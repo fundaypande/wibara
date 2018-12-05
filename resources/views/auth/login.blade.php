@@ -4,7 +4,7 @@
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
-					<img src="images/img-01.png" alt="IMG">
+					<a href="{{ url('/') }}"><img src="images/img-01.png" alt="IMG"></a>
 				</div>
 
 				<form class="login100-form validate-form" action="{{ route('login') }}" method="POST">
