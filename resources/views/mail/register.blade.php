@@ -6,6 +6,6 @@
   </head>
   <body>
     <h1>Konfirmasi Email</h1>
-    <a href="http://localhost:8000/verify/{{$users->token}}/{{$users->id}}">Verifikasi Email </a>
+    <a href="http://localhost:8000/verify/{{$user->token}}/{{$user->id}}">Verifikasi Email </a>
   </body>
 </html>
