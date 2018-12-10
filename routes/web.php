@@ -5,23 +5,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/beranda', function () {
-    return view('beranda');
-});
+Auth::routes();
 
-Route::get('/tes', function () {
-    return view('tes');
-});
-
-Route::get('/admin', function () {
-    return view('layouts.admin');
-});
-
-Route::get('/login2', function () {
-    return view('auth/login2');
-});
-
-Auth::routes(['verify' => true]);
+// --> Route untuk verifikasi Email
+Route::get('/verify/{token}/{id}', 'VerifyEmail@verify');
 
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -13,6 +13,19 @@
 						IKM Login
 					</span>
 
+					@if(session('warning'))
+					  <div class="alert alert-warning ">
+					    {{session('warning')}}
+					  </div>
+					@endif
+
+					@if(session('notif'))
+					  <div class="alert alert-primary">
+					    {{session('notif')}}
+					  </div>
+					@endif
+
+
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
 						<input id="email" type="email" class="input100 form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="Email" required autofocus>
 						@if ($errors->has('email'))
