@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
     <!-- Bootstrap CSS
 		============================================ -->
-    <link rel="stylesheet" href="css/admin/bootstrap.min.css">
+    <link rel="stylesheet" href="{!! asset('css/admin/bootstrap.min.css') !!}">
     <!-- Bootstrap CSS
 		============================================ -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
@@ -30,13 +30,13 @@
     <!-- <link rel="stylesheet" href="css/admin/animate.css"> -->
     <!-- normalize CSS
 		============================================ -->
-    <link rel="stylesheet" href="css/admin/normalize.css">
+    <link rel="stylesheet" href="{!! asset('css/admin/normalize.css') !!}">
     <!-- meanmenu icon CSS
 		============================================ -->
-    <link rel="stylesheet" href="css/admin/meanmenu.min.css">
+    <link rel="stylesheet" href="{!! asset('css/admin/meanmenu.min.css') !!}">
     <!-- main CSS
 		============================================ -->
-    <link rel="stylesheet" href="css/admin/main.css">
+    <link rel="stylesheet" href="{!! asset('css/admin/main.css') !!}">
     <!-- educate icon CSS
 		============================================ -->
     <!-- <link rel="stylesheet" href="css/admin/educate-custon-icon.css"> -->
@@ -45,21 +45,21 @@
     <!-- <link rel="stylesheet" href="css/admin/morrisjs/morris.css"> -->
     <!-- mCustomScrollbar CSS
 		============================================ -->
-    <link rel="stylesheet" href="css/admin/scrollbar/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="{!! asset('css/admin/scrollbar/jquery.mCustomScrollbar.min.css') !!}">
     <!-- metisMenu CSS
 		============================================ -->
-    <link rel="stylesheet" href="css/admin/metisMenu/metisMenu.min.css">
-    <link rel="stylesheet" href="css/admin/metisMenu/metisMenu-vertical.css">
+    <link rel="stylesheet" href="{!! asset('css/admin/metisMenu/metisMenu.min.css') !!}">
+    <link rel="stylesheet" href="{!! asset('css/admin/metisMenu/metisMenu-vertical.css') !!}">
     <!-- calendar CSS
 		============================================ -->
     <!-- <link rel="stylesheet" href="css/admin/calendar/fullcalendar.min.css">
     <link rel="stylesheet" href="css/admin/calendar/fullcalendar.print.min.css"> -->
     <!-- style CSS
 		============================================ -->
-    <link rel="stylesheet" href="css/admin/style.css">
+    <link rel="stylesheet" href="{!! asset('css/admin/style.css') !!}">
     <!-- responsive CSS
 		============================================ -->
-    <link rel="stylesheet" href="css/admin/responsive.css">
+    <link rel="stylesheet" href="{!! asset('css/admin/responsive.css') !!}">
     <!-- modernizr JS
 		============================================ -->
     <script src="js/admin/vendor/modernizr-2.8.3.min.js"></script>
