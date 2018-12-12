@@ -8,7 +8,10 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'admin'], function(){
   Route::get('/admin', 'AdminController@dashboard');
+
   Route::get('/kelola-staf', 'AdminController@showStaf');
+  Route::get('/api/staf', 'AdminController@apiStaf')->name('api.staf');
+
 
 
 });

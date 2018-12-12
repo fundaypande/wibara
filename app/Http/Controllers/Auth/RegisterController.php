@@ -67,7 +67,7 @@ class RegisterController extends Controller
 
         event(new Registered($user = $this->create($request->all())));
 
-        return redirect('/login');
+        return redirect('/login')->with('notif', 'Berhasil daftar, silahkan cek email untuk verifikasi sementara anda tetap bisa login');
 
     }
 

@@ -23,7 +23,7 @@
 						@endif
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
-							<i class="fa fa-envelope" aria-hidden="true"></i>
+							<i class="fa fa-user" aria-hidden="true"></i>
 						</span>
 					</div>
 

@@ -63,6 +63,15 @@
     <!-- modernizr JS
 		============================================ -->
     <script src="js/admin/vendor/modernizr-2.8.3.min.js"></script>
+
+    <script src="{!! asset('js/jquery.min.js') !!}"></script>
+
+
+    <!-- Datatables CSS -->
+    <link rel="stylesheet" href="{!! asset('assets/datatables/css/dataTables.bootstrap.min.css') !!}">
+
+    <link rel="stylesheet" href="{!! asset('assets/datatables/css/jquery.dataTables.min.css') !!}">
+
 </head>
 
 <body>
