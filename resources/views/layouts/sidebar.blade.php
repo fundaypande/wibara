@@ -3,7 +3,7 @@
 </li>
 @if(Auth::user() -> role == '3')
   <li>
-      <a class="has-arrow" href="/home" aria-expanded="false"><span style="color: #8d9498" class="fa fa-university icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Admin</span></a>
+      <a class="has-arrow aktif" href="/home" aria-expanded="false"><span style="color: #8d9498" class="fa fa-university icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Admin</span></a>
   </li>
   <li>
       <a class="has-arrow" href="/kelola-staf" aria-expanded="false"><span style="color: #8d9498" class="fa fa-university icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Kelola Staf</span></a>
@@ -30,3 +30,12 @@
 <li>
     <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="  educate-charts icon-wrap"></span> <span class="mini-click-non">Charts</span></a>
 </li>
+
+<script type="text/javascript">
+  var currentURL = $(location).attr("href"); //get all url
+  var base_url = window.location.origin; //get base url ('http://localhost.com')
+
+  currentURL = currentURL.replace(base_url, '');
+  $("li").find('a[href="'+ currentURL +'"]').parent().addClass('active');
+
+</script>

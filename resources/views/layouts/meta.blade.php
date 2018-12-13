@@ -8,6 +8,9 @@
     <title>Dashboard V.1 | Kiaalap - Kiaalap Admin Template</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="{!! asset('style.css') !!}">
+
     <!-- favicon
 		============================================ -->
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
@@ -31,6 +34,7 @@
     <!-- normalize CSS
 		============================================ -->
     <link rel="stylesheet" href="{!! asset('css/admin/normalize.css') !!}">
+
     <!-- meanmenu icon CSS
 		============================================ -->
     <link rel="stylesheet" href="{!! asset('css/admin/meanmenu.min.css') !!}">
