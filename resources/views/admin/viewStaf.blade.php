@@ -163,6 +163,7 @@
     function editData(id) {
       save_method = 'edit';
       $('input[name=_method]').val('PATCH');
+      urlAction = "{{ url('kelola-staf') }}";
       // $('#modal-form')[0].reset();
       $.ajax({
         url: "{{ url('kelola-staf') }}/" + id + "/edit",
@@ -172,6 +173,9 @@
 
           $('#modal-form').modal('show');
           $('#modal-title').modal('Edit Role');
+
+          // edit action pada form menjadi format URL patch di web.php
+          $("#modal-form").find("form").attr("action", urlAction + '/' + id);
 
           $('#id').val(data.id);
           $('#email').val(data.email);
@@ -186,10 +190,30 @@
 
     $(function(){
       $('#modal-form form').validator().on('submit', function (e) {
-        if(!e.isDefaultPrevented()){
-          var id = $('id').val();
-          if(save_method == 'add')
-        }
+        e.preventDefault();
+        var data = $('form').serialize();
+        console.log("Submit dipencet");
+        var form_action = $("#modal-form").find("form").attr("action");
+        var role = $("#modal-form").find("input[name='radio']").val();
+        var csrf_token = $('meta[name="crsf_token"]').attr('content');
+        console.log(role);
+        $.ajax({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          url: form_action,
+          type: "PATCH",
+          dataType: "JSON",
+          data: data,
+          success: function(data) {
+            table.ajax.reload();
+            $(".modal").modal('hide');
+            alert("Berhasil Edit Data");
+          },
+          error: function() {
+            alert("Tidak ada data -" + role + " - " + form_action);
+          },
+        });
       });
     });
 

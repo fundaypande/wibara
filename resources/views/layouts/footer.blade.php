@@ -47,9 +47,7 @@
 
 
 <!-- Datatables -->
-<script src="{!! asset('assets/datatables/js/dataTables.bootstrap.min.js') !!}"></script>
-
-<script src="{!! asset('assets/datatables/js/dataTables.foundation.min.js') !!}"></script>
+<!-- <script src="{!! asset('assets/datatables/js/dataTables.bootstrap.min.js') !!}"></script> -->
 
 <script src="{!! asset('assets/datatables/js/jquery.dataTables.min.js') !!}"></script>
 
