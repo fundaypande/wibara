@@ -23,6 +23,7 @@
     <!-- Bootstrap CSS
 		============================================ -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+
     <!-- owl.carousel CSS
 		============================================ -->
     <!-- <link rel="stylesheet" href="css/admin/owl.carousel.css">
@@ -66,7 +67,7 @@
     <link rel="stylesheet" href="{!! asset('css/admin/responsive.css') !!}">
     <!-- modernizr JS
 		============================================ -->
-    <script src="js/admin/vendor/modernizr-2.8.3.min.js"></script>
+    <!-- <script src="js/admin/vendor/modernizr-2.8.3.min.js"></script> -->
 
     <script src="{!! asset('js/jquery.min.js') !!}"></script>
 

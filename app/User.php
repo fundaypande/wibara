@@ -10,6 +10,15 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+
+    // --> Membuat fungsi untuk terhubung ke table ProfilIkm
+    // --> Dengan relasi one to one
+    public function profilIkm()
+    {
+      return $this->hasOne('App\ProfilIKM');
+    }
+
+
     /**
      * The attributes that are mass assignable.
      *

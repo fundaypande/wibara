@@ -16,21 +16,15 @@
           {{ csrf_field() }} {{ method_field('POST') }}
         <input type="hidden" name="id" id="id" value="">
         <div class="form-group">
-          <label for="email">Email address:</label>
-          <input type="email" class="form-control" id="email" disabled>
+          <label for="namaUsaha">Nama Usaha:</label>
+          <input type="namaUsaha" class="form-control" id="namaUsaha" disabled>
         </div>
         <div class="form-group">
-          <label for="role">Role</label>
+          <label for="role">Status</label>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="radio" id="radioAdmin" value="3">
+            <input class="form-check-input" type="radio" name="radio" id="radioAdmin" value="1">
             <label class="form-check-label" for="exampleRadios1">
-              Admin
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="radio" id="radioStaf" value="2">
-            <label class="form-check-label" for="exampleRadios2">
-              Staf
+              Validasi
             </label>
           </div>
         </div>
@@ -53,7 +47,7 @@
 
             <div style="padding-left: 20px; padding-right: 20px" class="card">
                 <div class="card-header">
-                  <h3>Kelola Staf</h3>
+                  <h3>Validasi Profil IKM</h3>
 
                 </div>
 
@@ -85,8 +79,8 @@
                         <div class="panel panel-default">
 
                           <div class="panel-heading">
-                            <h4>Daftar Pengguna
-                              <a href="/add-staf" class="btn btn-primary pull-right"> Tambah Pengguna </a>
+                            <h5>Daftar Profil IKM Yang Belum Tervalidasi
+                              <!-- <a href="/add-staf" class="btn btn-primary pull-right">Tambah Pengguna</a> -->
                             </h4>
                           </div>
 
@@ -95,9 +89,11 @@
                               <thead>
                                 <tr>
                                   <th width="50">ID</th>
-                                  <th>Nama</th>
-                                  <th>Email</th>
-                                  <th>Role</th>
+                                  <th>Nama Usaha</th>
+                                  <th>Merk Produk</th>
+                                  <th>Alamat</th>
+                                  <th>Jenis Produk</th>
+                                  <th>Telepon</th>
                                   <th>Action</th>
                                 </tr>
                               </thead>
@@ -125,48 +121,50 @@
       table = $('#staf-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('api.staf') }}",
+        ajax: "{{ route('api.valid') }}",
         columns: [
           {data: 'id', name: 'id'},
-          {data: 'name', name: 'name'},
-          {data: 'email', name: 'email'},
-          {data: 'role', name: 'role'},
+          {data: 'nama_usaha', name: 'nama_usaha'},
+          {data: 'merk_produk', name: 'merk_produk'},
+          {data: 'alamat', name: 'alamat'},
+          {data: 'jenis_produk', name: 'jenis_produk'},
+          {data: 'telpon', name: 'telpon'},
           {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
       });
 
     });
 
-    function deleteData(id){
-      var popup = confirm("Apakah anda yakin ingin menghapus data ini?");
-      var csrf_token = $('meta[name="crsf_token"]').attr('content');
-      if(popup == true){
-        $.ajax({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          },
-          url : "{{ url('kelola-staf') }}" + '/' + id,
-          type: "POST",
-          data: {'_method': 'DELETE', '_token': csrf_token},
-          success: function(data) {
-            table.ajax.reload();
-            console.log(data);
-            alert("Data berhasil di hapus");
-          },
-          error: function(){
-            alert("Gagal Menghapus! Terjadi kesalahan");
-          }
-        });
-      }
-    }
+    // function deleteData(id){
+    //   var popup = confirm("Apakah anda yakin ingin menghapus data ini?");
+    //   var csrf_token = $('meta[name="crsf_token"]').attr('content');
+    //   if(popup == true){
+    //     $.ajax({
+    //       headers: {
+    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //       },
+    //       url : "{{ url('kelola-staf') }}" + '/' + id,
+    //       type: "POST",
+    //       data: {'_method': 'DELETE', '_token': csrf_token},
+    //       success: function(data) {
+    //         table.ajax.reload();
+    //         console.log(data);
+    //         alert("Data berhasil di hapus");
+    //       },
+    //       error: function(){
+    //         alert("Gagal Menghapus! Terjadi kesalahan");
+    //       }
+    //     });
+    //   }
+    // }
 
     function editData(id) {
       save_method = 'edit';
       $('input[name=_method]').val('PATCH');
-      urlAction = "{{ url('kelola-staf') }}";
+      urlAction = "{{ url('validasi') }}";
       // $('#modal-form')[0].reset();
       $.ajax({
-        url: "{{ url('kelola-staf') }}/" + id + "/edit",
+        url: "{{ url('validasi') }}/" + id + "/edit",
         type: "GET",
         dataType: "JSON",
         success: function(data) {
@@ -178,8 +176,8 @@
           $("#modal-form").find("form").attr("action", urlAction + '/' + id);
 
           $('#id').val(data.id);
-          $('#email').val(data.email);
-          if(data.role == 3) $('#radioAdmin').prop('checked', true); else $('#radioStaf').prop('checked', true);
+          $('#namaUsaha').val(data.nama_usaha);
+          if(data.status == 0) $('#radioAdmin').prop('checked', false);
 
         },
         error: function() {
@@ -188,15 +186,17 @@
       });
     }
 
+
+    //melakukan pengeditan data setelah submit ditekan
     $(function(){
       $('#modal-form form').validator().on('submit', function (e) {
         e.preventDefault();
         var data = $('form').serialize();
         console.log("Submit dipencet");
         var form_action = $("#modal-form").find("form").attr("action");
-        var role = $("#modal-form").find("input[name='radio']").val();
+        var status = $("#modal-form").find("input[name='radio']").val();
         var csrf_token = $('meta[name="crsf_token"]').attr('content');
-        console.log(role);
+        console.log(status);
         $.ajax({
           headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -211,7 +211,7 @@
             alert("Berhasil Edit Data");
           },
           error: function() {
-            alert("Tidak ada data -" + role + " - " + form_action);
+            alert("Tidak ada data -" + status + " - " + form_action);
           },
         });
       });

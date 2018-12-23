@@ -9,33 +9,33 @@
       <a class="has-arrow" href="/kelola-staf" aria-expanded="false"><span style="color: #8d9498" class="fa fa-university icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Kelola Staf</span></a>
   </li>
 @endif
+
+@if(Auth::user() -> role == '1')
 <li>
-    <a class="has-arrow" href="all-students.html" aria-expanded="false"><span style="color: #8d9498" class="fa fa-bar-chart icon-wrap"></span> <span class="mini-click-non">Staf</span></a>
+    <a class="has-arrow" href="/profil" aria-expanded="false"><span style="color: #8d9498" class="fa fa-user icon-wrap"></span> <span class="mini-click-non">Profile IKM</span></a>
 </li>
 <li>
-    <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span style="color: #8d9498" class=" fa fa-calendar-times-o icon-wrap"></span> <span class="mini-click-non">Users</span></a>
+    <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span style="color: #8d9498" class=" fa fa-shopping-basket icon-wrap"></span> <span class="mini-click-non">Produk</span></a>
 </li>
 <li>
-    <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span style="color: #8d9498" class=" fa fa-envelope-open icon-wrap"></span> <span class="mini-click-non">Library</span></a>
+    <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span style="color: #8d9498" class=" fa fa-bar-chart icon-wrap"></span> <span class="mini-click-non">Evaluasi</span></a>
+</li>
+@endif
+
+@if(Auth::user() -> role == '2')
+<li>
+    <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span style="color: #8d9498" class="fa fa-users icon-wrap"></span> <span class="mini-click-non">Kelola Profil IKM</span></a>
 </li>
 <li>
-    <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span style="color: #8d9498" class="  icon-wrap"></span> <span class="mini-click-non">Departments</span></a>
+    <a class="has-arrow" href="/validasi" aria-expanded="false"><span style="color: #8d9498" class="fa fa-check-circle icon-wrap"></span> <span class="mini-click-non">Validasi IKM</span></a>
 </li>
-<li>
-    <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="  educate-message icon-wrap"></span> <span class="mini-click-non">Mailbox</span></a>
-</li>
-<li>
-    <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="  educate-interface icon-wrap"></span> <span class="mini-click-non">Interface</span></a>
-</li>
-<li>
-    <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="  educate-charts icon-wrap"></span> <span class="mini-click-non">Charts</span></a>
-</li>
+@endif
 
 <script type="text/javascript">
   var currentURL = $(location).attr("href"); //get all url
   var base_url = window.location.origin; //get base url ('http://localhost.com')
 
   currentURL = currentURL.replace(base_url, '');
-  $("li").find('a[href="'+ currentURL +'"]').parent().addClass('active');
+  $("li").find('a[href="'+ currentURL +'"]').parent().css("background-color","#f5f8fa");
 
 </script>
