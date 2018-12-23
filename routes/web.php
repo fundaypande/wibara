@@ -29,6 +29,13 @@ Route::group(['middleware' => 'staf'], function(){
   Route::get('/api/ikm-validasi', 'ValidasiController@apiValidasi')->name('api.valid');  //API untuk menampilkan data profil IKM yang belum tervalidasi
   Route::get('/validasi/{id}/edit', 'ValidasiController@formEdit'); //memunculkan modal validasi
   Route::patch('/validasi/{id}', 'ValidasiController@updateStatus'); //menyimpan hasil validasi
+
+  //--> Kelola Profil IKM
+  Route::get('/kelola-ikm', 'ProfilIkmController@showKelola');
+  Route::get('/api/kelola-ikm', 'ProfilIkmController@apiKelola')->name('api.kelolaIkm');  //API untuk menampilkan data profil IKM yang belum tervalidasi
+
+  Route::get('/profil/{id}/edit', 'ProfilIkmController@showModal'); //--> arahkan ke modal EDIT
+  Route::patch('/profil/{id}', 'ProfilIkmController@update');
 });
 
 

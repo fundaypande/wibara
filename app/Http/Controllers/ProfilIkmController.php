@@ -35,6 +35,35 @@ class ProfilIkmController extends Controller
       return view('ikm.profil');
     }
 
+    //-> Menampikan data profil IKM untuk dikelola oleh STAF
+    public function showKelola()
+    {
+      return view('staf.kelolaIkm');
+    }
+
+    public function showModal($id)
+    {
+      $ikm = ProfilIkm::find($id);
+
+      return $ikm;
+    }
+
+    //-> API untuk menampilkan data profil IKM
+    public function apiKelola()
+    {
+      $staf = ProfilIkm::get();
+
+
+      return Datatables::of($staf)
+        -> addColumn('action', function($staf){
+          return '
+            <a href="#" class="btn btn-info btn-xs"><i class="fa fa-eye"></i>Show</a>
+            <a onclick="editData(' . $staf-> id . ')" class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o"></i>Edit</a>
+            <a onclick="deleteData(' . $staf-> id . ')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i>Delete</a>
+          ';
+        })->make(true);
+    }
+
 
 
     public function edit(ProfilIkm $profilIkm)
@@ -114,7 +143,11 @@ class ProfilIkmController extends Controller
 
             ]);
 
-      return redirect('/profil')->with('status', 'Selamat anda berhasil memasukkan data profil IKM Anda');
+      if(Auth::user()->role == 1) {
+        return redirect('/profil')->with('status', 'Selamat anda berhasil memasukkan data profil IKM Anda');
+      }
+
+      return $profil;
     }
 
     /**

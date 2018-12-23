@@ -24,7 +24,7 @@
 
 @if(Auth::user() -> role == '2')
 <li>
-    <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span style="color: #8d9498" class="fa fa-users icon-wrap"></span> <span class="mini-click-non">Kelola Profil IKM</span></a>
+    <a class="has-arrow" href="/kelola-ikm" aria-expanded="false"><span style="color: #8d9498" class="fa fa-users icon-wrap"></span> <span class="mini-click-non">Kelola Profil IKM</span></a>
 </li>
 <li>
     <a class="has-arrow" href="/validasi" aria-expanded="false"><span style="color: #8d9498" class="fa fa-check-circle icon-wrap"></span> <span class="mini-click-non">Validasi IKM</span></a>

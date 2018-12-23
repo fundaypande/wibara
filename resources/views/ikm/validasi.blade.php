@@ -9,7 +9,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit Role</h4>
+        <h4 class="modal-title">Edit Status Validasi</h4>
       </div>
       <div class="modal-body">
         <form method="post" data-toggle="validator">
