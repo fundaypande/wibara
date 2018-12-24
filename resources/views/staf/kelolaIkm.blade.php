@@ -9,10 +9,10 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit Profil IKM</h4>
+        <h4 class="modal-title" id="modal-title">Tambah Profil IKM</h4>
       </div>
       <div class="modal-body">
-        <form method="post" data-toggle="validator">
+        <form method="post" data-toggle="validator" action="/profil/store">
           {{ csrf_field() }} {{ method_field('POST') }}
         <input type="hidden" name="id" id="id" value="" method="patch">
         <div class="form-group">
@@ -130,7 +130,7 @@
 
                           <div class="panel-heading">
                             <h5>Daftar Profil IKM
-                              <a href="/add-staf" class="btn btn-primary pull-right"> Tambah Profil IKM </a>
+                              <a style="color:white" class="btn btn-primary pull-right" data-toggle="modal" data-target="#modal-form">Tambah Profil IKM </a>
                             </h5>
                           </div>
 
@@ -210,10 +210,16 @@
       }
     }
 
+    function store() {
+
+    }
+
+
     function editData(id) {
       save_method = 'edit';
       $('input[name=_method]').val('PATCH');
       urlAction = "{{ url('profil') }}";
+      $('#modal-title').text('Edit Profil IKM');
       console.log(id);
       // $('#modal-form')[0].reset();
       console.log(urlAction);
@@ -224,7 +230,7 @@
         success: function(data) {
 
           $('#modal-form').modal('show');
-          $('#modal-title').modal('Edit Profil IKM');
+
 
           // edit action pada form menjadi format URL patch di web.php
           $("#modal-form").find("form").attr("action", urlAction + '/' + id);
@@ -246,7 +252,6 @@
           $('#jenisBimtek').val(data.jenis_bimtek);
           $('#permasalahan').val(data.permasalahan);
           $('#jarak').val(data.jarak);
-          if(data.role == 3) $('#radioAdmin').prop('checked', true); else $('#radioStaf').prop('checked', true);
 
         },
         error: function() {
@@ -264,6 +269,7 @@
         var nama = $("#modal-form").find("input[name='nama']").val();
         var csrf_token = $('meta[name="crsf_token"]').attr('content');
         console.log(nama);
+        console.log(form_action);
         $.ajax({
           headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

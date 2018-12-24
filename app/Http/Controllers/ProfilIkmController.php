@@ -25,8 +25,7 @@ class ProfilIkmController extends Controller
 
     public function store(Request $request)
     {
-
-
+      return 'berhasil';
     }
 
 
@@ -150,14 +149,9 @@ class ProfilIkmController extends Controller
       return $profil;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\ProfilIkm  $profilIkm
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ProfilIkm $profilIkm)
+
+    public function destroy($id)
     {
-        //
+        ProfilIkm::destroy($id);
     }
 }

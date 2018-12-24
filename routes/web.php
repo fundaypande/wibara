@@ -35,7 +35,9 @@ Route::group(['middleware' => 'staf'], function(){
   Route::get('/api/kelola-ikm', 'ProfilIkmController@apiKelola')->name('api.kelolaIkm');  //API untuk menampilkan data profil IKM yang belum tervalidasi
 
   Route::get('/profil/{id}/edit', 'ProfilIkmController@showModal'); //--> arahkan ke modal EDIT
-  Route::patch('/profil/{id}', 'ProfilIkmController@update');
+  Route::patch('/profil/{id}', 'ProfilIkmController@update'); //-> Proses edit data
+  Route::delete('/profil/{id}', 'ProfilIkmController@destroy');
+  Route::post('/profil/store', 'ProfilIkmController@store');
 });
 
 
