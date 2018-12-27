@@ -15,7 +15,7 @@
     <a class="has-arrow" href="/profil" aria-expanded="false"><span style="color: #8d9498" class="fa fa-user icon-wrap"></span> <span class="mini-click-non">Profile IKM</span></a>
 </li>
 <li>
-    <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span style="color: #8d9498" class=" fa fa-shopping-basket icon-wrap"></span> <span class="mini-click-non">Produk</span></a>
+    <a class="has-arrow" href="/produksi" aria-expanded="false"><span style="color: #8d9498" class="fa fa-shopping-basket icon-wrap"></span> <span class="mini-click-non">Produksi</span></a>
 </li>
 <li>
     <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span style="color: #8d9498" class=" fa fa-bar-chart icon-wrap"></span> <span class="mini-click-non">Evaluasi</span></a>

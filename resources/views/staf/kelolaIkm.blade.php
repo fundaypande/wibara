@@ -12,7 +12,7 @@
         <h4 class="modal-title" id="modal-title">Tambah Profil IKM</h4>
       </div>
       <div class="modal-body">
-        <form method="post" data-toggle="validator" action="/profil/store">
+        <form method="post" data-toggle="validator" action="/profil/store" id="theForm">
           {{ csrf_field() }} {{ method_field('POST') }}
         <input type="hidden" name="id" id="id" value="" method="patch">
         <div class="form-group">
@@ -81,10 +81,11 @@
         </div>
 
         <button type="submit" class="btn btn-info btn-fill">Simpan Profil</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
       </div>
     </div>
 
@@ -130,7 +131,7 @@
 
                           <div class="panel-heading">
                             <h5>Daftar Profil IKM
-                              <a style="color:white" class="btn btn-primary pull-right" data-toggle="modal" data-target="#modal-form">Tambah Profil IKM </a>
+                              <a onclick="addForm()" style="color:white" class="btn btn-primary pull-right">Tambah Profil IKM </a>
                             </h5>
                           </div>
 
@@ -188,30 +189,47 @@
     });
 
     function deleteData(id){
-      var popup = confirm("Apakah anda yakin ingin menghapus data ini?");
       var csrf_token = $('meta[name="crsf_token"]').attr('content');
-      if(popup == true){
-        $.ajax({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          },
-          url : "{{ url('profil') }}" + '/' + id,
-          type: "POST",
-          data: {'_method': 'DELETE', '_token': csrf_token},
-          success: function(data) {
-            table.ajax.reload();
-            console.log(data);
-            alert("Data berhasil di hapus");
-          },
-          error: function(){
-            alert("Gagal Menghapus! Terjadi kesalahan");
-          }
-        });
-      }
-    }
-
-    function store() {
-
+      Swal({
+        title: 'Hapus Data?',
+        text: "Apakah anda yakin ingin menghapus data ini",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.value) {
+          $.ajax({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url : "{{ url('profil') }}" + '/' + id,
+            type: "POST",
+            data: {'_method': 'DELETE', '_token': csrf_token},
+            success: function(data) {
+              table.ajax.reload();
+              console.log(data);
+              Swal({
+                position: 'top-end',
+                type: 'success',
+                title: 'Data berhasil dihapus',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            },
+            error: function(){
+              Swal({
+                position: 'top-end',
+                type: 'error',
+                title: 'Data berhasil dihapus',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            }
+          });
+        }
+      });
     }
 
 
@@ -255,7 +273,13 @@
 
         },
         error: function() {
-          alert("Tidak ada data");
+          Swal({
+            position: 'top-end',
+            type: 'error',
+            title: 'Terjadi kesalahan',
+            showConfirmButton: false,
+            timer: 1500
+          })
         },
       });
     }
@@ -275,20 +299,59 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           },
           url: form_action,
-          type: "PATCH",
+          type: "POST",
           dataType: "JSON",
           data: data,
           success: function(data) {
             table.ajax.reload();
             $(".modal").modal('hide');
-            alert("Berhasil Edit Data");
+            Swal({
+              position: 'top-end',
+              type: 'success',
+              title: 'Selamat data berhasi disimpan',
+              showConfirmButton: false,
+              timer: 1500
+            });
           },
-          error: function() {
-            alert("Tidak ada data -" + nama + " - " + form_action);
-          },
+          error: function(jqXhr, json, errorThrown){// this are default for ajax errors
+            var errors = jqXhr.responseJSON;
+            var errorsHtml = '';
+            $.each(errors['errors'], function (index, value) {
+                errorsHtml += '<ul class="list-group"><li class="list-group-item alert alert-danger">' + value + '</li></ul>';
+            });
+            //I use SweetAlert2 for this
+            swal({
+                title: "Error " + jqXhr.status + ': ' + errorThrown,// this will output "Error 422: Unprocessable Entity"
+                html: errorsHtml,
+                width: 'auto',
+                confirmButtonText: 'Try again',
+                cancelButtonText: 'Cancel',
+                confirmButtonClass: 'btn',
+                cancelButtonClass: 'cancel-class',
+                showCancelButton: true,
+                closeOnConfirm: true,
+                closeOnCancel: true,
+                type: 'error'
+            }, function(isConfirm) {
+                if (isConfirm) {
+                     $('#openModal').click();//this is when the form is in a modal
+                }
+            });
+
+          } //error close
         });
       });
     });
+
+    function addForm() {
+      save_method = "add";
+      $('input[name=_method]').val('POST');
+      $('#modal-form').modal('show');
+      $('#theForm')[0].reset();
+      $('.modal-title').text('Tambah Profil IKM');
+      console.log('Tampilkan Form ADD');
+      $("#modal-form").find("form").attr("action", "{{ route('staf.addIkm') }}");
+    }
 
 
 

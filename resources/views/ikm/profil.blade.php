@@ -53,7 +53,7 @@
 
             <div style="padding-left: 20px; padding-right: 20px" class="card">
                 <div class="card-header">
-                  <h3>Kelola Profil IKM @if (Auth::user()->profilIkm->status === 1)
+                  <h3>Kelola Profil IKM @if (Auth::user()->profilIkm->status == 1)
                     <i style="color:green; font-size: 24px;" class="fa fa-check-circle" aria-hidden="true"></i>
                   @endif</h3>
 

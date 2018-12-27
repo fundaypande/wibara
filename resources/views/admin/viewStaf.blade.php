@@ -138,26 +138,47 @@
     });
 
     function deleteData(id){
-      var popup = confirm("Apakah anda yakin ingin menghapus data ini?");
       var csrf_token = $('meta[name="crsf_token"]').attr('content');
-      if(popup == true){
-        $.ajax({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          },
-          url : "{{ url('kelola-staf') }}" + '/' + id,
-          type: "POST",
-          data: {'_method': 'DELETE', '_token': csrf_token},
-          success: function(data) {
-            table.ajax.reload();
-            console.log(data);
-            alert("Data berhasil di hapus");
-          },
-          error: function(){
-            alert("Gagal Menghapus! Terjadi kesalahan");
-          }
-        });
-      }
+      Swal({
+        title: 'Hapus Data?',
+        text: "Apakah anda yakin ingin menghapus data ini",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.value) {
+          $.ajax({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url : "{{ url('kelola-staf') }}" + '/' + id,
+            type: "POST",
+            data: {'_method': 'DELETE', '_token': csrf_token},
+            success: function(data) {
+              table.ajax.reload();
+              console.log(data);
+              Swal({
+                position: 'top-end',
+                type: 'success',
+                title: 'Data berhasil dihapus',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            },
+            error: function(){
+              Swal({
+                position: 'top-end',
+                type: 'error',
+                title: 'Data berhasil dihapus',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            }
+          });
+        }
+      });
     }
 
     function editData(id) {

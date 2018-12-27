@@ -208,11 +208,40 @@
           success: function(data) {
             table.ajax.reload();
             $(".modal").modal('hide');
-            alert("Berhasil Edit Data");
+            Swal({
+              position: 'top-end',
+              type: 'success',
+              title: 'Selamat data berhasi disimpan',
+              showConfirmButton: false,
+              timer: 1500
+            });
           },
-          error: function() {
-            alert("Tidak ada data -" + status + " - " + form_action);
-          },
+          error: function(jqXhr, json, errorThrown){// this are default for ajax errors
+            var errors = jqXhr.responseJSON;
+            var errorsHtml = '';
+            $.each(errors['errors'], function (index, value) {
+                errorsHtml += '<ul class="list-group"><li class="list-group-item alert alert-danger">' + value + '</li></ul>';
+            });
+            //I use SweetAlert2 for this
+            swal({
+                title: "Error " + jqXhr.status + ': ' + errorThrown,// this will output "Error 422: Unprocessable Entity"
+                html: errorsHtml,
+                width: 'auto',
+                confirmButtonText: 'Try again',
+                cancelButtonText: 'Cancel',
+                confirmButtonClass: 'btn',
+                cancelButtonClass: 'cancel-class',
+                showCancelButton: true,
+                closeOnConfirm: true,
+                closeOnCancel: true,
+                type: 'error'
+            }, function(isConfirm) {
+                if (isConfirm) {
+                     $('#openModal').click();//this is when the form is in a modal
+                }
+            });
+
+          } //error close
         });
       });
     });

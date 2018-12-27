@@ -54,6 +54,9 @@
 <script src="{!! asset('assets/validator/validator.js') !!}"></script>
 
 
+<script src="{!! asset('js/sweetalert2.min.js') !!}"></script>
+
+
 </body>
 
 </html>

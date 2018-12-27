@@ -11,6 +11,8 @@
 
     <link rel="stylesheet" href="{!! asset('style.css') !!}">
 
+    <link rel="stylesheet" href="{!! asset('css/sweetalert2.css') !!}">
+
     <!-- favicon
 		============================================ -->
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
@@ -20,6 +22,8 @@
     <!-- Bootstrap CSS
 		============================================ -->
     <link rel="stylesheet" href="{!! asset('css/admin/bootstrap.min.css') !!}">
+
+    <link rel="stylesheet" href="{!! asset('css/pande.css') !!}">
     <!-- Bootstrap CSS
 		============================================ -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
