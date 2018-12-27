@@ -63,6 +63,22 @@ Route::group(['middleware' => 'ikm'], function(){
   Route::get('/api/produksi', 'ProduksiController@apiProduksi')->name('api.produksi');
   Route::post('/produksi/store', 'ProduksiController@store')->name('ikm.addProduksi'); //Menambah data produksi
 
+
+  //-> ***** Profil IKM Jenis Peralatan PANUTAN
+  Route::get('/peralatan', 'PeralatanController@show');
+  Route::get('/api/peralatan', 'PeralatanController@apiPeralatan')->name('api.peralatan');
+  Route::post('/peralatan', 'PeralatanController@store')->name('ikm.addPeralatan');
+  Route::get('/peralatan/{id}/edit', 'PeralatanController@formEdit'); //--> menampilkan data di form edit
+  Route::patch('/peralatan/{id}', 'PeralatanController@update'); //-> Proses edit data
+  Route::delete('/peralatan/{id}', 'PeralatanController@destroy'); //->Mneghapus data
+
+  //Bahan Baku Profil IKM
+  Route::get('/bahan', 'BahanController@show');
+  Route::get('/api/bahan', 'BahanController@apiBahan')->name('api.bahan');
+  Route::post('/bahan', 'BahanController@store')->name('ikm.addBahan');
+  Route::get('/bahan/{id}/edit', 'BahanController@formEdit'); //--> menampilkan data di form edit
+  Route::patch('/bahan/{id}', 'BahanController@update'); //-> Proses edit data
+  Route::delete('/bahan/{id}', 'BahanController@destroy'); //->Mneghapus data
 });
 
 

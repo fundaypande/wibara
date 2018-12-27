@@ -42,68 +42,55 @@ class ProduksiController extends Controller
 
     public function store(Request $request)
     {
-      // $userId = Auth::user() -> id;
-      // $jenisProduksi = $request -> jenis_produksi;
-      // $jumlah = $request -> jumlah;
-      // $harga = $request -> harga;
-      // $nilaiPenjualan = $request -> nilai_penjualan;
-      // $tujuan = $request -> tujuan;
-      // $deskripsi = $request -> deskripsi;
-      //
-      //
-      //
-      // //--> replace titik pada harga
-      // $jumlah = str_replace('.','',$jumlah);
-      // $harga = str_replace('.','',$harga);
-      // $nilaiPenjualan = str_replace('.','',$nilaiPenjualan);
+      $userId = Auth::user() -> id;
+      $jenisProduksi = $request -> jenis_produksi;
+      $jumlah = $request -> jumlah;
+      $harga = $request -> harga;
+      $nilaiPenjualan = $request -> nilai_penjualan;
+      $tujuan = $request -> tujuan;
+      $deskripsi = $request -> deskripsi;
+
+
+
+      //--> replace titik pada harga
+      $jumlah = str_replace('.','',$jumlah);
+      $harga = str_replace('.','',$harga);
+      $nilaiPenjualan = str_replace('.','',$nilaiPenjualan);
 
 
       // --> Validasi angka yang dimasukkan tidak boleh 0 atau minus
-      // if($jumlah < 1 || $harga < 1 || $nilaiPenjualan < 1
-      // )
-      // {
-      //   return redirect('/produksi')->with('warning', 'Setiap angka nominal yang diinput ke dalam form tidak boleh bernilai nol (0) atau kurang dari 1');
-      // }
+      if($jumlah < 1 || $harga < 1 || $nilaiPenjualan < 1
+      )
+      {
+        return redirect('/produksi')->with('warning', 'Setiap angka nominal yang diinput ke dalam form tidak boleh bernilai nol (0) atau kurang dari 1');
+      }
 
 
-      $validator -> validate($request, [
+      $this -> validate($request, [
               // 'jenis_produksi' => 'required|min:20',
               // 'jumlah' => 'required|min:1',
-              // 'gambar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+              'gambar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
 
-            if ($validator->fails()) {
-                  if($request->ajax())
-                  {
-                      return response()->json(array(
-                          'success' => false,
-                          'message' => 'There are incorect values in the form!',
-                          'errors' => $validator->getMessageBag()->toArray()
-                      ), 422);
-                  }
-                  $this->throwValidationException(
-                      $request, $validator
-                  );
-              }
 
     //--> Upload Gambar
-      // $input = $request->gambar;
-      // $input = time().'.'.$request->gambar->getClientOriginalExtension();
-      // $request->gambar->move('images/produksi', $input);
+      $input = $request->gambar;
+      $input = time().'.'.$request->gambar->getClientOriginalExtension();
+      $request->gambar->move('images/produksi', $input);
 
 
-      // $data = [
-      //   'user_id' => $userId,
-      //   'jenis_produksi' => $jenisProduksi,
-      //   'jumlah' => $jumlah,
-      //   'alamat' => $alamat,
-      //   'harga' => $harga,
-      //   'nilai_penjualan' => $nilaiPenjualan,
-      //   'tujuan' => $tujuan,
-      //   'deskripsi' => $deskripsi,
-      //   'photo' => $input,
-      // ];
+      $data = [
+        'user_id' => $userId,
+        'jenis_produksi' => $jenisProduksi,
+        'jumlah' => $jumlah,
+        'alamat' => $alamat,
+        'harga' => $harga,
+        'nilai_penjualan' => $nilaiPenjualan,
+        'tujuan' => $tujuan,
+        'deskripsi' => $deskripsi,
+        'photo' => $input,
+      ];
 
-      return 'NilaiProduksi::create($data)';
+      return NilaiProduksi::create($data);
     }
 }

@@ -18,6 +18,12 @@
     <a class="has-arrow" href="/produksi" aria-expanded="false"><span style="color: #8d9498" class="fa fa-shopping-basket icon-wrap"></span> <span class="mini-click-non">Produksi</span></a>
 </li>
 <li>
+    <a class="has-arrow" href="/peralatan" aria-expanded="false"><span style="color: #8d9498" class="fa fa-suitcase icon-wrap"></span> <span class="mini-click-non">Peralatan</span></a>
+</li>
+<li>
+    <a class="has-arrow" href="/bahan" aria-expanded="false"><span style="color: #8d9498" class="fa fa-flask icon-wrap"></span> <span class="mini-click-non">Bahan Baku</span></a>
+</li>
+<li>
     <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span style="color: #8d9498" class=" fa fa-bar-chart icon-wrap"></span> <span class="mini-click-non">Evaluasi</span></a>
 </li>
 @endif
