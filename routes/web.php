@@ -62,6 +62,9 @@ Route::group(['middleware' => 'ikm'], function(){
   Route::get('/produksi', 'ProduksiController@showProduksi');
   Route::get('/api/produksi', 'ProduksiController@apiProduksi')->name('api.produksi');
   Route::post('/produksi/store', 'ProduksiController@store')->name('ikm.addProduksi'); //Menambah data produksi
+  Route::get('/add-produksi', 'ProduksiController@showCreate')->name('create.produksi');
+  Route::post('/produksi/store2', 'ProduksiController@store2')->name('store.produksi');;
+  Route::delete('/produksi/{id}', 'ProduksiController@destroy'); //->Mneghapus data
 
 
   //-> ***** Profil IKM Jenis Peralatan PANUTAN

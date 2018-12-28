@@ -9,44 +9,33 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title" id="modal-title">Tambah Peralatan IKM</h4>
+        <h4 class="modal-title" id="modal-title">Tambah Bahan Baku IKM</h4>
       </div>
       <div class="modal-body">
         <form method="post" data-toggle="validator" action="/profil/store" id="theForm">
           {{ csrf_field() }} {{ method_field('POST') }}
         <input type="hidden" name="id" id="id" value="" method="patch">
         <div class="form-group">
-          <label for="jenis_alat">Jenis Alat</label>
-          <input type="text" name="jenis_alat" value="" class="form-control" id="jenis_alat" required placeholder="">
-        </div>
-        <div class="form-group">
-          <label for="tahun">Tahun Produksi</label>
-          <input min="1" type="text" name="tahun" value="" class="form-control" id="tahun"  placeholder="">
-        </div>
-        <div class="form-group">
-          <label for="spesifikasi">Spesifikasi</label>
-          <textarea name="spesifikasi" class="form-control" id="spesifikasi" rows="2" ></textarea>
-        </div>
-        <div class="form-group">
-          <label for="kapasitas">Kapasitas</label>
-          <input type="text" name="kapasitas" value="" class="form-control" id="kapasitas" placeholder="" >
+          <label for="jenis_bahan">Jenis Bahan</label>
+          <input type="text" name="jenis_bahan" value="" class="form-control" id="jenis_bahan" required placeholder="">
         </div>
         <div class="form-group">
           <label for="jumlah">Jumlah</label>
-          <input type="text" name="jumlah" value="" class="form-control" id="jumlah" placeholder="" >
+          <input min="1" type="text" name="jumlah" value="" class="form-control" id="jumlah"  placeholder="">
         </div>
         <div class="form-group">
-          <label for="buatan">Buatan</label>
-          <input type="text" name="buatan" value="" class="form-control" id="buatan" placeholder="" >
+          <label for="satuan">Satuan</label>
+          <input type="text" name="satuan" value="" class="form-control" id="satuan" placeholder="" >
         </div>
         <div class="form-group">
           <label for="harga">Harga</label>
-          <input type="text" name="harga" value="" class="form-control" id="harga" placeholder="" >
+          <input type="text" name="harga" value="" class="form-control" id="harga" placeholder="Rp." >
         </div>
         <div class="form-group">
           <label for="asal">Asal</label>
           <input type="text" name="asal" value="" class="form-control" id="asal" placeholder="" >
         </div>
+
 
 
         <button type="submit" class="btn btn-info btn-fill">Simpan Data</button>
@@ -67,7 +56,7 @@
 
             <div style="padding-left: 20px; padding-right: 20px" class="card">
                 <div class="card-header">
-                  <h3>Kelola Jenis Peralatan</h3>
+                  <h3>Kelola Kebutuhan Bahan Baku</h3>
 
                 </div>
 
@@ -90,7 +79,7 @@
           					  </div>
           					@endif
 
-                    <p>Daftar peralatan yang dimiliki oleh IKM</p>
+                    <p>Daftar kebutuhan bahan baku yang dibutuhkan oleh IKM</p>
                     <br>
 
                     <!-- table show daftar user yang dapat mengakses sistem -->
@@ -100,7 +89,7 @@
 
                           <div class="panel-heading">
                             <h5>Daftar Peralatan IKM
-                              <a onclick="addForm()" style="color:white" class="btn btn-primary pull-right">Tambah Peralatan IKM </a>
+                              <a onclick="addForm()" style="color:white" class="btn btn-primary pull-right">Tambah Bahan Baku IKM </a>
                             </h5>
                           </div>
 
@@ -109,12 +98,9 @@
                               <thead>
                                 <tr>
                                   <th width="50">ID</th>
-                                  <th>Jenis Alat</th>
-                                  <th>Tahun Produksi</th>
-                                  <th>Spesifikasi</th>
-                                  <th>Kapasitas</th>
+                                  <th>Jenis Bahan</th>
                                   <th>Jumlah</th>
-                                  <th>Buatan</th>
+                                  <th>Satuan</th>
                                   <th>Harga</th>
                                   <th>Asal</th>
                                   <th>Action</th>
@@ -144,17 +130,14 @@
       table = $('#staf-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('api.peralatan') }}",
+        ajax: "{{ route('api.bahan') }}",
         columns: [
           {data: 'id', name: 'id'},
-          {data: 'jenis_alat', name: 'jenis_alat'},
-          {data: 'tahun', name: 'tahun'},
-          {data: 'ket', name: 'spesifikasi'},
-          {data: 'kapasitas', name: 'kapasitas'},
-          {data: 'jumlah', name: 'jumlah'},
-          {data: 'buatan', name: 'buatan'},
-          {data: 'harga', name: 'harga'},
-          {data: 'asal', name: 'asal'},
+          {data: 'jenis_bahan', name: 'jenis_alat'},
+          {data: 'jumlah', name: 'tahun'},
+          {data: 'satuan', name: 'spesifikasi'},
+          {data: 'harga', name: 'kapasitas'},
+          {data: 'asal', name: 'jumlah'},
           {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
       });
@@ -179,7 +162,7 @@
             headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url : "{{ url('peralatan') }}" + '/' + id,
+            url : "{{ url('bahan') }}" + '/' + id,
             type: "POST",
             data: {'_method': 'DELETE', '_token': csrf_token},
             success: function(data) {
@@ -211,13 +194,13 @@
     function editData(id) {
       save_method = 'edit';
       $('input[name=_method]').val('PATCH');
-      urlAction = "{{ url('peralatan') }}";
-      $('#modal-title').text('Edit Peralatan IKM');
+      urlAction = "{{ url('bahan') }}";
+      $('#modal-title').text('Edit Bahan Baku IKM');
       console.log(id);
       // $('#modal-form')[0].reset();
       console.log(urlAction);
       $.ajax({
-        url: "{{ url('peralatan') }}/" + id + "/edit",
+        url: "{{ url('bahan') }}/" + id + "/edit",
         type: "GET",
         dataType: "JSON",
         success: function(data) {
@@ -229,12 +212,10 @@
           $("#modal-form").find("form").attr("action", urlAction + '/' + id);
 
           $('#id').val(data.id);
-          $('#jenis_alat').val(data.jenis_alat);
+          $('#jenis_bahan').val(data.jenis_bahan);
           $('#tahun').val(data.tahun);
-          $('#spesifikasi').val(data.spesifikasi);
-          $('#kapasitas').val(data.kapasitas);
+          $('#satuan').val(data.satuan);
           $('#jumlah').val(data.jumlah);
-          $('#buatan').val(data.buatan);
           $('#harga').val(data.harga);
           $('#asal').val(data.asal);
 
@@ -315,9 +296,9 @@
       $('input[name=_method]').val('POST');
       $('#modal-form').modal('show');
       $('#theForm')[0].reset();
-      $('.modal-title').text('Tambah Peralatan IKM');
+      $('.modal-title').text('Tambah Bahan Baku IKM');
       console.log('Tampilkan Form ADD');
-      $("#modal-form").find("form").attr("action", "{{ route('ikm.addPeralatan') }}");
+      $("#modal-form").find("form").attr("action", "{{ route('ikm.addBahan') }}");
     }
 
 

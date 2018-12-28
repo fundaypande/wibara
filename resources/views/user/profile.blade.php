@@ -73,8 +73,11 @@
                     }
                     ?>
 
-                  <div class="container">
-                    <img src="{!! asset('images/' . $url) !!}" alt="Avatar" class="image" width="100%">
+
+
+                  <div class="container" >
+                    <div class="image company-header-avatar" style="background-image: url({!! asset('images/' . $url) !!})"></div>
+                    <!-- <img src="{!! asset('images/' . $url) !!}" alt="Avatar" class="image profile-pic" width="100%"> -->
                     <div class="middle">
                       <a id="change-pic" onclick="addForm()" class="btn btn-info btn-fill">Ubah Gambar</a>
                     </div>

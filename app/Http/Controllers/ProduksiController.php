@@ -8,6 +8,7 @@ use Auth;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Storage;
 use Validator;
+use App\Token;
 
 class ProduksiController extends Controller
 {
@@ -42,55 +43,74 @@ class ProduksiController extends Controller
 
     public function store(Request $request)
     {
-      $userId = Auth::user() -> id;
-      $jenisProduksi = $request -> jenis_produksi;
-      $jumlah = $request -> jumlah;
-      $harga = $request -> harga;
-      $nilaiPenjualan = $request -> nilai_penjualan;
-      $tujuan = $request -> tujuan;
-      $deskripsi = $request -> deskripsi;
+      $file = Input::file('photo');
+      $input = null;
 
-
-
-      //--> replace titik pada harga
-      $jumlah = str_replace('.','',$jumlah);
-      $harga = str_replace('.','',$harga);
-      $nilaiPenjualan = str_replace('.','',$nilaiPenjualan);
-
-
-      // --> Validasi angka yang dimasukkan tidak boleh 0 atau minus
-      if($jumlah < 1 || $harga < 1 || $nilaiPenjualan < 1
-      )
+      if ($file)
       {
-        return redirect('/produksi')->with('warning', 'Setiap angka nominal yang diinput ke dalam form tidak boleh bernilai nol (0) atau kurang dari 1');
+          $input = time().'.'.$file->getClientOriginalExtension();
+          $file->move('images/produksi', $input);
       }
 
 
+
       $this -> validate($request, [
-              // 'jenis_produksi' => 'required|min:20',
-              // 'jumlah' => 'required|min:1',
-              'gambar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+              'jenis_produksi' => 'required|min:1',
+              // 'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
 
+      // $gambar = $request->file('photo');
+      // $input = time().'.'.$gambar->getClientOriginalExtension();
+      // // $request->file('photo')
 
-    //--> Upload Gambar
-      $input = $request->gambar;
-      $input = time().'.'.$request->gambar->getClientOriginalExtension();
-      $request->gambar->move('images/produksi', $input);
-
-
-      $data = [
-        'user_id' => $userId,
-        'jenis_produksi' => $jenisProduksi,
-        'jumlah' => $jumlah,
-        'alamat' => $alamat,
-        'harga' => $harga,
-        'nilai_penjualan' => $nilaiPenjualan,
-        'tujuan' => $tujuan,
-        'deskripsi' => $deskripsi,
+      return NilaiProduksi::create([
+        'user_id' => Auth::user()->id,
+        'jenis_produksi' => $request -> jenis_produksi,
+        'jumlah' => $request -> jumlah,
+        'merk_produk' => $request -> merk_produk,
+        'harga' => $request -> harga,
+        'nilai_penjualan' => $request -> nilai_penjualan,
+        'tujuan' => $request -> tujuan,
+        'deskripsi' => $request -> deskripsi,
         'photo' => $input,
-      ];
-
-      return NilaiProduksi::create($data);
+      ]);
     }
+
+    public function store2(Request $request)
+    {
+      $this -> validate($request, [
+              'jenis_produksi' => 'required|min:1',
+              'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+      $input = $request->photo;
+      $input = time().'.'.$request->photo->getClientOriginalExtension();
+      $request->photo->move('images/produksi', $input);
+
+      $hasil = NilaiProduksi::create([
+        'user_id' => Auth::user()->id,
+        'jenis_produksi' => $request -> jenis_produksi,
+        'jumlah' => $request -> jumlah,
+        'merk_produk' => $request -> merk_produk,
+        'harga' => $request -> harga,
+        'nilai_penjualan' => $request -> nilai_penjualan,
+        'tujuan' => $request -> tujuan,
+        'deskripsi' => $request -> deskripsi,
+        'photo' => $input,
+      ]);
+
+      return redirect('/produksi')->with('status', 'Berhasil menambahkan produksi baru');
+    }
+
+    public function showCreate()
+    {
+      return view('ikm.produksi.createProduksi');
+    }
+
+    public function destroy($id)
+    {
+        NilaiProduksi::destroy($id);
+    }
+
+
 }

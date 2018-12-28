@@ -97,29 +97,45 @@
 
                           <div class="panel-heading">
                             <h5>Daftar Profil IKM
-                              <a href="{{ route('create.produksi') }}" style="color:white" class="btn btn-primary pull-right">Tambah Produksi </a>
+                              <a onclick="addForm()" style="color:white" class="btn btn-primary pull-right">Tambah Produksi </a>
                             </h5>
                           </div>
 
                           <div class="panel-body" style="overflow-x:auto;">
-                            <table id="staf-table" width="100%" class="table table-striped table-bordered table-hover">
-                              <thead>
-                                <tr>
-                                  <th width="50">ID</th>
-                                  <th>Jenis Produksi</th>
-                                  <th>Jumlah</th>
-                                  <th>rerataHarga</th>
-                                  <th>Nilai Penjualan</th>
-                                  <th>Tujuan Pemasaran</th>
-                                  <th>Deskripsi Produk</th>
-                                  <th>Photo</th>
-                                  <th>Action</th>
-                                </tr>
-                              </thead>
-                              <tbody>
+                            <form method="post" data-toggle="validator" action="{{ route('store.produksi') }}" id="theForm" enctype="multipart/form-data">
+                              {{ csrf_field() }} {{ method_field('POST') }}
+                            <input type="hidden" name="id" id="id" value="" method="patch">
+                            <div class="form-group">
+                              <label for="jenis_produksi">Jenis Produksi</label>
+                              <input type="text" name="jenis_produksi" value="" class="form-control" id="jenis_produksi" required placeholder="">
+                            </div>
+                            <div class="form-group">
+                              <label for="jumlah">Jumlah</label>
+                              <input min="1" type="text" name="jumlah" value="" class="form-control" id="jumlah" required placeholder="">
+                            </div>
+                            <div class="form-group">
+                              <label for="harga">Harga</label>
+                              <input type="text" name="harga" value="" class="form-control" id="harga" placeholder="Rp." required>
+                            </div>
+                            <div class="form-group">
+                              <label for="nilai_penjualan">Nilai Penjualan</label>
+                              <input type="text" name="nilai_penjualan" value="" class="form-control" id="nilai_penjualan" placeholder="Rp." required>
+                            </div>
 
-                              </tbody>
-                            </table>
+                            <div class="form-group">
+                              <label for="tujuan">Tujuan Pemasaran</label>
+                              <input type="text" name="tujuan" value="" class="form-control" id="tujuan" placeholder="">
+                            </div>
+                            <div class="form-group">
+                              <label for="deskripsi">Deskripsi</label>
+                              <textarea name="deskripsi" class="form-control" id="deskripsi" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                              <label for="photo">Gambar</label>
+                              <input type="file" name="photo" class="form-control">
+                            </div>
+
+                            <button type="submit" class="btn btn-info btn-fill">Simpan Produksi</button>
                           </div>
 
 
@@ -134,7 +150,7 @@
     </div>
 
 
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
     var table;
     $(document).ready(function() {
       table = $('#staf-table').DataTable({
@@ -151,7 +167,7 @@
           {data: 'deskripsi', name: 'deskripsi'},
           {data: 'photos', name: 'photos', orderable: false, searchable: false,
             render: function( data, type, full, meta ) {
-                      return '<img src="' + data + '" height="50px" style="height: 50px;"/>';
+                      return '<img src="' + data + '" height="50"/>';
                   }
           },
           {data: 'action', name: 'action', orderable: false, searchable: false},
@@ -161,48 +177,32 @@
     });
 
     function deleteData(id){
+      var popup = confirm("Apakah anda yakin ingin menghapus data ini?");
       var csrf_token = $('meta[name="crsf_token"]').attr('content');
-      Swal({
-        title: 'Hapus Data?',
-        text: "Apakah anda yakin ingin menghapus data ini",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Ya, Hapus!',
-        cancelButtonText: 'Batal'
-      }).then((result) => {
-        if (result.value) {
-          $.ajax({
-            headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            url : "{{ url('produksi') }}" + '/' + id,
-            type: "POST",
-            data: {'_method': 'DELETE', '_token': csrf_token},
-            success: function(data) {
-              table.ajax.reload();
-              console.log(data);
-              Swal({
-                position: 'top-end',
-                type: 'success',
-                title: 'Data berhasil dihapus',
-                showConfirmButton: false,
-                timer: 1500
-              })
-            },
-            error: function(){
-              Swal({
-                position: 'top-end',
-                type: 'error',
-                title: 'Data berhasil dihapus',
-                showConfirmButton: false,
-                timer: 1500
-              })
-            }
-          });
-        }
-      });
+      if(popup == true){
+        $.ajax({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          url : "{{ url('profil') }}" + '/' + id,
+          type: "POST",
+          data: {'_method': 'DELETE', '_token': csrf_token},
+          success: function(data) {
+            table.ajax.reload();
+            console.log(data);
+            Swal({
+              position: 'top-end',
+              type: 'success',
+              title: 'Data berhasil dihapus',
+              showConfirmButton: false,
+              timer: 1500
+            })
+          },
+          error: function(){
+            alert("Gagal Menghapus! Terjadi kesalahan");
+          }
+        });
+      }
     }
 
     function store() {
@@ -324,7 +324,7 @@
       $('.modal-title').text('Tambah Produksi IKM');
       console.log('Tampilkan Form ADD');
       $("#modal-form").find("form").attr("action", "{{ route('ikm.addProduksi') }}");
-    }
+    } -->
 
 
 
@@ -332,6 +332,6 @@
 
 
 
-    </script>
+    <!-- </script> -->
 
 @endsection

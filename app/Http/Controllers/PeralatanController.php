@@ -31,6 +31,15 @@ class PeralatanController extends Controller
           <a onclick="deleteData(' . $peralatan-> id . ')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i>Delete</a>
         ';
       })
+      -> addColumn('ket', function($peralatan){
+        $deskripsi = $peralatan-> spesifikasi;
+        $deskripsi = substr($deskripsi, 0, 40);
+        if (strlen($deskripsi) > 39) {
+          $deskripsi = $deskripsi . "[...]";
+        }
+
+        return $deskripsi;
+      })
       ->make(true);
   }
 

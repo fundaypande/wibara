@@ -1,10 +1,7 @@
 <li class="active">
-    <a title="Landing Page" href="events.html" aria-expanded="false"><span style="color: #8d9498" class="fa fa-home icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Beranda</span></a>
+    <a title="Landing Page" href="/home" aria-expanded="false"><span style="color: #8d9498" class="fa fa-home icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Beranda</span></a>
 </li>
 @if(Auth::user() -> role == '3')
-  <li>
-      <a class="has-arrow aktif" href="/home" aria-expanded="false"><span style="color: #8d9498" class="fa fa-university icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Admin</span></a>
-  </li>
   <li>
       <a class="has-arrow" href="/kelola-staf" aria-expanded="false"><span style="color: #8d9498" class="fa fa-university icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Kelola Staf</span></a>
   </li>
