@@ -14,12 +14,14 @@ Route::group(['middleware' => ['auth']], function(){
   Route::get('/home', 'HomeController@index')->name('home');
 
 
+  Route::get('/ikm/{id}', 'IkmController@show');
+
+
 
   // --> Route untuk verifikasi Email
   Route::get('/verify/{token}/{id}', 'VerifyEmail@verify');
 
 });
-
 
 Route::group(['middleware' => 'admin'], function(){
   Route::get('/admin', 'AdminController@dashboard');
@@ -32,7 +34,19 @@ Route::group(['middleware' => 'admin'], function(){
   Route::delete('/kelola-staf/{id}', 'AdminController@destroy');
   Route::get('/kelola-staf/{id}/edit', 'AdminController@formEdit');
   Route::patch('/kelola-staf/{id}', 'AdminController@updateRole');
+
+
+  //--> Kelola Profil IKM
+  Route::get('/kelola-ikm', 'ProfilIkmController@showKelola');
+  Route::get('/api/kelola-ikm', 'ProfilIkmController@apiKelola')->name('api.kelolaIkm');  //API untuk menampilkan data profil IKM yang belum tervalidasi
+
+  Route::get('/profil/{id}/edit', 'ProfilIkmController@showModal'); //--> arahkan ke modal EDIT
+  Route::patch('/profil/{id}', 'ProfilIkmController@update'); //-> Proses edit data
+  Route::delete('/profil/{id}', 'ProfilIkmController@destroy');
+  Route::post('/profil/store', 'ProfilIkmController@store')->name('staf.addIkm');
 });
+
+
 
 Route::group(['middleware' => 'staf'], function(){
   Route::get('/staf', 'StafController@dashboard');
@@ -41,6 +55,7 @@ Route::group(['middleware' => 'staf'], function(){
   Route::get('/api/ikm-validasi', 'ValidasiController@apiValidasi')->name('api.valid');  //API untuk menampilkan data profil IKM yang belum tervalidasi
   Route::get('/validasi/{id}/edit', 'ValidasiController@formEdit'); //memunculkan modal validasi
   Route::patch('/validasi/{id}', 'ValidasiController@updateStatus'); //menyimpan hasil validasi
+
 
   //--> Kelola Profil IKM
   Route::get('/kelola-ikm', 'ProfilIkmController@showKelola');
@@ -63,8 +78,11 @@ Route::group(['middleware' => 'ikm'], function(){
   Route::get('/api/produksi', 'ProduksiController@apiProduksi')->name('api.produksi');
   Route::post('/produksi/store', 'ProduksiController@store')->name('ikm.addProduksi'); //Menambah data produksi
   Route::get('/add-produksi', 'ProduksiController@showCreate')->name('create.produksi');
-  Route::post('/produksi/store2', 'ProduksiController@store2')->name('store.produksi');;
+  Route::post('/produksi/store2', 'ProduksiController@store2')->name('store.produksi');
   Route::delete('/produksi/{id}', 'ProduksiController@destroy'); //->Mneghapus data
+  Route::get('/produksi/{id}/edit', 'ProduksiController@edit');
+  Route::patch('/produksi/{id}', 'ProduksiController@update'); //-> Proses edit data
+  Route::get('/produksi/{id}/show', 'ProduksiController@formEdit'); //--> menampilkan data di form edit
 
 
   //-> ***** Profil IKM Jenis Peralatan PANUTAN

@@ -2,6 +2,23 @@
 
 @section('content')
 
+<style type="text/css" scoped>
+  .tdIkm{
+    font-weight: 500;
+    width: 20%;
+  }
+  .tableIkm{
+    font-size: 16px;
+    width: 100%;
+  }
+  .tableIkm tr{
+    height: 60px;
+  }
+  .tableIkm td:first{
+    font-weight: 400;
+  }
+</style>
+
 <div id="modal-form" class="modal fade" role="dialog" tabindex="1" aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog">
 
@@ -70,7 +87,7 @@
 
             <div style="padding-left: 20px; padding-right: 20px" class="card">
                 <div class="card-header">
-                  <h3>Kelola Jenis Peralatan</h3>
+                  <h3>Profil IKM</h3>
 
                 </div>
 
@@ -93,46 +110,111 @@
           					  </div>
           					@endif
 
-                    <p>Daftar peralatan yang dimiliki oleh IKM</p>
+                    <p>Daftar profil IKM</p>
                     <br>
 
                     <!-- table show daftar user yang dapat mengakses sistem -->
-                    <div class="row">
-                      <div class="com-md-12">
-                        <div class="panel panel-default">
 
-                          <div class="panel-heading">
-                            <h5>Daftar Peralatan IKM
-                              <a onclick="addForm()" style="color:white" class="btn btn-primary pull-right">Tambah Peralatan IKM </a>
-                            </h5>
-                          </div>
-
-                          <div class="panel-body" style="overflow-x:auto;">
-                            <table id="staf-table" width="100%" class="table table-striped table-bordered table-hover">
-                              <thead>
-                                <tr>
-                                  <th width="50">ID</th>
-                                  <th>Jenis Alat</th>
-                                  <th>Tahun Produksi</th>
-                                  <th>Spesifikasi</th>
-                                  <th>Kapasitas</th>
-                                  <th>Jumlah</th>
-                                  <th>Buatan</th>
-                                  <th>Harga</th>
-                                  <th>Asal</th>
-                                  <th>Action</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-
-                              </tbody>
-                            </table>
-                          </div>
+                      <?php
+                      if($users -> user -> photo == null){
+                        $url = 'user.png';
+                      } else {
+                        $url = $users -> user -> photo;
+                      }
+                      ?>
 
 
+                    <div class="col-md-12">
+                      <div class="col-md-3">
+                        <center>
+                        <div class="container" >
+                          <div class="image company-header-avatar" style="background-image: url({!! asset('images/' . $url) !!}); width:200px; height:200px"></div>
+                          <!-- <img src="{!! asset('images/' . $url) !!}" alt="Avatar" class="image profile-pic" width="100%"> -->
                         </div>
+
+                        </center>
+                        <br>
+                        <table>
+                          <tr>
+                            <td style="width: 100px"><i>Nama Pemilik</i></td>
+                            <td><i>{{ $users -> user -> name }}</i></td>
+                          </tr>
+                          <tr>
+                            <td><i>Email</i></td>
+                            <td><i>{{ $users -> user -> email }}</i></td>
+                          </tr>
+                        </table>
                       </div>
+                      <div class="col-md-9">
+                        <table class="tableIkm">
+
+                          <tr>
+                            <td class="tdIkm"><b>Nama Usaha</b></td>
+                            <td>{{ $users -> nama_usaha  }}</td>
+                          </tr>
+                          <tr>
+                            <td class="tdIkm"><b>Alamat</b></td>
+                            <td>{{ $users -> alamat  }}</td>
+                          </tr>
+                          <tr>
+                            <td class="tdIkm"><b>Merk Produk</b></td>
+                            <td>{{ $users -> merk_produk  }}</td>
+                          </tr>
+                          <tr>
+                            <td class="tdIkm"><b>Telepon</b></td>
+                            <td>{{ $users -> telpon  }}</td>
+                          </tr>
+                          <tr>
+                            <td class="tdIkm"><b>Jenis Produk Yang Dihasilkan</b></td>
+                            <td>{{ $users -> jenis_produk  }}</td>
+                          </tr>
+
+                          <tr>
+                            <td class="tdIkm"><b>Jumlah Produksi Rata-rata</b></td>
+                            <td>{{ $users -> rerata_produksi  }}</td>
+                          </tr>
+                          <tr>
+                            <td class="tdIkm"><b>Harga Rata-rata Produk</b></td>
+                            <td>{{ $users -> rerata_harga  }}</td>
+                          </tr>
+                          <tr>
+                            <td class="tdIkm"><b>Rata-rata Nilai Penjualan</b></td>
+                            <td>{{ $users -> rerata_penjualan  }}</td>
+                          </tr>
+                          <tr>
+                            <td class="tdIkm"><b>Tempat Pemasaran</b></td>
+                            <td>{{ $users -> tempat_pemasaran  }}</td>
+                          </tr>
+                          <tr>
+                            <td class="tdIkm"><b>Total Peralatan dan Mesin Yang Dimiliki</b></td>
+                            <td>{{ $users -> total_peralatan  }}</td>
+                          </tr>
+                          <tr>
+                            <td class="tdIkm"><b>Rata-rata Bahan Baku Yang Digunakan Pertahun</b></td>
+                            <td>{{ $users -> total_bahan_baku  }}</td>
+                          </tr>
+                          <tr>
+                            <td class="tdIkm"><b>Jumlah Tenaga Kerja</b></td>
+                            <td>{{ $users -> total_pekerja  }}</td>
+                          </tr>
+                          <tr>
+                            <td class="tdIkm"><b>Jarak Dari Dinas Ke Lokasi IKM</b></td>
+                            <td>{{ $users -> jarak  }} KM</td>
+                          </tr>
+                          <tr>
+                            <td class="tdIkm"><b>Permasalahan Pada Usaha Yang Dihadapi</b></td>
+                            <td>{{ $users -> permasalahan  }}</td>
+                          </tr>
+                          <tr>
+                            <td class="tdIkm"><b>Jenis Bimtek Yang Diminati</b></td>
+                            <td>{{ $users -> jenis_bimtek  }}</td>
+                          </tr>
+                        </table>
+                      </div>
+
                     </div>
+
+
 
 
                 </div>

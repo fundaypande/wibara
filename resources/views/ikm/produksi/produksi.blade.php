@@ -15,6 +15,13 @@
         <form method="post" data-toggle="validator" action="" id="theForm" enctype="multipart/form-data">
           {{ csrf_field() }} {{ method_field('POST') }}
         <input type="hidden" name="id" id="id" value="" method="patch">
+
+        <center>
+          <div class="container" id="divGambar">
+            <img id="gambarProduk" src="" alt="Gambar Produk" style="height:400px">
+          </div>
+        </center>
+
         <div class="form-group">
           <label for="jenis_produksi">Jenis Produksi</label>
           <input type="text" name="jenis_produksi" value="" class="form-control" id="jenis_produksi" required placeholder="">
@@ -39,13 +46,11 @@
         <div class="form-group">
           <label for="deskripsi">Deskripsi</label>
           <textarea name="deskripsi" class="form-control" id="deskripsi" rows="2"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="photo">Gambar</label>
-          <input type="file" name="photo" class="form-control">
+          <div id="par" style="background-color: #eee; border-radius: 3px; padding: 5px">
+
+          </div>
         </div>
 
-        <button type="submit" class="btn btn-info btn-fill">Simpan Produksi</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </form>
       </div>
@@ -148,7 +153,7 @@
           {data: 'harga', name: 'harga'},
           {data: 'nilai_penjualan', name: 'nilai_penjualan'},
           {data: 'tujuan', name: 'tujuan'},
-          {data: 'deskripsi', name: 'deskripsi'},
+          {data: 'ket', name: 'deskripsi'},
           {data: 'photos', name: 'photos', orderable: false, searchable: false,
             render: function( data, type, full, meta ) {
                       return '<img src="' + data + '" height="50px" style="height: 50px;"/>';
@@ -210,16 +215,133 @@
     }
 
 
-    function editData(id) {
+    // function editData(id) {
+    //   save_method = 'edit';
+    //   $('input[name=_method]').val('PATCH');
+    //   urlAction = "{{ url('profil') }}";
+    //   $('#modal-title').text('Edit Profil IKM');
+    //   console.log(id);
+    //   // $('#modal-form')[0].reset();
+    //   console.log(urlAction);
+    //   $.ajax({
+    //     url: "{{ url('profil') }}/" + id + "/edit",
+    //     type: "GET",
+    //     dataType: "JSON",
+    //     success: function(data) {
+    //
+    //       $('#modal-form').modal('show');
+    //
+    //
+    //       // edit action pada form menjadi format URL patch di web.php
+    //       $("#modal-form").find("form").attr("action", urlAction + '/' + id);
+    //
+    //       $('#id').val(data.id);
+    //       $('#nama').val(data.nama_usaha);
+    //       $('#lamaBerdiri').val(data.lama_berdiri);
+    //       $('#merk').val(data.merk_produk);
+    //       $('#alamat').val(data.alamat);
+    //       $('#telepon').val(data.telpon);
+    //       $('#jenisProduk').val(data.jenis_produk);
+    //       $('#rerataProduksi').val(data.rerata_produksi);
+    //       $('#rerataHarga').val(data.rerata_harga);
+    //       $('#rerataPenjualan').val(data.rerata_penjualan);
+    //       $('#tempatPemasaran').val(data.tempat_pemasaran);
+    //       $('#totalPeralatan').val(data.total_peralatan);
+    //       $('#totalBahanBaku').val(data.total_bahan_baku);
+    //       $('#totalPekerja').val(data.total_pekerja);
+    //       $('#jenisBimtek').val(data.jenis_bimtek);
+    //       $('#permasalahan').val(data.permasalahan);
+    //       $('#jarak').val(data.jarak);
+    //
+    //     },
+    //     error: function() {
+    //       alert("Tidak ada data");
+    //     },
+    //   });
+    // }
+    //
+    // $(function(){
+    //   $('#modal-form form').validator().on('submit', function (e) {
+    //     e.preventDefault();
+    //     var data = $('form').serialize();
+    //     console.log("Submit dipencet");
+    //     var form_action = $("#modal-form").find("form").attr("action");
+    //     var nama = $("#modal-form").find("input[name='jenis_produksi']").val();
+    //     console.log(nama);
+    //     console.log(form_action);
+    //
+    //     $.ajax({
+    //       headers: {
+    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //       },
+    //       url: form_action,
+    //       type: "POST",
+    //       dataType: "JSON",
+    //       data: data,
+    //       success: function(data) {
+    //         table.ajax.reload();
+    //         $(".modal").modal('hide');
+    //         Swal({
+    //           position: 'top-end',
+    //           type: 'success',
+    //           title: 'Data berhasil dimasukkan',
+    //           showConfirmButton: false,
+    //           timer: 1500
+    //         });
+    //       },
+    //       error: function(jqXhr, json, errorThrown){// this are default for ajax errors
+    //       var errors = jqXhr.responseJSON;
+    //       var errorsHtml = '';
+    //       $.each(errors['errors'], function (index, value) {
+    //           errorsHtml += '<ul class="list-group"><li class="list-group-item alert alert-danger">' + value + '</li></ul>';
+    //           console.log(value);
+    //       });
+    //
+    //       //I use SweetAlert2 for this
+    //       swal({
+    //           title: "Error " + jqXhr.status + ': ' + errorThrown,// this will output "Error 422: Unprocessable Entity"
+    //           html: errorsHtml,
+    //           width: 'auto',
+    //           confirmButtonText: 'Try again',
+    //           cancelButtonText: 'Cancel',
+    //           confirmButtonClass: 'btn',
+    //           cancelButtonClass: 'cancel-class',
+    //           showCancelButton: true,
+    //           closeOnConfirm: true,
+    //           closeOnCancel: true,
+    //           type: 'error'
+    //       }, function(isConfirm) {
+    //           if (isConfirm) {
+    //                $('#openModal').click();//this is when the form is in a modal
+    //           }
+    //       });
+    //
+    //     } //error close
+    //     });
+    //   });
+    // });
+    //
+    // function addForm() {
+    //   save_method = "add";
+    //   $('input[name=_method]').val('POST');
+    //   $('#modal-form').modal('show');
+    //   $('#theForm')[0].reset();
+    //   $('.modal-title').text('Tambah Produksi IKM');
+    //   console.log('Tampilkan Form ADD');
+    //   $("#modal-form").find("form").attr("action", "{{ route('ikm.addProduksi') }}");
+    // }
+
+
+    function showData(id){
       save_method = 'edit';
       $('input[name=_method]').val('PATCH');
-      urlAction = "{{ url('profil') }}";
+      urlAction = "{{ url('produksi') }}";
       $('#modal-title').text('Edit Profil IKM');
       console.log(id);
       // $('#modal-form')[0].reset();
       console.log(urlAction);
       $.ajax({
-        url: "{{ url('profil') }}/" + id + "/edit",
+        url: "{{ url('produksi') }}/" + id + "/show",
         type: "GET",
         dataType: "JSON",
         success: function(data) {
@@ -231,99 +353,30 @@
           $("#modal-form").find("form").attr("action", urlAction + '/' + id);
 
           $('#id').val(data.id);
-          $('#nama').val(data.nama_usaha);
-          $('#lamaBerdiri').val(data.lama_berdiri);
-          $('#merk').val(data.merk_produk);
-          $('#alamat').val(data.alamat);
-          $('#telepon').val(data.telpon);
-          $('#jenisProduk').val(data.jenis_produk);
-          $('#rerataProduksi').val(data.rerata_produksi);
-          $('#rerataHarga').val(data.rerata_harga);
-          $('#rerataPenjualan').val(data.rerata_penjualan);
-          $('#tempatPemasaran').val(data.tempat_pemasaran);
-          $('#totalPeralatan').val(data.total_peralatan);
-          $('#totalBahanBaku').val(data.total_bahan_baku);
-          $('#totalPekerja').val(data.total_pekerja);
-          $('#jenisBimtek').val(data.jenis_bimtek);
-          $('#permasalahan').val(data.permasalahan);
-          $('#jarak').val(data.jarak);
+          $('#jenis_produksi').val(data.jenis_produksi);
+          $('#jumlah').val(data.jumlah);
+          $('#merk_produk').val(data.merk_produk);
+          $('#harga').val(data.harga);
+          $('#nilai_penjualan').val(data.nilai_penjualan);
+          $('#tujuan').val(data.tujuan);
+          $('#deskripsi').hide();
+
+          $('#gambarProduk').attr("src","images/produksi/" + data.photo);
+
+          console.log('/images/produksi/'+ data.photo);
+
+          data = data.deskripsi;
+
+          $("#theForm input").prop("disabled", true);
+          $("#theForm textarea").prop("disabled", true);
+          $("#simpan").hide();
+          $("#par").text(data);
 
         },
         error: function() {
           alert("Tidak ada data");
         },
       });
-    }
-
-    $(function(){
-      $('#modal-form form').validator().on('submit', function (e) {
-        e.preventDefault();
-        var data = $('form').serialize();
-        console.log("Submit dipencet");
-        var form_action = $("#modal-form").find("form").attr("action");
-        var nama = $("#modal-form").find("input[name='jenis_produksi']").val();
-        console.log(nama);
-        console.log(form_action);
-
-        $.ajax({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          },
-          url: form_action,
-          type: "POST",
-          dataType: "JSON",
-          data: data,
-          success: function(data) {
-            table.ajax.reload();
-            $(".modal").modal('hide');
-            Swal({
-              position: 'top-end',
-              type: 'success',
-              title: 'Data berhasil dimasukkan',
-              showConfirmButton: false,
-              timer: 1500
-            });
-          },
-          error: function(jqXhr, json, errorThrown){// this are default for ajax errors
-          var errors = jqXhr.responseJSON;
-          var errorsHtml = '';
-          $.each(errors['errors'], function (index, value) {
-              errorsHtml += '<ul class="list-group"><li class="list-group-item alert alert-danger">' + value + '</li></ul>';
-              console.log(value);
-          });
-
-          //I use SweetAlert2 for this
-          swal({
-              title: "Error " + jqXhr.status + ': ' + errorThrown,// this will output "Error 422: Unprocessable Entity"
-              html: errorsHtml,
-              width: 'auto',
-              confirmButtonText: 'Try again',
-              cancelButtonText: 'Cancel',
-              confirmButtonClass: 'btn',
-              cancelButtonClass: 'cancel-class',
-              showCancelButton: true,
-              closeOnConfirm: true,
-              closeOnCancel: true,
-              type: 'error'
-          }, function(isConfirm) {
-              if (isConfirm) {
-                   $('#openModal').click();//this is when the form is in a modal
-              }
-          });
-
-        } //error close
-        });
-      });
-    });
-
-    function addForm() {
-      save_method = "add";
-      $('input[name=_method]').val('POST');
-      $('#modal-form').modal('show');
-      $('#theForm')[0].reset();
-      $('.modal-title').text('Tambah Produksi IKM');
-      console.log('Tampilkan Form ADD');
-      $("#modal-form").find("form").attr("action", "{{ route('ikm.addProduksi') }}");
     }
 
 

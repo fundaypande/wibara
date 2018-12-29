@@ -26,6 +26,6 @@ class IKMMiddleware
       }
 
 
-      return redirect(404);
+      return redirect('/home');
     }
 }

@@ -12,40 +12,15 @@
         <h4 class="modal-title" id="modal-title">Tambah Profil IKM</h4>
       </div>
       <div class="modal-body">
-        <form method="post" data-toggle="validator" action="" id="theForm" enctype="multipart/form-data">
+        <form enctype="multipart/form-data" method="post" data-toggle="validator" action="/user/pic/{{ Auth::user()->id }}" id="theForm">
           {{ csrf_field() }} {{ method_field('POST') }}
         <input type="hidden" name="id" id="id" value="" method="patch">
         <div class="form-group">
-          <label for="jenis_produksi">Jenis Produksi</label>
-          <input type="text" name="jenis_produksi" value="" class="form-control" id="jenis_produksi" required placeholder="">
-        </div>
-        <div class="form-group">
-          <label for="jumlah">Jumlah</label>
-          <input min="1" type="text" name="jumlah" value="" class="form-control" id="jumlah" required placeholder="">
-        </div>
-        <div class="form-group">
-          <label for="harga">Harga</label>
-          <input type="text" name="harga" value="" class="form-control" id="harga" placeholder="Rp." required>
-        </div>
-        <div class="form-group">
-          <label for="nilai_penjualan">Nilai Penjualan</label>
-          <input type="text" name="nilai_penjualan" value="" class="form-control" id="nilai_penjualan" placeholder="Rp." required>
+          <label for="nama">Gambar</label>
+          <input type="file" name="gambar" class="form-control">
         </div>
 
-        <div class="form-group">
-          <label for="tujuan">Tujuan Pemasaran</label>
-          <input type="text" name="tujuan" value="" class="form-control" id="tujuan" placeholder="">
-        </div>
-        <div class="form-group">
-          <label for="deskripsi">Deskripsi</label>
-          <textarea name="deskripsi" class="form-control" id="deskripsi" rows="2"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="photo">Gambar</label>
-          <input type="file" name="photo" class="form-control">
-        </div>
-
-        <button type="submit" class="btn btn-info btn-fill">Simpan Produksi</button>
+        <button type="submit" class="btn btn-info btn-fill">Simpan Profil</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </form>
       </div>
@@ -63,11 +38,23 @@
 
             <div style="padding-left: 20px; padding-right: 20px" class="card">
                 <div class="card-header">
-                  <h3>Kelola Produksi</h3>
+                  <h3>Update Data Produksi</h3>
 
                 </div>
 
                 <div class="card-body">
+
+                  @if(count($errors) > 0)
+                  <div class="alert alert-danger">
+                    <ul>
+                      @foreach ($errors-> all() as $error)
+                        <li>{{ $error }}</li>
+                      @endforeach
+                    </ul>
+                  </div>
+                  @endif
+
+
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
@@ -102,38 +89,50 @@
                           </div>
 
                           <div class="panel-body" style="overflow-x:auto;">
-                            <form method="post" data-toggle="validator" action="{{ route('store.produksi') }}" id="theForm" enctype="multipart/form-data">
-                              {{ csrf_field() }} {{ method_field('POST') }}
+                            <form method="post" data-toggle="validator" action="/produksi/{{ $produksi->id }}" id="theForm" enctype="multipart/form-data">
+                              {{ csrf_field() }} {{ method_field('PATCH') }}
                             <input type="hidden" name="id" id="id" value="" method="patch">
                             <div class="form-group">
                               <label for="jenis_produksi">Jenis Produksi</label>
-                              <input type="text" name="jenis_produksi" value="" class="form-control" id="jenis_produksi" required placeholder="">
+                              <input type="text" name="jenis_produksi" value="{{ $produksi->jenis_produksi }}" class="form-control" id="jenis_produksi" required placeholder="">
                             </div>
                             <div class="form-group">
                               <label for="jumlah">Jumlah</label>
-                              <input min="1" type="text" name="jumlah" value="" class="form-control" id="jumlah" required placeholder="">
+                              <input min="1" type="text" name="jumlah" value="{{ $produksi->jumlah }}" class="form-control" id="jumlah" required placeholder="">
                             </div>
                             <div class="form-group">
                               <label for="harga">Harga</label>
-                              <input type="text" name="harga" value="" class="form-control" id="harga" placeholder="Rp." required>
+                              <input type="text" name="harga" value="{{ $produksi->harga }}" class="form-control" id="harga" placeholder="Rp." required>
                             </div>
                             <div class="form-group">
                               <label for="nilai_penjualan">Nilai Penjualan</label>
-                              <input type="text" name="nilai_penjualan" value="" class="form-control" id="nilai_penjualan" placeholder="Rp." required>
+                              <input type="text" name="nilai_penjualan" value="{{ $produksi->nilai_penjualan }}" class="form-control" id="nilai_penjualan" placeholder="Rp." required>
                             </div>
 
                             <div class="form-group">
                               <label for="tujuan">Tujuan Pemasaran</label>
-                              <input type="text" name="tujuan" value="" class="form-control" id="tujuan" placeholder="">
+                              <input type="text" name="tujuan" value="{{ $produksi->tujuan }}" class="form-control" id="tujuan" placeholder="">
                             </div>
                             <div class="form-group">
                               <label for="deskripsi">Deskripsi</label>
-                              <textarea name="deskripsi" class="form-control" id="deskripsi" rows="2"></textarea>
+                              <textarea name="deskripsi" class="form-control" id="deskripsi" rows="2">{{ $produksi->deskripsi }}</textarea>
                             </div>
-                            <div class="form-group">
-                              <label for="photo">Gambar</label>
-                              <input type="file" name="photo" class="form-control">
+                            <label for="tujuan">Ubah Gambar</label>
+                            <div style="width: 20%">
+                              <div class="container" >
+                                <img src="/images/produksi/{{ $produksi->photo }}" alt="Avatar" class="image profile-pic" style="width:100%">
+                                <div class="middle">
+                                  <!-- <input type="file" name="gambar" class="form-control"> -->
+                                  <!-- <a id="change-pic" onclick="addForm({{ $produksi->id }})" class="btn btn-info btn-fill">Ubah Gambar</a> -->
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <input type="file" name="gambar" class="form-control">
+                              </div>
                             </div>
+
+                            <br>
+                            <br>
 
                             <button type="submit" class="btn btn-info btn-fill">Simpan Produksi</button>
                           </div>
@@ -151,6 +150,7 @@
 
 
     <!-- <script type="text/javascript">
+
     var table;
     $(document).ready(function() {
       table = $('#staf-table').DataTable({
@@ -316,15 +316,17 @@
       });
     });
 
-    function addForm() {
+
+    function addForm($id) {
       save_method = "add";
-      $('input[name=_method]').val('POST');
+      $('input[name=_method]').val('PUT');
       $('#modal-form').modal('show');
       $('#theForm')[0].reset();
-      $('.modal-title').text('Tambah Produksi IKM');
+      $('.modal-title').text('Ubah Foto');
       console.log('Tampilkan Form ADD');
-      $("#modal-form").find("form").attr("action", "{{ route('ikm.addProduksi') }}");
-    } -->
+      $("#modal-form").find("form").attr("action", "/produksiFoto/"+$id);
+    }
+    -->
 
 
 

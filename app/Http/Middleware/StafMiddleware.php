@@ -26,6 +26,6 @@ class StafMiddleware
       }
 
 
-      return redirect(404);
+      return redirect('/home');
     }
 }
