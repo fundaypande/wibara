@@ -21,6 +21,12 @@ Route::group(['middleware' => ['auth']], function(){
   // --> Route untuk verifikasi Email
   Route::get('/verify/{token}/{id}', 'VerifyEmail@verify');
 
+
+  // --> Kumpulan API yang bisa diakses oleh user auth
+  Route::get('/api/bahan/{id?}', 'BahanController@apiBahan')->name('api.bahan');
+  Route::get('/api/peralatan/{id?}', 'PeralatanController@apiPeralatan')->name('api.peralatan');
+  Route::get('/api/produksi/{id?}', 'ProduksiController@apiProduksi')->name('api.produksi');
+
 });
 
 Route::group(['middleware' => 'admin'], function(){
@@ -68,14 +74,14 @@ Route::group(['middleware' => 'staf'], function(){
 });
 
 
-Route::group(['middleware' => 'ikm'], function(){
+Route::group(['middleware' => ['ikm'], ['staf']], function(){
   Route::get('/ikm', 'IkmController@dashboard');
 
   Route::get('/profil', 'ProfilIkmController@show');
   Route::put('/profil/{id}', 'ProfilIkmController@update');
 
   Route::get('/produksi', 'ProduksiController@showProduksi');
-  Route::get('/api/produksi', 'ProduksiController@apiProduksi')->name('api.produksi');
+
   Route::post('/produksi/store', 'ProduksiController@store')->name('ikm.addProduksi'); //Menambah data produksi
   Route::get('/add-produksi', 'ProduksiController@showCreate')->name('create.produksi');
   Route::post('/produksi/store2', 'ProduksiController@store2')->name('store.produksi');
@@ -87,7 +93,7 @@ Route::group(['middleware' => 'ikm'], function(){
 
   //-> ***** Profil IKM Jenis Peralatan PANUTAN
   Route::get('/peralatan', 'PeralatanController@show');
-  Route::get('/api/peralatan', 'PeralatanController@apiPeralatan')->name('api.peralatan');
+
   Route::post('/peralatan', 'PeralatanController@store')->name('ikm.addPeralatan');
   Route::get('/peralatan/{id}/edit', 'PeralatanController@formEdit'); //--> menampilkan data di form edit
   Route::patch('/peralatan/{id}', 'PeralatanController@update'); //-> Proses edit data
@@ -95,7 +101,7 @@ Route::group(['middleware' => 'ikm'], function(){
 
   //Bahan Baku Profil IKM
   Route::get('/bahan', 'BahanController@show');
-  Route::get('/api/bahan', 'BahanController@apiBahan')->name('api.bahan');
+
   Route::post('/bahan', 'BahanController@store')->name('ikm.addBahan');
   Route::get('/bahan/{id}/edit', 'BahanController@formEdit'); //--> menampilkan data di form edit
   Route::patch('/bahan/{id}', 'BahanController@update'); //-> Proses edit data

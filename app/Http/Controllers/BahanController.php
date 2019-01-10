@@ -17,9 +17,14 @@ class BahanController extends Controller
 
 
   //-> API untuk menampilkan data peralatan IKM
-  public function apiBahan()
+  public function apiBahan($id = null)
   {
-    $idUser = Auth::user()->id;
+    if($id == null){
+      $idUser = Auth::user()->id;
+    } else {
+      $idUser = $id;
+    }
+
     $bahan = BahanBaku::where('user_id', '=', $idUser)->get();
 
 

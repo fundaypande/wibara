@@ -18,9 +18,13 @@ class ProduksiController extends Controller
     }
 
     //-> API untuk menampilkan data produksi IKM
-    public function apiProduksi()
+    public function apiProduksi($id=null)
     {
-      $idUser = Auth::user()->id;
+      if($id == null){
+        $idUser = Auth::user()->id;
+      } else {
+        $idUser = $id;
+      }
       $staf = NilaiProduksi::where('user_id', '=', $idUser)->get();
 
 
@@ -33,7 +37,7 @@ class ProduksiController extends Controller
           ';
         })
         -> addColumn('photos', function($staf){
-          if(!$staf->photo) $photo = 'images/user.png'; else $photo = 'images/produksi/'.$staf->photo;
+          if(!$staf->photo) $photo = '/images/user.png'; else $photo = '/images/produksi/'.$staf->photo;
           return '
             '.$photo.'
           ';

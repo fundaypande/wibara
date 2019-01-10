@@ -17,9 +17,13 @@ class PeralatanController extends Controller
 
 
   //-> API untuk menampilkan data peralatan IKM
-  public function apiPeralatan()
+  public function apiPeralatan($id=null)
   {
-    $idUser = Auth::user()->id;
+    if($id == null){
+      $idUser = Auth::user()->id;
+    } else {
+      $idUser = $id;
+    }
     $peralatan = JenisPeralatan::where('user_id', '=', $idUser)->get();
 
 

@@ -24,8 +24,10 @@ class IkmController extends Controller
 
   public function show($id)
   {
-    $users = ProfilIkm::findOrFail($id);
+    $profils = ProfilIkm::findOrFail($id);
+    $userId = $profils -> user_id;
+    $bahanBaku = BahanBaku::where('user_id', '=', $userId)->get();
 
-    return view('ikm.show', ['users' => ProfilIkm::findOrFail($id)]);
+    return view('ikm.show', ['profils' => ProfilIkm::findOrFail($id)], ['bahanBaku' => $bahanBaku]);
   }
 }
