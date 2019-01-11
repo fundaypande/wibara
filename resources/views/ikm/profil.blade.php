@@ -93,7 +93,7 @@
                     </div>
                     <div class="form-group">
                       <label for="lamaBerdiri">Lama Berdirinya Usaha</label>
-                      <input min="1" type="text" name="lamaBerdiri" value="{{ Auth::user()->profilIkm->lama_berdiri }}" class="form-control" id="lamaBerdiri" required placeholder="4 tahun">
+                      <input min="1" type="number" name="lamaBerdiri" value="{{ Auth::user()->profilIkm->lama_berdiri }}" class="form-control" id="lamaBerdiri" required placeholder="4 tahun">
                     </div>
                     <div class="form-group">
                       <label for="merk">Merk Produk</label>

@@ -17,6 +17,26 @@ class ProduksiController extends Controller
       return view('ikm.produksi.produksi');
     }
 
+
+
+
+
+
+
+    public function showRandom()
+    {
+      return view('public.showProduksi');
+    }
+
+
+
+
+
+
+
+
+
+
     //-> API untuk menampilkan data produksi IKM
     public function apiProduksi($id=null)
     {
@@ -67,7 +87,10 @@ class ProduksiController extends Controller
 
       $this -> validate($request, [
               'jenis_produksi' => 'required|min:1',
-              'gambar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+              'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+              'jumlah' => 'required|min:1|numeric',
+              'harga' => 'required|min:1|numeric',
+              'nilai_penjualan' => 'required|min:1|numeric',
             ]);
 
       $input = $request->gambar;
@@ -114,6 +137,9 @@ class ProduksiController extends Controller
       $this -> validate($request, [
               'jenis_produksi' => 'required|min:1',
               'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+              'jumlah' => 'required|min:1|numeric',
+              'harga' => 'required|min:1|numeric',
+              'nilai_penjualan' => 'required|min:1|numeric',
             ]);
 
 

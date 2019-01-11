@@ -61,8 +61,9 @@ class ProfilIkmController extends Controller
 
 
       $this -> validate($request, [
-              'lamaBerdiri' => 'required|min:1',
+              'lamaBerdiri' => 'required|min:1|numeric',
               'rerataProduksi' => 'required|min:1',
+
             ]);
       $data = [
         'nama_usaha' => $namaUsaha,

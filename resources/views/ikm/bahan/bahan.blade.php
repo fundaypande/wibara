@@ -123,10 +123,16 @@
 
     </div>
 
-
+    <script src="{{ asset('js/rupiah.js') }}"></script>
     <script type="text/javascript">
     var table;
     $(document).ready(function() {
+
+
+      justNum($('#jumlah'));
+      justNum($('#harga'));
+
+
       table = $('#staf-table').DataTable({
         processing: true,
         serverSide: true,

@@ -5,6 +5,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/produk', 'ProduksiController@showRandom');
+
 
 Route::group(['middleware' => ['auth']], function(){
   Route::get('/user/{id?}', 'UserController@user');

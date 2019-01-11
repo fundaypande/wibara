@@ -75,6 +75,18 @@
                 </div>
 
                 <div class="card-body">
+
+                  @if(count($errors) > 0)
+                  <div class="alert alert-danger">
+                    <ul>
+                      @foreach ($errors-> all() as $error)
+                        <li>{{ $error }}</li>
+                      @endforeach
+                    </ul>
+                  </div>
+                  @endif
+
+
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
@@ -141,9 +153,19 @@
     </div>
 
 
+      <script src="{{ asset('js/rupiah.js') }}"></script>
+
     <script type="text/javascript">
     var table;
     $(document).ready(function() {
+
+
+      justNum($('#tahun'));
+      justNum($('#harga'));
+      justNum($('#kapasitas'));
+      justNum($('#jumlah'));
+
+
       table = $('#staf-table').DataTable({
         processing: true,
         serverSide: true,

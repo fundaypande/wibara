@@ -2,14 +2,15 @@
 
 @section('content')
 
+
 <div class="swiper-container hero-slider">
-                <div class="swiper-slide hero-content-wrap" style="background-image: url('images/hero.jpg')">
+                <div class="swiper-slide hero-content-wrap" style="background-color: #eeeeee">
                     <div class="hero-content-overlay position-absolute w-100 h-100">
                         <div class="container h-100">
                             <div class="row h-100">
                                 <div class="col-12 col-lg-6 d-flex flex-column justify-content-center align-items-start">
                                     <header class="entry-header">
-                                        <h1>The Best <br>Medical Services</h1>
+                                        <h1>Cari Hasil Produksi</h1>
                                     </header><!-- .entry-header -->
 
                                     <div class="entry-content mt-4">

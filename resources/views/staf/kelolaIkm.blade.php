@@ -166,10 +166,25 @@
 
     </div>
 
+    <script src="{{ asset('js/rupiah.js') }}"></script>
 
     <script type="text/javascript">
+
+
     var table;
     $(document).ready(function() {
+
+
+      justNum($('#lamaBerdiri'));
+      justNum($('#rerataProduksi'));
+      justNum($('#rerataHarga'));
+      justNum($('#rerataPenjualan'));
+      justNum($('#totalBahanBaku'));
+      justNum($('#totalPeralatan'));
+      justNum($('#totalPekerja'));
+      justNum($('#jarak'));
+
+
       table = $('#staf-table').DataTable({
         processing: true,
         serverSide: true,
