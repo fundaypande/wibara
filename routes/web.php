@@ -6,6 +6,9 @@ Route::get('/', function () {
 });
 
 Route::get('/produk', 'ProduksiController@showRandom');
+Route::post('/produk/search', 'ProduksiController@search');
+Route::get('/produk/{id}', 'ProduksiController@showOne');
+Route::get('/produsen/{id}', 'ProduksiController@showProdusen');
 
 
 Route::group(['middleware' => ['auth']], function(){
@@ -52,6 +55,14 @@ Route::group(['middleware' => 'admin'], function(){
   Route::patch('/profil/{id}', 'ProfilIkmController@update'); //-> Proses edit data
   Route::delete('/profil/{id}', 'ProfilIkmController@destroy');
   Route::post('/profil/store', 'ProfilIkmController@store')->name('staf.addIkm');
+
+
+  Route::get('/komoditi', 'KomoditiController@show');
+  Route::get('/api/komoditi', 'KomoditiController@apiKomoditi')->name('api.komoditi');
+  Route::post('/komoditi', 'KomoditiController@store')->name('admin.addKomoditi');
+  Route::get('/komoditi/{id}/edit', 'KomoditiController@formEdit'); //--> menampilkan data di form edit
+  Route::patch('/komoditi/{id}', 'KomoditiController@update'); //-> Proses edit data
+  Route::delete('/komoditi/{id}', 'KomoditiController@destroy'); //->Mneghapus data
 });
 
 
@@ -84,7 +95,7 @@ Route::group(['middleware' => ['ikm'], ['staf']], function(){
 
   Route::get('/produksi', 'ProduksiController@showProduksi');
 
-  Route::post('/produksi/store', 'ProduksiController@store')->name('ikm.addProduksi'); //Menambah data produksi
+  // Route::post('/produksi/store', 'ProduksiController@store')->name('ikm.addProduksi'); //Menambah data produksi
   Route::get('/add-produksi', 'ProduksiController@showCreate')->name('create.produksi');
   Route::post('/produksi/store2', 'ProduksiController@store2')->name('store.produksi');
   Route::delete('/produksi/{id}', 'ProduksiController@destroy'); //->Mneghapus data

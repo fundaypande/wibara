@@ -45,13 +45,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     </div><!-- .footer-widgets -->
 </footer><!-- .site-footer -->
 
-<script type='text/javascript' src='js/jquery.js'></script>
-<script type='text/javascript' src='js/jquery.collapsible.min.js'></script>
-<script type='text/javascript' src='js/swiper.min.js'></script>
-<script type='text/javascript' src='js/jquery.countdown.min.js'></script>
-<script type='text/javascript' src='js/circle-progress.min.js'></script>
-<script type='text/javascript' src='js/jquery.countTo.min.js'></script>
-<script type='text/javascript' src='js/jquery.barfiller.js'></script>
-<script type='text/javascript' src='js/custom.js'></script>
+<script type='text/javascript' src='{!! asset("js/jquery.js") !!}'></script>
+<script type='text/javascript' src='{!! asset("jjs/jquery.collapsible.min.js") !!}'></script>
+<script type='text/javascript' src='{!! asset("js/swiper.min.js") !!}'></script>
+<script type='text/javascript' src='{!! asset("js/jquery.countdown.min.js") !!}'></script>
+<script type='text/javascript' src='{!! asset("js/circle-progress.min.js") !!}'></script>
+<script type='text/javascript' src='{!! asset("js/jquery.countTo.min.js") !!}'></script>
+<script type='text/javascript' src='{!! asset("js/jquery.barfiller.js") !!}'></script>
+<script type='text/javascript' src='{!! asset("js/custom.js") !!}'></script>
 </body>
 </html>

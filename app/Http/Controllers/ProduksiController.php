@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\NilaiProduksi;
+use App\ProfilIkm;
 use Auth;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Storage;
@@ -25,7 +26,42 @@ class ProduksiController extends Controller
 
     public function showRandom()
     {
-      return view('public.showProduksi');
+      $produksis = NilaiProduksi::inRandomOrder()->paginate(10);
+
+      return view('public.showProduksi', ['produksis' => $produksis], ['cari' => null]);
+    }
+
+    public function search(Request $request)
+    {
+      $search = $request -> cari;
+      $produksis = NilaiProduksi::inRandomOrder()
+                  ->Where('jenis_produksi', 'like', '%' . $search . '%')
+                  ->orWhere('deskripsi', 'like', '%' . $search . '%')
+                  ->paginate(10);
+      return view('public.showProduksi', ['produksis' => $produksis], ['cari' => $search])->with('notif', 'Hasil Pencarian "'. $search . '"');;
+    }
+
+    public function showOne($id)
+    {
+      $produksi = NilaiProduksi::findOrFail($id);
+
+      return view('public.showOne', ['produksi' => $produksi]);
+    }
+
+    public function showProdusen($id)
+    {
+      $datas = ProfilIkm::findOrFail($id);
+
+      $userId = $datas -> user_id;
+
+      $produksi = NilaiProduksi::Where('user_id', '=', $userId)
+                  -> paginate(10);
+
+      $totalProduksi = NilaiProduksi::Where('user_id', '=', $userId)
+                  ->count();
+
+
+      return view('public.showProdusen', ['data' => $datas], ['produksis' => $produksi], ['totalProduksi' => $totalProduksi]);
     }
 
 
@@ -143,12 +179,12 @@ class ProduksiController extends Controller
             ]);
 
 
-      $input = $request->gambar;
+      $input = $request->photo;
       if($input){
-        $input = time().'.'.$request->gambar->getClientOriginalExtension();
-        $request->gambar->move('images/produksi/', $input);
-
-      } else {
+        $input = time().'.'.$request->photo->getClientOriginalExtension();
+        $request->photo->move('images/produksi/', $input);
+      }
+      else {
         $input = null;
       }
 

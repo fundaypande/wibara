@@ -53,3 +53,81 @@
     background-size: cover;
     background-position: center center;
 }
+
+.produksi-tumb{
+    width: 100%;
+    height: 250px;
+    float: left;
+    background-size: cover;
+    background-position: center center;
+}
+
+.produk-card:hover .produksi-tumb{
+    opacity: 0.5;
+    -webkit-transition: ease-in 500ms;
+    -moz-transition: ease-in 500ms;
+    -o-transition: ease-in 500ms;
+    transition: ease-in 500ms;
+}
+
+.tengah{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.produk-card {
+  border: 1px solid #e1dfde;
+  /* padding: 10px; */
+  margin-top: 25px;
+  text-align: center;
+}
+
+.produk-card:hover {
+  border: 1px solid #e1dfde;
+  /* padding: 10px; */
+  margin-top: 25px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.produk-caption {
+  font-size: 13px;
+  font-weight: 600;
+  display: block;
+  min-height: 40px;
+  padding: 20px 15px 20px 15px;
+  margin-top: 15px;
+  background-color: #eee;
+}
+
+.produk-images{
+  display: block;
+  min-height: 230px;
+}
+
+.produk-search {
+  width: 100%;
+  margin-top: 30px;
+  min-height: 45px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.produk-search:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.profil-produsen {
+    width: 50px;
+    height: 50px;
+    -webkit-border-radius: 50px;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 50px;
+    -moz-background-clip: padding;
+    border-radius: 50px;
+    background-clip: padding-box;
+    float: left;
+    background-size: cover;
+    background-position: center center;
+}

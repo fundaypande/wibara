@@ -8,24 +8,52 @@
   }
 </style>
 
+<?php
+if($data -> user -> photo == null){
+  $url = 'user.png';
+} else {
+  $url = $data -> user -> photo;
+}
+?>
 
-<div class="swiper-container hero-slider" style="    max-height: 500px;">
+<div class="swiper-container hero-slider" style="    max-height: 550px;">
                 <div class="swiper-slide hero-content-wrap" style="background-color: #f0f5f9">
                     <div class="hero-content-overlay position-absolute w-100 h-100">
-                        <div class="container h-100">
+                        <div class="container h-100" style="margin-top: 150px">
+
+                          <header class="entry-header">
+                              <h1>{{ $data -> nama_usaha }}</h1>
+                          </header><!-- .entry-header -->
+                          <!-- Untuk Data Barang -->
+                          <div class="container">
+                          <div class="row">
+
+
+
+                          <div class="col-md-4" style="margin-right: 50px">
+                            <header class="entry-header">
+                                <div class="company-header-avatar" style="background-image: url({!! asset('images/' . $url) !!})"></div>
+                            </header><!-- .entry-header -->
+
+
+                          </div>
+                          <div class="col-md-4" style="margin-top: 20px">
+                            <p><b>{{ $data -> nama_usaha }}</p></b>
+                            <p><b>Alamat {{ $data -> alamat }}</p></b>
+                            <p><b>Telepon {{ $data -> telpon }}</p></b>
+                            <p> <b> Total Produk: {{ $produksis -> count() }} </b> </p>
+                          </div>
+                          </div>
+                          </div>
+
+
+
+
                             <div class="row h-100">
                                 <div class="col-12 col-lg-6 d-flex flex-column justify-content-center align-items-start">
-                                    <header class="entry-header" style="    margin-top: -100px;">
-                                        <h1>Cari Hasil Produksi</h1>
-                                    </header><!-- .entry-header -->
 
-                                    <form method="post" style="width: 100%;" action="/produk/search">
-                                      {{ csrf_field() }}
-                                      <input style="outline: none;" type="text" class="produk-search" name="cari" placeholder="Search">
-                                      <footer class="entry-footer d-flex flex-wrap align-items-center mt-4">
-                                          <button type="submit" class="button gradient-bg">Temukan</button>
-                                      </footer>
-                                    </form>
+
+
 
                                     <!-- .entry-footer -->
                                 </div><!-- .col -->
@@ -40,14 +68,9 @@
 
 
 <div class="container">
-  @if ($cari)
-  <div class="alert alert-primary" style="margin-top: 20px">
-    <p>Hasil Pencarian "{{ $cari }}"</p>
-  </div>
-  @endif
 
   <div class="row">
-    <h2 style="margin-top: 30px">Produk IKM Buleleng</h2>
+    <h2 style="margin-top: 30px">Produk {{ $data -> nama_usaha }}</h2>
     <br>
     <div class="container">
       <div class="row">
@@ -69,9 +92,6 @@
             {{session('notif')}}
           </div>
         @endif
-
-
-
 
 
         @foreach ($produksis as $produksi)
@@ -103,6 +123,9 @@
       <div class="" style="display: flex; align-items: center; justify-content: center; margin-top: 60px;">
         {{ $produksis->links() }}
       </div>
+
+
+
 
     </div>
   </div>

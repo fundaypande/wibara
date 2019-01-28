@@ -10,4 +10,9 @@ class NilaiProduksi extends Model
       'user_id', 'jenis_produksi', 'jumlah', 'harga', 'nilai_penjualan', 'tujuan',
       'deskripsi', 'photo'
   ];
+
+  public function user()
+  {
+    return $this->beLongsTo('App\User');
+  }
 }

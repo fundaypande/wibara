@@ -12,7 +12,7 @@
         <h4 class="modal-title" id="modal-title">Tambah Profil IKM</h4>
       </div>
       <div class="modal-body">
-        <form method="post" data-toggle="validator" action="" id="theForm" enctype="multipart/form-data">
+        <form method="post" data-toggle="validator" action="/produksi/store2" id="theForm" enctype="multipart/form-data">
           {{ csrf_field() }} {{ method_field('POST') }}
         <input type="hidden" name="id" id="id" value="" method="patch">
         <div class="form-group">
@@ -161,7 +161,7 @@
 
 
     <script src="{{ asset('js/rupiah.js') }}"></script>
-    
+
     <script type="text/javascript">
       $(document).ready(function() {
         console.log('data');

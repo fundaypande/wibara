@@ -152,6 +152,8 @@
                       <input type="text" name="jarak" value="{{ Auth::user()->profilIkm->jarak }}" class="form-control" id="jarak" placeholder="Kilometer" required>
                     </div>
 
+                    <hr>
+
                     <button type="submit" class="btn btn-info btn-fill pull-right">Simpan Profil</button>
 
                   </form>
