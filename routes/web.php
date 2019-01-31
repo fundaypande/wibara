@@ -27,12 +27,46 @@ Route::group(['middleware' => ['auth']], function(){
   Route::get('/verify/{token}/{id}', 'VerifyEmail@verify');
 
 
+
+
+});
+
+
+// *** midleware staf dan IKM
+Route::group(['middleware' => 'ikmStaf'], function(){
   // --> Kumpulan API yang bisa diakses oleh user auth
   Route::get('/api/bahan/{id?}', 'BahanController@apiBahan')->name('api.bahan');
   Route::get('/api/peralatan/{id?}', 'PeralatanController@apiPeralatan')->name('api.peralatan');
   Route::get('/api/produksi/{id?}', 'ProduksiController@apiProduksi')->name('api.produksi');
 
+  Route::get('/produksi/{id?}', 'ProduksiController@showProduksi');
+
+  // Route::post('/produksi/store', 'ProduksiController@store')->name('ikm.addProduksi'); //Menambah data produksi
+  Route::get('/add-produksi/{id?}', 'ProduksiController@showCreate')->name('create.produksi');
+  Route::post('/produksi/store2', 'ProduksiController@store2')->name('store.produksi');
+  Route::delete('/produksi/{id}', 'ProduksiController@destroy'); //->Mneghapus data
+  Route::get('/produksi/{id}/edit', 'ProduksiController@edit');
+  Route::patch('/produksi/{id}', 'ProduksiController@update'); //-> Proses edit data
+  Route::get('/produksi/{id}/show', 'ProduksiController@formEdit'); //--> menampilkan data di form edit
+
+
+  //-> ***** Profil IKM Jenis Peralatan PANUTAN
+  Route::get('/peralatan', 'PeralatanController@show');
+
+  Route::post('/peralatan', 'PeralatanController@store')->name('ikm.addPeralatan');
+  Route::get('/peralatan/{id}/edit', 'PeralatanController@formEdit'); //--> menampilkan data di form edit
+  Route::patch('/peralatan/{id}', 'PeralatanController@update'); //-> Proses edit data
+  Route::delete('/peralatan/{id}', 'PeralatanController@destroy'); //->Mneghapus data
+
+  //Bahan Baku Profil IKM
+  Route::get('/bahan', 'BahanController@show');
+
+  Route::post('/bahan', 'BahanController@store')->name('ikm.addBahan');
+  Route::get('/bahan/{id}/edit', 'BahanController@formEdit'); //--> menampilkan data di form edit
+  Route::patch('/bahan/{id}', 'BahanController@update'); //-> Proses edit data
+  Route::delete('/bahan/{id}', 'BahanController@destroy'); //->Mneghapus data
 });
+
 
 Route::group(['middleware' => 'admin'], function(){
   Route::get('/admin', 'AdminController@dashboard');
@@ -92,33 +126,6 @@ Route::group(['middleware' => ['ikm'], ['staf']], function(){
 
   Route::get('/profil', 'ProfilIkmController@show');
   Route::put('/profil/{id}', 'ProfilIkmController@update');
-
-  Route::get('/produksi', 'ProduksiController@showProduksi');
-
-  // Route::post('/produksi/store', 'ProduksiController@store')->name('ikm.addProduksi'); //Menambah data produksi
-  Route::get('/add-produksi', 'ProduksiController@showCreate')->name('create.produksi');
-  Route::post('/produksi/store2', 'ProduksiController@store2')->name('store.produksi');
-  Route::delete('/produksi/{id}', 'ProduksiController@destroy'); //->Mneghapus data
-  Route::get('/produksi/{id}/edit', 'ProduksiController@edit');
-  Route::patch('/produksi/{id}', 'ProduksiController@update'); //-> Proses edit data
-  Route::get('/produksi/{id}/show', 'ProduksiController@formEdit'); //--> menampilkan data di form edit
-
-
-  //-> ***** Profil IKM Jenis Peralatan PANUTAN
-  Route::get('/peralatan', 'PeralatanController@show');
-
-  Route::post('/peralatan', 'PeralatanController@store')->name('ikm.addPeralatan');
-  Route::get('/peralatan/{id}/edit', 'PeralatanController@formEdit'); //--> menampilkan data di form edit
-  Route::patch('/peralatan/{id}', 'PeralatanController@update'); //-> Proses edit data
-  Route::delete('/peralatan/{id}', 'PeralatanController@destroy'); //->Mneghapus data
-
-  //Bahan Baku Profil IKM
-  Route::get('/bahan', 'BahanController@show');
-
-  Route::post('/bahan', 'BahanController@store')->name('ikm.addBahan');
-  Route::get('/bahan/{id}/edit', 'BahanController@formEdit'); //--> menampilkan data di form edit
-  Route::patch('/bahan/{id}', 'BahanController@update'); //-> Proses edit data
-  Route::delete('/bahan/{id}', 'BahanController@destroy'); //->Mneghapus data
 });
 
 

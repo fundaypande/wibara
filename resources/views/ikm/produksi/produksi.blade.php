@@ -70,6 +70,11 @@
                 <div class="card-header">
                   <h3>Kelola Produksi</h3>
 
+                  @if($idUser)
+                    <p>Kelola Produksi IKM User Milik {{ $idUser -> name }}</p>
+                    <input type="hidden" name="idUser" id="idUser" value="{{ $idUser -> id }}">
+                    <input type="hidden" name="roleUser" id="roleUser" value="{{ Auth::user() -> role }}">
+                  @endif
                 </div>
 
                 <div class="card-body">
@@ -93,6 +98,7 @@
 
                     <p>Pelaku IKM dapat menginputkan data-data hasil produksinya yang nantinya akan ditampilkan di halaman depan website ini sehingga membantu untuk mempromosikan
                     produk-produk yang dimiliki IKM</p>
+
                     <br>
 
                     <!-- table show daftar user yang dapat mengakses sistem -->
@@ -102,7 +108,7 @@
 
                           <div class="panel-heading">
                             <h5>Daftar Profil IKM
-                              <a href="{{ route('create.produksi') }}" style="color:white" class="btn btn-primary pull-right">Tambah Produksi </a>
+                              <a href="{{ url('/add-produksi/').'/'.$idUser -> id }}" style="color:white" class="btn btn-primary pull-right">Tambah Produksi </a>
                             </h5>
                           </div>
 
@@ -142,10 +148,26 @@
     <script type="text/javascript">
     var table;
     $(document).ready(function() {
+      var idUser = $( "#idUser" ).val();
+      var roleUser = $( "#roleUser" ).val();
+
+      //** jika url slash nya kosong maka kosong
+      if(!idUser){
+        urlUser = "{{ url('api/produksi') }}";
+      } else {
+        //jika role IKM tidak boleh mengakses ini:
+        if(roleUser == '1'){
+          urlUser = "{{ url('api/produksi') }}";
+          alert('Maaf anda tidak boleh mengakses profil IKM orang lain');
+        } else {
+          urlUser = "{{ url('api/produksi') }}" + '/' + idUser
+        }
+
+      }
       table = $('#staf-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('api.produksi') }}",
+        ajax: urlUser,
         columns: [
           {data: 'id', name: 'id'},
           {data: 'jenis_produksi', name: 'jenis_produksi'},

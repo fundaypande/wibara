@@ -5,66 +5,11 @@
 <div id="modal-form" class="modal fade" role="dialog" tabindex="1" aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title" id="modal-title">Tambah Profil IKM</h4>
-      </div>
-      <div class="modal-body">
-        <form method="post" data-toggle="validator" action="/produksi/store2" id="theForm" enctype="multipart/form-data">
-          {{ csrf_field() }} {{ method_field('POST') }}
-        <input type="hidden" name="id" id="id" value="" method="patch">
-        <div class="form-group">
-          <label for="jenis_produksi">Jenis Produksi</label>
-          <input type="text" name="jenis_produksi" value="" class="form-control" id="jenis_produksi" required placeholder="">
-        </div>
-        <div class="form-group">
-          <label for="jumlah">Jumlah</label>
-          <input min="1" type="text" name="jumlah" value="" class="form-control" id="jumlah" required placeholder="">
-        </div>
-        <div class="form-group">
-          <label for="harga">Harga</label>
-          <input type="text" name="harga" value="" class="form-control" id="harga" placeholder="Rp." required>
-        </div>
-        <div class="form-group">
-          <label for="nilai_penjualan">Nilai Penjualan</label>
-          <input type="text" name="nilai_penjualan" value="" class="form-control" id="nilai_penjualan" placeholder="Rp." required>
-        </div>
-
-        <div class="form-group">
-          <label for="tujuan">Tujuan Pemasaran</label>
-          <input type="text" name="tujuan" value="" class="form-control" id="tujuan" placeholder="">
-        </div>
-        <div class="form-group">
-          <label for="deskripsi">Deskripsi</label>
-          <textarea name="deskripsi" class="form-control" id="deskripsi" rows="2"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="photo">Gambar</label>
-          <input type="file" name="photo" class="form-control">
-        </div>
-
-        <button type="submit" class="btn btn-info btn-fill">Simpan Produksi</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </form>
-      </div>
-      <div class="modal-footer">
-
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- end modal content -->
-
     <div class="row justify-content-center">
 
             <div style="padding-left: 20px; padding-right: 20px" class="card">
                 <div class="card-header">
                   <h3>Kelola Produksi</h3>
-
                 </div>
 
                 <div class="card-body">
@@ -144,6 +89,8 @@
                               <label for="photo">Gambar</label>
                               <input type="file" name="photo" class="form-control">
                             </div>
+
+                            <input type="hidden" name="idUser" id="idUser" value="{{ $idUser -> id }}">
 
                             <button type="submit" class="btn btn-info btn-fill">Simpan Produksi</button>
                           </div>

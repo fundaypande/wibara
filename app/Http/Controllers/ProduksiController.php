@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\NilaiProduksi;
 use App\ProfilIkm;
+use App\User;
 use Auth;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Storage;
@@ -13,17 +14,21 @@ use App\Token;
 
 class ProduksiController extends Controller
 {
-    public function showProduksi()
+    public function showProduksi($id = null)
     {
-      return view('ikm.produksi.produksi');
+      if($id == null){
+        $idUser = null;
+      } else {
+        $idUser = User::findOrFail($id);
+      }
+
+
+      return view('ikm.produksi.produksi', ['idUser' => $idUser]);
     }
 
 
 
-
-
-
-
+// *** For HALAMAN DEPAN
     public function showRandom()
     {
       $produksis = NilaiProduksi::inRandomOrder()->paginate(10);
@@ -64,7 +69,7 @@ class ProduksiController extends Controller
       return view('public.showProdusen', ['data' => $datas], ['produksis' => $produksi], ['totalProduksi' => $totalProduksi]);
     }
 
-
+// *** END For HALAMAN DEPAN
 
 
 
@@ -203,9 +208,15 @@ class ProduksiController extends Controller
       return redirect('/produksi')->with('status', 'Berhasil menambahkan produksi baru');
     }
 
-    public function showCreate()
+    public function showCreate($id = null)
     {
-      return view('ikm.produksi.createProduksi');
+      if($id == null){
+        $idUser = null;
+      } else {
+        $idUser = User::findOrFail($id);
+      }
+
+      return view('ikm.produksi.createProduksi', ['idUser' => $idUser]);
     }
 
     public function destroy($id)
