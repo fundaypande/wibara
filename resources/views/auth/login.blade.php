@@ -3,14 +3,17 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
+				<span class="login100-form-title" style="margin-top: -120px;">
+					DINAS PERDAGANGAN DAN PERINDUSTRIAN KABUPATEN BULELENG
+				</span>
 				<div class="login100-pic js-tilt" data-tilt>
-					<a href="{{ url('/') }}"><img src="images/img-01.png" alt="IMG"></a>
+					<a href="{{ url('/') }}"><img src="images/buleleng.png" alt="IMG"></a>
 				</div>
 
 				<form class="login100-form validate-form" action="{{ route('login') }}" method="POST">
 					@csrf
 					<span class="login100-form-title">
-						IKM Login
+						FORM LOGIN
 					</span>
 
 					@if(session('warning'))

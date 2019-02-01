@@ -6,7 +6,7 @@
     <div class="left-sidebar-pro">
         <nav id="sidebar" class="">
             <div class="sidebar-header">
-                <a href="index.html"><img class="main-logo" src="images/logo/logo.png" alt="" /></a>
+                <a href="{{ url('/') }}"><img class="main-logo" src="images/buleleng-kecil.png" alt="" /></a>
                 <strong><a href="index.html"><img src="images/logo/logosn.png" alt="" /></a></strong>
             </div>
             <div class="left-custom-menu-adp-wrap comment-scrollbar">

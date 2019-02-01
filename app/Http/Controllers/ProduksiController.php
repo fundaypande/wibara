@@ -14,6 +14,14 @@ use App\Token;
 
 class ProduksiController extends Controller
 {
+    public function welcome()
+    {
+      $produksis = NilaiProduksi::paginate(10);
+
+      return view('welcome', ['produksis' => $produksis]);
+    }
+
+
     public function showProduksi($id = null)
     {
       if($id == null){

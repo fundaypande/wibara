@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Hello World</title>
+    <title>Dinas Perdagangan dan Perindustrian Kabupaten Buleleng</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
+    <link rel="shortcut icon" href="{{{ asset('images/buleleng-kecil.png') }}}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS {!! asset('css/sweetalert2.css') !!} -->
@@ -28,14 +29,15 @@
                 <div class="row">
                     <div class="col-12 d-flex flex-wrap justify-content-between align-items-center">
                         <div class="site-branding d-flex align-items-center">
-                           <a class="d-block" href="index.html" rel="home"><img class="d-block" src="{!! asset('images/logo.png') !!}" alt="logo"></a>
+                           <a class="d-block" href="{{ url('/') }}" rel="home"><img class="d-block" src="{!! asset('images/buleleng-kecil.png') !!}" alt="logo"></a>
                         </div><!-- .site-branding -->
 
                         <nav class="site-navigation d-flex justify-content-end align-items-center">
                             <ul class="d-flex flex-column flex-lg-row justify-content-lg-end align-items-center">
-                                <li class="current-menu-item"><a href="/">Beranda</a></li>
+                                <!-- <li class="current-menu-item"><a href="/">Beranda</a></li> -->
+                                <li><a href="/">Beranda</a></li>
                                 <li><a href="/produk">Produksi</a></li>
-                                <li><a href="about.html">Tentang Kami</a></li>
+                                <li><a href="/tentang">Tentang Kami</a></li>
 
                                 @if (Route::has('login'))
                                         @auth
@@ -63,3 +65,14 @@
                 </div><!-- .row -->
             </div><!-- .container -->
         </div><!-- .nav-bar -->
+
+
+        <script type="text/javascript">
+          $(document).ready(function() {
+            var currentURL = $(location).attr("href"); //get all url
+            var base_url = window.location.origin; //get base url ('http://localhost.com')
+            alert(base_url);
+            currentURL = currentURL.replace(base_url, '');
+            $("li").find('a[href="'+ currentURL +'"]').parent().css("color","#f5f8fa");
+          });
+        </script>

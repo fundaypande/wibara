@@ -38,10 +38,10 @@
 @endif
 
 <script type="text/javascript">
-  var currentURL = $(location).attr("href"); //get all url
-  var base_url = window.location.origin; //get base url ('http://localhost.com')
+    var currentURL = $(location).attr("href"); //get all url
+    var base_url = window.location.origin; //get base url ('http://localhost.com')
 
-  currentURL = currentURL.replace(base_url, '');
-  $("li").find('a[href="'+ currentURL +'"]').parent().css("background-color","#f5f8fa");
+    currentURL = currentURL.replace(base_url, '');
+    $("li").find('a[href="'+ currentURL +'"]').parent().css("background-color","#f5f8fa");
 
 </script>

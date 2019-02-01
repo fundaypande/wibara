@@ -1,9 +1,11 @@
 <?php
 
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/tentang', function () {
+    return view('public.tentang');
 });
+
+Route::get('/', 'ProduksiController@welcome');
 
 Route::get('/produk', 'ProduksiController@showRandom');
 Route::post('/produk/search', 'ProduksiController@search');
