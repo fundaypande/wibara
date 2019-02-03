@@ -17,7 +17,7 @@
                                     </div><!-- .entry-content -->
 
                                     <footer class="entry-footer d-flex flex-wrap align-items-center mt-4">
-                                        <a href="#" class="button gradient-bg">Selengkapnya</a>
+                                        <a href="/tentang" class="button gradient-bg">Selengkapnya</a>
                                     </footer><!-- .entry-footer -->
                                 </div><!-- .col -->
                             </div><!-- .row -->

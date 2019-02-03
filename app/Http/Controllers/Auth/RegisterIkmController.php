@@ -13,7 +13,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Mail;
 use  App\Mail\UserRegistered;
 
-class RegisterStafController extends Controller
+class RegisterIkmController extends Controller
 {
     /*
     |--------------------------------------------------------------- -----------
@@ -67,7 +67,7 @@ class RegisterStafController extends Controller
 
         event(new Registered($user = $this->create($request->all())));
 
-        return redirect('/kelola-staf')->with('status', 'Staf baru berhasil ditambahkan');
+        return redirect('/kelola-ikm')->with('status', 'Ikm baru berhasil ditambahkan');
     }
 
     /**
@@ -83,7 +83,7 @@ class RegisterStafController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'token' => str_random(20),
-            'role' => 2,
+            'role' => 1,
         ]);
 
         Mail::to($user->email)->send(new UserRegistered($user ));

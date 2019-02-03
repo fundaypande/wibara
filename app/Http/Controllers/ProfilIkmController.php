@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\ProfilIkm;
-use App\Kriteria;
+// use App\Kriteria;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 
@@ -94,9 +94,9 @@ class ProfilIkmController extends Controller
     public function show(ProfilIkm $profilIkm)
     {
       $idUser = Auth::user()->id;
-      $kriteria = Kriteria::all();
+      // $kriteria = Kriteria::all();
 
-      return view('ikm.profil', ['kriterias' => $kriteria]);
+      return view('ikm.profil');
     }
 
     //-> Menampikan data profil IKM untuk dikelola oleh STAF

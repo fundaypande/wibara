@@ -113,13 +113,25 @@ Route::group(['middleware' => 'staf'], function(){
 
 
   //--> Kelola Profil IKM
-  Route::get('/kelola-ikm', 'ProfilIkmController@showKelola');
-  Route::get('/api/kelola-ikm', 'ProfilIkmController@apiKelola')->name('api.kelolaIkm');  //API untuk menampilkan data profil IKM yang belum tervalidasi
+  // Route::get('/kelola-ikm', 'ProfilIkmController@showKelola');
+  // Route::get('/api/kelola-ikm', 'ProfilIkmController@apiKelola')->name('api.kelolaIkm');  //API untuk menampilkan data profil IKM yang belum tervalidasi
 
   Route::get('/profil/{id}/edit', 'ProfilIkmController@showModal'); //--> arahkan ke modal EDIT
   Route::patch('/profil/{id}', 'ProfilIkmController@update'); //-> Proses edit data
   Route::delete('/profil/{id}', 'ProfilIkmController@destroy');
   Route::post('/profil/store', 'ProfilIkmController@store')->name('staf.addIkm');
+
+
+
+  // ** Untek membuat login IKM Baru
+  Route::get('/kelola-ikm', 'StafController@showIkm');
+  Route::get('/add-ikm', 'StafController@addIkm');
+  Route::get('/api/ikm', 'StafController@apiIkm')->name('api.ikm');
+  Route::post('/add-ikm', 'Auth\RegisterIkmController@register')->name('addIkm');
+
+  Route::delete('/kelola-ikm/{id}', 'StafController@destroy');
+  Route::get('/kelola-ikm/{id}/edit', 'StafController@formEdit');
+  Route::patch('/kelola-ikm/{id}', 'StafController@update');
 });
 
 
