@@ -5,45 +5,14 @@
 <div id="modal-form" class="modal fade" role="dialog" tabindex="1" aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title" id="modal-title">Tambah Profil IKM</h4>
-      </div>
-      <div class="modal-body">
-        <form enctype="multipart/form-data" method="post" data-toggle="validator" action="/user/pic/{{ Auth::user()->id }}" id="theForm">
-          {{ csrf_field() }} {{ method_field('POST') }}
-        <input type="hidden" name="id" id="id" value="" method="patch">
-        <div class="form-group">
-          <label for="nama">Gambar</label>
-          <input type="file" name="gambar" class="form-control">
-        </div>
-
-        <button type="submit" class="btn btn-info btn-fill">Simpan Profil</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </form>
-      </div>
-      <div class="modal-footer">
-
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- end modal content -->
-
     <div class="row justify-content-center">
 
             <div style="padding-left: 20px; padding-right: 20px" class="card">
                 <div class="card-header">
-                  <h3>Tambah Data Produksi {{ $idUser -> name }}</h3>
-
+                  <h3>Kelola Produksi</h3>
                 </div>
 
                 <div class="card-body">
-
                   @if(count($errors) > 0)
                   <div class="alert alert-danger">
                     <ul>
@@ -53,7 +22,6 @@
                     </ul>
                   </div>
                   @endif
-
 
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -89,7 +57,7 @@
                           </div>
 
                           <div class="panel-body" style="overflow-x:auto;">
-                            <form method="post" data-toggle="validator" action="{{ url('/produksi/') }}/{{$idUser -> id}}/store2"  id="theForm" enctype="multipart/form-data">
+                            <form method="post" data-toggle="validator" action="{{ route('store.produksi') }}" id="theForm" enctype="multipart/form-data">
                               {{ csrf_field() }} {{ method_field('POST') }}
                             <input type="hidden" name="id" id="id" value="" method="patch">
                             <div class="form-group">
@@ -138,8 +106,12 @@
 
     </div>
 
+</div>
+</div>
 
-    <script src="{{ asset('js/rupiah.js') }}"></script>
+
+
+    <!-- <script src="{{ asset('js/rupiah.js') }}"></script>
 
     <script type="text/javascript">
       $(document).ready(function() {
@@ -150,6 +122,6 @@
         console.log('end');
       });
 
-    </script>
+    </script> -->
 
 @endsection

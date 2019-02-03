@@ -86,7 +86,7 @@
                                   <th width="50">ID</th>
                                   <th>Nama</th>
                                   <th>Email</th>
-                                  <th>Role</th>
+                                  <th>Data IKM</th>
                                   <th>Action</th>
                                 </tr>
                               </thead>
@@ -119,7 +119,11 @@
           {data: 'id', name: 'id'},
           {data: 'name', name: 'name'},
           {data: 'email', name: 'email'},
-          {data: 'role', name: 'role'},
+          {data: 'ikm', name: 'ikm', orderable: false, searchable: false,
+            render: function( data, type, row ) {
+                      return '<a href="{{ url('produksi') }}/'+ data +'" class="btn btn-info btn-xs"><i class="fa fa-eye"></i>Profil</a> <a href="{{ url('produksi') }}/'+ data +'" class="btn btn-info btn-xs"><i class="fa fa-eye"></i>Kriteria</a> <a href="{{ url('produksi') }}/'+ data +'" class="btn btn-info btn-xs"><i class="fa fa-eye"></i>Produksi</a> <a href="{{ url('produksi') }}/'+ data +'" class="btn btn-info btn-xs"><i class="fa fa-eye"></i>Bahan Baku</a> <a href="{{ url('produksi') }}/'+ data +'" class="btn btn-info btn-xs"><i class="fa fa-eye"></i>Peralatan</a>';
+                  }
+          },
           {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
       });

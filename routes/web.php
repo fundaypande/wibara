@@ -39,13 +39,13 @@ Route::group(['middleware' => 'ikmStaf'], function(){
   // --> Kumpulan API yang bisa diakses oleh user auth
   Route::get('/api/bahan/{id?}', 'BahanController@apiBahan')->name('api.bahan');
   Route::get('/api/peralatan/{id?}', 'PeralatanController@apiPeralatan')->name('api.peralatan');
-  Route::get('/api/produksi/{id?}', 'ProduksiController@apiProduksi')->name('api.produksi');
+  Route::get('/api/produksi/{id}', 'ProduksiController@apiProduksi')->name('api.produksi');
 
-  Route::get('/produksi/{id?}', 'ProduksiController@showProduksi');
+  Route::get('/produksi/{id}', 'ProduksiController@showProduksi');
 
   // Route::post('/produksi/store', 'ProduksiController@store')->name('ikm.addProduksi'); //Menambah data produksi
-  Route::get('/add-produksi/{id?}', 'ProduksiController@showCreate')->name('create.produksi');
-  Route::post('/produksi/store2', 'ProduksiController@store2')->name('store.produksi');
+  Route::get('/add-produksi/{id}', 'ProduksiController@showCreate')->name('create.produksi');
+  Route::post('/produksi/{id}/store2', 'ProduksiController@store2');
   Route::delete('/produksi/{id}', 'ProduksiController@destroy'); //->Mneghapus data
   Route::get('/produksi/{id}/edit', 'ProduksiController@edit');
   Route::patch('/produksi/{id}', 'ProduksiController@update'); //-> Proses edit data

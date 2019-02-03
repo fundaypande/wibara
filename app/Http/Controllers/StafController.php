@@ -35,7 +35,14 @@ class StafController extends Controller
             <a onclick="editData(' . $staf-> id . ')" class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o"></i>Edit</a>
             <a onclick="deleteData(' . $staf-> id . ')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i>Delete</a>
           ';
-        })->make(true);
+        })
+        // mengirimkan ID untuk dirender di ajax show viewIkm.blade.php
+        -> addColumn('ikm', function($staf){
+          return $staf -> id;
+        })
+
+
+        ->make(true);
     }
 
 

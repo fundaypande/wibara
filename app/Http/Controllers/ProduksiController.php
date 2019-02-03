@@ -22,14 +22,10 @@ class ProduksiController extends Controller
     }
 
 
-    public function showProduksi($id = null)
+    public function showProduksi($id)
     {
-      if($id == null){
-        $idUser = null;
-      } else {
-        $idUser = User::findOrFail($id);
-      }
-
+      $idUser = null;
+      $idUser = User::findOrFail($id);
 
       return view('ikm.produksi.produksi', ['idUser' => $idUser]);
     }
@@ -87,13 +83,9 @@ class ProduksiController extends Controller
 
 
     //-> API untuk menampilkan data produksi IKM
-    public function apiProduksi($id=null)
+    public function apiProduksi($id)
     {
-      if($id == null){
-        $idUser = Auth::user()->id;
-      } else {
-        $idUser = $id;
-      }
+      $idUser = $id;
       $staf = NilaiProduksi::where('user_id', '=', $idUser)->get();
 
 
@@ -170,7 +162,7 @@ class ProduksiController extends Controller
         'deskripsi' => $request -> deskripsi,
       ]);
 
-      return redirect('/produksi')->with('status', 'Berhasil mengedit data produksi');
+      return back()->with('status', 'Berhasil mengedit data produksi');
     }
 
     //--> mengambil data untuk kita edit
@@ -181,8 +173,9 @@ class ProduksiController extends Controller
 
 
 
-    public function store2(Request $request)
+    public function store2(Request $request, $id)
     {
+      $idUser = User::findOrFail($id);
       $this -> validate($request, [
               'jenis_produksi' => 'required|min:1',
               'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -202,7 +195,7 @@ class ProduksiController extends Controller
       }
 
       $hasil = NilaiProduksi::create([
-        'user_id' => Auth::user()->id,
+        'user_id' => $idUser->id,
         'jenis_produksi' => $request -> jenis_produksi,
         'jumlah' => $request -> jumlah,
         'merk_produk' => $request -> merk_produk,
@@ -213,16 +206,12 @@ class ProduksiController extends Controller
         'photo' => $input,
       ]);
 
-      return redirect('/produksi')->with('status', 'Berhasil menambahkan produksi baru');
+      return redirect('/produksi/'.$idUser->id)->with('status', 'Berhasil menambahkan produksi baru');
     }
 
-    public function showCreate($id = null)
+    public function showCreate($id)
     {
-      if($id == null){
-        $idUser = null;
-      } else {
-        $idUser = User::findOrFail($id);
-      }
+      $idUser = User::findOrFail($id);
 
       return view('ikm.produksi.createProduksi', ['idUser' => $idUser]);
     }
