@@ -160,6 +160,7 @@ class ProduksiController extends Controller
         'nilai_penjualan' => $request -> nilai_penjualan,
         'tujuan' => $request -> tujuan,
         'deskripsi' => $request -> deskripsi,
+        'tahun' => $request -> get('tahun'),
       ]);
 
       return back()->with('status', 'Berhasil mengedit data produksi');
@@ -204,6 +205,7 @@ class ProduksiController extends Controller
         'tujuan' => $request -> tujuan,
         'deskripsi' => $request -> deskripsi,
         'photo' => $input,
+        'tahun' => $request -> get('tahun'),
       ]);
 
       return redirect('/produksi/'.$idUser->id)->with('status', 'Berhasil menambahkan produksi baru');

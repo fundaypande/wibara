@@ -38,7 +38,7 @@ Route::group(['middleware' => ['auth']], function(){
 Route::group(['middleware' => 'ikmStaf'], function(){
   // --> Kumpulan API yang bisa diakses oleh user auth
   Route::get('/api/bahan/{id?}', 'BahanController@apiBahan')->name('api.bahan');
-  Route::get('/api/peralatan/{id?}', 'PeralatanController@apiPeralatan')->name('api.peralatan');
+  Route::get('/api/peralatan/{id}', 'PeralatanController@apiPeralatan');
   Route::get('/api/produksi/{id}', 'ProduksiController@apiProduksi')->name('api.produksi');
 
   Route::get('/produksi/{id}', 'ProduksiController@showProduksi');
@@ -53,9 +53,9 @@ Route::group(['middleware' => 'ikmStaf'], function(){
 
 
   //-> ***** Profil IKM Jenis Peralatan PANUTAN
-  Route::get('/peralatan', 'PeralatanController@show');
+  Route::get('/peralatan/{id}', 'PeralatanController@show');
 
-  Route::post('/peralatan', 'PeralatanController@store')->name('ikm.addPeralatan');
+  Route::post('/peralatan/{id}', 'PeralatanController@store');
   Route::get('/peralatan/{id}/edit', 'PeralatanController@formEdit'); //--> menampilkan data di form edit
   Route::patch('/peralatan/{id}', 'PeralatanController@update'); //-> Proses edit data
   Route::delete('/peralatan/{id}', 'PeralatanController@destroy'); //->Mneghapus data

@@ -51,6 +51,29 @@
           <input type="text" name="asal" value="" class="form-control" id="asal" placeholder="" >
         </div>
 
+        <div class="forn-group">
+          <label for="tahunInput">Tahun</label>
+          <select id="tahunInput" name="tahunInput" class="form-control">
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
+            <option value="2027">2027</option>
+            <option value="2028">2028</option>
+            <option value="2029">2029</option>
+            <option value="2030">2030</option>
+            <option value="2031">2031</option>
+            <option value="2032">2032</option>
+            <option value="2033">2033</option>
+          </select>
+        </div>
+        <br>
+
 
         <button type="submit" class="btn btn-info btn-fill" id="simpan">Simpan Data</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -70,7 +93,7 @@
 
             <div style="padding-left: 20px; padding-right: 20px" class="card">
                 <div class="card-header">
-                  <h3>Kelola Jenis Peralatan</h3>
+                  <h3>Kelola Jenis Peralatan {{$user -> name}}</h3>
 
                 </div>
 
@@ -108,6 +131,8 @@
                     <p>Daftar peralatan yang dimiliki oleh IKM</p>
                     <br>
 
+                    <input type="hidden" name="idUser" id="idUser" value="{{ $user -> id }}">
+
                     <!-- table show daftar user yang dapat mengakses sistem -->
                     <div class="row">
                       <div class="com-md-12">
@@ -115,13 +140,14 @@
 
                           <div class="panel-heading">
                             <h5>Daftar Peralatan IKM
-                              <a onclick="addForm()" style="color:white" class="btn btn-primary pull-right">Tambah Peralatan IKM </a>
+                              <a onclick="addForm({{ $user -> id }})" style="color:white" class="btn btn-primary pull-right">Tambah Peralatan IKM </a>
                             </h5>
                           </div>
 
                           <div class="panel-body" style="overflow-x:auto;">
                             <table id="staf-table" width="100%" class="table table-striped table-bordered table-hover">
                               <thead>
+
                                 <tr>
                                   <th width="50">ID</th>
                                   <th>Jenis Alat</th>
@@ -132,6 +158,7 @@
                                   <th>Buatan</th>
                                   <th>Harga</th>
                                   <th>Asal</th>
+                                  <th>Tahun</th>
                                   <th>Action</th>
                                 </tr>
                               </thead>
@@ -157,8 +184,10 @@
 
     <script type="text/javascript">
     var table;
+
     $(document).ready(function() {
 
+      var idUser = $( "#idUser" ).val();
 
       justNum($('#tahun'));
       justNum($('#harga'));
@@ -169,7 +198,7 @@
       table = $('#staf-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('api.peralatan') }}",
+        ajax: "{{ url('/api/peralatan') }}" + '/' + idUser,
         columns: [
           {data: 'id', name: 'id'},
           {data: 'jenis_alat', name: 'jenis_alat'},
@@ -180,6 +209,7 @@
           {data: 'buatan', name: 'buatan'},
           {data: 'harga', name: 'harga'},
           {data: 'asal', name: 'asal'},
+          {data: 'tahunInput', name: 'tahunInput'},
           {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
       });
@@ -263,6 +293,10 @@
           $('#harga').val(data.harga);
           $('#asal').val(data.asal);
 
+          // $('$tahunInput').val(data.tahunInput);
+          $("#tahunInput > [value=" + data.tahunInput + "]").attr("selected", "true");
+
+
         },
         error: function() {
           Swal({
@@ -335,14 +369,14 @@
       });
     });
 
-    function addForm() {
+    function addForm(id) {
       save_method = "add";
       $('input[name=_method]').val('POST');
       $('#modal-form').modal('show');
       $('#theForm')[0].reset();
       $('.modal-title').text('Tambah Peralatan IKM');
       console.log('Tampilkan Form ADD');
-      $("#modal-form").find("form").attr("action", "{{ route('ikm.addPeralatan') }}");
+      $("#modal-form").find("form").attr("action", "{{ url('peralatan') }}/" + id);
     }
 
     function showData(id) {

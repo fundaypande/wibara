@@ -10,6 +10,6 @@ class JenisPeralatan extends Model
 
     protected $fillable = [
         'user_id', 'jenis_alat', 'tahun', 'spesifikasi', 'jumlah', 'buatan',
-        'harga', 'asal', 'kapasitas'
+        'harga', 'asal', 'kapasitas', 'tahunInput'
     ];
 }

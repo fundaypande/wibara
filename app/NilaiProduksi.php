@@ -8,7 +8,7 @@ class NilaiProduksi extends Model
 {
   protected $fillable = [
       'user_id', 'jenis_produksi', 'jumlah', 'harga', 'nilai_penjualan', 'tujuan',
-      'deskripsi', 'photo'
+      'deskripsi', 'photo', 'tahun'
   ];
 
   public function user()

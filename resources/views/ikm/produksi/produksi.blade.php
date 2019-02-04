@@ -123,6 +123,7 @@
                                   <th>Nilai Penjualan</th>
                                   <th>Tujuan Pemasaran</th>
                                   <th>Deskripsi Produk</th>
+                                  <th>Tahun</th>
                                   <th>Photo</th>
                                   <th>Action</th>
                                 </tr>
@@ -176,6 +177,7 @@
           {data: 'nilai_penjualan', name: 'nilai_penjualan'},
           {data: 'tujuan', name: 'tujuan'},
           {data: 'ket', name: 'deskripsi'},
+          {data: 'tahun', name: 'tahun'},
           {data: 'photos', name: 'photos', orderable: false, searchable: false,
             render: function( data, type, full, meta ) {
                       return '<img src="' + data + '" height="50px" style="height: 50px;"/>';

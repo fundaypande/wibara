@@ -121,7 +121,7 @@
           {data: 'email', name: 'email'},
           {data: 'ikm', name: 'ikm', orderable: false, searchable: false,
             render: function( data, type, row ) {
-                      return '<a href="{{ url('produksi') }}/'+ data +'" class="btn btn-info btn-xs"><i class="fa fa-eye"></i>Profil</a> <a href="{{ url('produksi') }}/'+ data +'" class="btn btn-info btn-xs"><i class="fa fa-eye"></i>Kriteria</a> <a href="{{ url('produksi') }}/'+ data +'" class="btn btn-info btn-xs"><i class="fa fa-eye"></i>Produksi</a> <a href="{{ url('produksi') }}/'+ data +'" class="btn btn-info btn-xs"><i class="fa fa-eye"></i>Bahan Baku</a> <a href="{{ url('produksi') }}/'+ data +'" class="btn btn-info btn-xs"><i class="fa fa-eye"></i>Peralatan</a>';
+                      return '<a href="{{ url('produksi') }}/'+ data +'" class="btn btn-info btn-xs"><i class="fa fa-eye"></i>Profil</a> <a href="{{ url('produksi') }}/'+ data +'" class="btn btn-info btn-xs"><i class="fa fa-eye"></i>Kriteria</a> <a href="{{ url('produksi') }}/'+ data +'" class="btn btn-info btn-xs"><i class="fa fa-eye"></i>Produksi</a> <a href="{{ url('produksi') }}/'+ data +'" class="btn btn-info btn-xs"><i class="fa fa-eye"></i>Bahan Baku</a> <a href="{{ url('peralatan') }}/'+ data +'" class="btn btn-info btn-xs"><i class="fa fa-eye"></i>Peralatan</a>';
                   }
           },
           {data: 'action', name: 'action', orderable: false, searchable: false}

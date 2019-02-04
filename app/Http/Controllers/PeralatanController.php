@@ -5,25 +5,26 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\JenisPeralatan;
 use Auth;
+use App\User;
 use Yajra\Datatables\Datatables;
 
 class PeralatanController extends Controller
 {
-  public function show()
+  public function show($id)
   {
-    return view('ikm.peralatan.peralatan');
+    $idUser = $id;
+    $user = User::findOrFail($id);
+    $peralatan = JenisPeralatan::where('user_id', '=', $idUser)->get();
+
+    return view('ikm.peralatan.peralatan', ['peralatans' => $peralatan], ['user' => $user]);
   }
 
 
 
   //-> API untuk menampilkan data peralatan IKM
-  public function apiPeralatan($id=null)
+  public function apiPeralatan($id)
   {
-    if($id == null){
-      $idUser = Auth::user()->id;
-    } else {
-      $idUser = $id;
-    }
+    $idUser = $id;
     $peralatan = JenisPeralatan::where('user_id', '=', $idUser)->get();
 
 
@@ -49,14 +50,14 @@ class PeralatanController extends Controller
 
 
   //--> Input data ke database
-  public function store(Request $request)
+  public function store(Request $request, $id)
   {
     $this -> validate($request, [
             'jenis_alat' => 'required|min:1',
           ]);
 
     return JenisPeralatan::create([
-      'user_id' => Auth::user()->id,
+      'user_id' => $id,
       'jenis_alat' => $request -> jenis_alat,
       'tahun' => $request -> tahun,
       'spesifikasi' => $request -> spesifikasi,
@@ -65,6 +66,7 @@ class PeralatanController extends Controller
       'buatan' => $request -> buatan,
       'harga' => $request -> harga,
       'asal' => $request -> asal,
+      'tahunInput' => $request -> get('tahunInput'),
     ]);
   }
 
@@ -92,6 +94,7 @@ class PeralatanController extends Controller
       'buatan' => $request -> buatan,
       'harga' => $request -> harga,
       'asal' => $request -> asal,
+      'tahunInput' => $request -> get('tahunInput'),
     ]);
 
     return $peralatan;
