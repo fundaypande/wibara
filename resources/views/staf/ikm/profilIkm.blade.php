@@ -12,58 +12,7 @@
         <h4 class="modal-title" id="modal-title">Tambah Bahan Baku IKM</h4>
       </div>
       <div class="modal-body">
-        <form method="post" data-toggle="validator" action="/profil/store" id="theForm">
-          {{ csrf_field() }} {{ method_field('POST') }}
-        <input type="hidden" name="id" id="id" value="" method="patch">
-        <div class="form-group">
-          <label for="jenis_bahan">Jenis Bahan</label>
-          <input type="text" name="jenis_bahan" value="" class="form-control" id="jenis_bahan" required placeholder="">
-        </div>
-        <div class="form-group">
-          <label for="jumlah">Jumlah</label>
-          <input min="1" type="text" name="jumlah" value="" class="form-control" id="jumlah"  placeholder="">
-        </div>
-        <div class="form-group">
-          <label for="satuan">Satuan</label>
-          <input type="text" name="satuan" value="" class="form-control" id="satuan" placeholder="" >
-        </div>
-        <div class="form-group">
-          <label for="harga">Harga</label>
-          <input type="text" name="harga" value="" class="form-control" id="harga" placeholder="Rp." >
-        </div>
-        <div class="form-group">
-          <label for="asal">Asal</label>
-          <input type="text" name="asal" value="" class="form-control" id="asal" placeholder="" >
-        </div>
 
-        <div class="forn-group">
-          <label for="tahun">Tahun</label>
-          <select id="tahun" name="tahun" class="form-control">
-            <option value="2018">2018</option>
-            <option value="2019">2019</option>
-            <option value="2020">2020</option>
-            <option value="2021">2021</option>
-            <option value="2022">2022</option>
-            <option value="2023">2023</option>
-            <option value="2024">2024</option>
-            <option value="2025">2025</option>
-            <option value="2026">2026</option>
-            <option value="2027">2027</option>
-            <option value="2028">2028</option>
-            <option value="2029">2029</option>
-            <option value="2030">2030</option>
-            <option value="2031">2031</option>
-            <option value="2032">2032</option>
-            <option value="2033">2033</option>
-          </select>
-        </div>
-        <br>
-
-
-
-        <button type="submit" class="btn btn-info btn-fill">Simpan Data</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </form>
       </div>
       <div class="modal-footer">
 
@@ -79,7 +28,7 @@
 
             <div style="padding-left: 20px; padding-right: 20px" class="card">
                 <div class="card-header">
-                  <h3>Kelola Kebutuhan Bahan Baku {{ $user -> name }}</h3>
+                  <h3>Kelola Data Profil IKM {{ $user -> name }}</h3>
                   <input type="hidden" name="idUser" id="idUser" value="{{ $user -> id }}">
 
                 </div>
@@ -103,7 +52,7 @@
           					  </div>
           					@endif
 
-                    <p>Daftar kebutuhan bahan baku yang dibutuhkan oleh IKM</p>
+                    <p>Data Profil IKM</p>
                     <br>
 
                     <!-- table show daftar user yang dapat mengakses sistem -->
@@ -112,29 +61,75 @@
                         <div class="panel panel-default">
 
                           <div class="panel-heading">
-                            <h5>Daftar Peralatan IKM
-                              <a onclick="addForm({{ $user->id }})" style="color:white" class="btn btn-primary pull-right">Tambah Bahan Baku IKM </a>
+                            <h5>Informasi Data Profil IKM
+
                             </h5>
                           </div>
 
                           <div class="panel-body" style="overflow-x:auto;">
-                            <table id="staf-table" width="100%" class="table table-striped table-bordered table-hover">
-                              <thead>
-                                <tr>
-                                  <th width="50">ID</th>
-                                  <th>Jenis Bahan</th>
-                                  <th>Jumlah</th>
-                                  <th>Satuan</th>
-                                  <th>Harga</th>
-                                  <th>Asal</th>
-                                  <th>Tahun</th>
-                                  <th>Action</th>
-                                </tr>
-                              </thead>
-                              <tbody>
 
-                              </tbody>
-                            </table>
+
+                            <!-- Start Form -->
+                            @foreach($profil as $prof)
+
+
+                            <form method="post" data-toggle="validator" action="/profil/store" id="theForm">
+                              {{ csrf_field() }} {{ method_field('POST') }}
+                            <input type="hidden" name="id" id="id" value="" method="patch">
+
+
+                            <div class="form-group">
+                              <label for="nama_usaha">Nama Usaha</label>
+                              <input type="text" name="nama_usaha" value="{{ $prof -> nama_usaha }}" class="form-control" id="nama_usaha" required placeholder="">
+                            </div>
+                            <div class="form-group">
+                              <label for="badan_hukum">Badan Hukum</label>
+                              <input min="1" type="text" name="badan_hukum" value="{{ $prof -> badan_hukum }}" class="form-control" id="badan_hukum" required placeholder="">
+                            </div>
+                            <div class="form-group">
+                              <label for="izin_usaha">Izin Usaha</label>
+                              <input type="text" name="izin_usaha" value="{{ $prof -> izin_usaha }}" class="form-control" id="izin_usaha" placeholder="" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="merk_produk">Merk Produk</label>
+                              <input type="text" name="merk_produk" value="{{ $prof -> merk_produk }}" class="form-control" id="merk_produk" placeholder="" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="alamat">Alamat</label>
+                              <textarea name="alamat" class="form-control" id="alamat" rows="2" required>{{ $prof -> alamat }}</textarea>
+                            </div>
+                            <div class="form-group">
+                              <label for="telpon">Telepon</label>
+                              <input type="tel" pattern="^\d{12}$" name="telpon" value="{{ $prof -> telpon }}" class="form-control" id="telpon" placeholder="" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="jenis_produk">Jenis Produk</label>
+                              <input type="text" name="jenis_produk" value="{{ $prof -> jenis_produk }}" class="form-control" id="jenis_produk" placeholder="" required>
+                            </div>
+
+                            <div class="form-group">
+                              <label for="tempat_pemasaran">Lokasi Pemasaran</label>
+                              <input type="text" name="tempat_pemasaran" value="{{ $prof -> tempat_pemasaran }}" class="form-control" id="tempat_pemasaran" placeholder="" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="permasalahan">Permasalahan Pada Usaha Yang Dihadapi Saat Ini</label>
+                              <textarea name="permasalahan" class="form-control" id="permasalahan" rows="2">{{ $prof -> permasalahan }}</textarea>
+                            </div>
+                            <div class="form-group">
+                              <label for="jenis_bimtek">Jenis Bimtek Yang Diminati</label>
+                              <input type="text" name="jenis_bimtek" value="{{ $prof -> jenis_bimtek }}" class="form-control" id="jenis_bimtek" placeholder="">
+                            </div>
+
+                            @endforeach
+
+
+                            <button type="submit" class="btn btn-info btn-fill">Simpan Data</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          </form>
+
+
+                            <!-- END FORM -->
+
                           </div>
 
 
@@ -162,14 +157,19 @@
       table = $('#staf-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ url('/api/bahan') }}" + '/' + idUser,
+        ajax: "{{ url('/api/profilIkm') }}" + '/' + idUser,
         columns: [
           {data: 'id', name: 'id'},
-          {data: 'jenis_bahan', name: 'jenis_alat'},
-          {data: 'jumlah', name: 'tahun'},
-          {data: 'satuan', name: 'spesifikasi'},
-          {data: 'harga', name: 'kapasitas'},
-          {data: 'asal', name: 'jumlah'},
+          {data: 'nama_usaha', name: 'nama_usaha'},
+          {data: 'badan_hukum', name: 'badan_hukum'},
+          {data: 'izin_usaha', name: 'izin_usaha'},
+          {data: 'merk_produk', name: 'merk_produk'},
+          {data: 'alamat', name: 'alamat'},
+          {data: 'telpon', name: 'telpon'},
+          {data: 'jenis_produk', name: 'jenis_produk'},
+          {data: 'tempat_pemasaran', name: 'tempat_pemasaran'},
+          {data: 'permasalahan', name: 'permasalahan'},
+          {data: 'jenis_bimtek', name: 'jenis_bimtek'},
           {data: 'tahun', name: 'tahun'},
           {data: 'action', name: 'action', orderable: false, searchable: false}
         ]

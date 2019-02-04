@@ -4,26 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\BahanBaku;
+use App\User;
 use Auth;
 use Yajra\Datatables\Datatables;
 
 class BahanController extends Controller
 {
-  public function show()
+  public function show($id)
   {
-    return view('ikm.bahan.bahan');
+    $user = User::findOrFail($id);
+    return view('ikm.bahan.bahan', ['user' => $user]);
   }
 
 
 
   //-> API untuk menampilkan data peralatan IKM
-  public function apiBahan($id = null)
+  public function apiBahan($id)
   {
-    if($id == null){
-      $idUser = Auth::user()->id;
-    } else {
-      $idUser = $id;
-    }
+    $idUser = $id;
 
     $bahan = BahanBaku::where('user_id', '=', $idUser)->get();
 
@@ -40,19 +38,20 @@ class BahanController extends Controller
 
 
   //--> Input data ke database
-  public function store(Request $request)
+  public function store(Request $request, $id)
   {
     $this -> validate($request, [
             'jenis_bahan' => 'required|min:1',
           ]);
 
     return BahanBaku::create([
-      'user_id' => Auth::user()->id,
+      'user_id' => $id,
       'jenis_bahan' => $request -> jenis_bahan,
       'jumlah' => $request -> jumlah,
       'satuan' => $request -> satuan,
       'harga' => $request -> harga,
       'asal' => $request -> asal,
+      'tahun' => $request -> get('tahun'),
     ]);
   }
 
@@ -77,6 +76,7 @@ class BahanController extends Controller
       'satuan' => $request -> satuan,
       'harga' => $request -> harga,
       'asal' => $request -> asal,
+      'tahun' => $request -> get('tahun'),
     ]);
 
     return $bahan;

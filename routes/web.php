@@ -37,9 +37,10 @@ Route::group(['middleware' => ['auth']], function(){
 // *** midleware staf dan IKM
 Route::group(['middleware' => 'ikmStaf'], function(){
   // --> Kumpulan API yang bisa diakses oleh user auth
-  Route::get('/api/bahan/{id?}', 'BahanController@apiBahan')->name('api.bahan');
+  Route::get('/api/bahan/{id}', 'BahanController@apiBahan');
   Route::get('/api/peralatan/{id}', 'PeralatanController@apiPeralatan');
   Route::get('/api/produksi/{id}', 'ProduksiController@apiProduksi')->name('api.produksi');
+  Route::get('/api/profilIkm/{id}', 'IkmController@apiProfil');
 
   Route::get('/produksi/{id}', 'ProduksiController@showProduksi');
 
@@ -61,12 +62,20 @@ Route::group(['middleware' => 'ikmStaf'], function(){
   Route::delete('/peralatan/{id}', 'PeralatanController@destroy'); //->Mneghapus data
 
   //Bahan Baku Profil IKM
-  Route::get('/bahan', 'BahanController@show');
+  Route::get('/bahan/{id}', 'BahanController@show');
 
-  Route::post('/bahan', 'BahanController@store')->name('ikm.addBahan');
+  Route::post('/bahan/{id}', 'BahanController@store');
   Route::get('/bahan/{id}/edit', 'BahanController@formEdit'); //--> menampilkan data di form edit
   Route::patch('/bahan/{id}', 'BahanController@update'); //-> Proses edit data
   Route::delete('/bahan/{id}', 'BahanController@destroy'); //->Mneghapus data
+
+  //Profil IKM yang dapat diedit oleh staf Profil IKM
+  Route::get('/profilIkm/{id}', 'IkmController@showIkm');
+
+  Route::post('/profilIkm/{id}', 'IkmController@store');
+  Route::get('/profilIkm/{id}/edit', 'IkmController@formEdit'); //--> menampilkan data di form edit
+  Route::patch('/profilIkm/{id}', 'IkmController@update'); //-> Proses edit data
+  Route::delete('/profilIkm/{id}', 'IkmController@destroy'); //->Mneghapus data
 });
 
 
