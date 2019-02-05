@@ -54,7 +54,7 @@
                   </div>
                   @endif
 
-                  
+
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
@@ -88,7 +88,7 @@
 
 
                   <div class="container" >
-                    <div class="image company-header-avatar" style="background-image: url({!! asset('images/' . $url) !!})"></div>
+                    <div class="image user-avatar" style="background-image: url({!! asset('images/' . $url) !!})"></div>
                     <!-- <img src="{!! asset('images/' . $url) !!}" alt="Avatar" class="image profile-pic" width="100%"> -->
                     <div class="middle">
                       <a id="change-pic" onclick="addForm()" class="btn btn-info btn-fill">Ubah Gambar</a>

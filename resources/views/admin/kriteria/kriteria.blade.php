@@ -9,10 +9,26 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title" id="modal-title">Tambah Bahan Baku IKM</h4>
+        <h4 class="modal-title" id="modal-title">Tambah Peralatan IKM</h4>
       </div>
       <div class="modal-body">
+        <form method="post" data-toggle="validator" action="" id="theForm">
+          {{ csrf_field() }} {{ method_field('POST') }}
+        <div class="form-group">
+          <label for="nama">Nama Kriteria</label>
+          <input type="text" name="nama" value="" class="form-control" id="nama" required placeholder="">
+        </div>
 
+
+        <div class="form-group">
+          <label for="keterangan">Keterangan</label>
+          <textarea name="keterangan" class="form-control" id="keterangan" rows="2" ></textarea>
+        </div>
+
+
+        <button type="submit" class="btn btn-info btn-fill" id="simpan">Simpan Data</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </form>
       </div>
       <div class="modal-footer">
 
@@ -28,12 +44,23 @@
 
             <div style="padding-left: 20px; padding-right: 20px" class="card">
                 <div class="card-header">
-                  <h3>Kelola Data Profil IKM {{ $user -> name }}</h3>
-                  <input type="hidden" name="idUser" id="idUser" value="{{ $user -> id }}">
+                  <h3>Kelola Kriteria Pemilihan IKM</h3>
 
                 </div>
 
                 <div class="card-body">
+
+                  @if(count($errors) > 0)
+                  <div class="alert alert-danger">
+                    <ul>
+                      @foreach ($errors-> all() as $error)
+                        <li>{{ $error }}</li>
+                      @endforeach
+                    </ul>
+                  </div>
+                  @endif
+
+
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
@@ -52,7 +79,7 @@
           					  </div>
           					@endif
 
-                    <p>Data Profil IKM</p>
+                    <p>Daftar kriteria yang akan digunakan acuan dalam pemilihan IKM</p>
                     <br>
 
                     <!-- table show daftar user yang dapat mengakses sistem -->
@@ -61,75 +88,26 @@
                         <div class="panel panel-default">
 
                           <div class="panel-heading">
-                            <h5>Informasi Data Profil IKM
-
+                            <h5>Daftar Komoditi
+                              <a onclick="addForm()" style="color:white" class="btn btn-primary pull-right">Tambah Kriteria </a>
                             </h5>
                           </div>
 
                           <div class="panel-body" style="overflow-x:auto;">
+                            <table id="staf-table" width="100%" class="table table-striped table-bordered table-hover">
+                              <thead>
+                                <tr>
+                                  <th width="50">ID</th>
+                                  <th>Nama Kriteria</th>
+                                  <th>Keterangan</th>
+                                  <th>Bobot</th>
+                                  <th>Action</th>
+                                </tr>
+                              </thead>
+                              <tbody>
 
-
-                            <!-- Start Form -->
-                            @foreach($profil as $prof)
-
-
-                            <form action="/profilikm/{{ $prof-> id }}/{{ $user->id }}" method="POST">
-                              {{ csrf_field() }}
-                            <input type="hidden" name="_method" value="PUT">
-
-
-                            <div class="form-group">
-                              <label for="nama_usaha">Nama Usaha</label>
-                              <input type="text" name="nama_usaha" value="{{ $prof -> nama_usaha }}" class="form-control" id="nama_usaha" required placeholder="">
-                            </div>
-                            <div class="form-group">
-                              <label for="badan_hukum">Badan Hukum</label>
-                              <input min="1" type="text" name="badan_hukum" value="{{ $prof -> badan_hukum }}" class="form-control" id="badan_hukum" required placeholder="">
-                            </div>
-                            <div class="form-group">
-                              <label for="izin_usaha">Izin Usaha</label>
-                              <input type="text" name="izin_usaha" value="{{ $prof -> izin_usaha }}" class="form-control" id="izin_usaha" placeholder="" required>
-                            </div>
-                            <div class="form-group">
-                              <label for="merk_produk">Merk Produk</label>
-                              <input type="text" name="merk_produk" value="{{ $prof -> merk_produk }}" class="form-control" id="merk_produk" placeholder="" required>
-                            </div>
-                            <div class="form-group">
-                              <label for="alamat">Alamat</label>
-                              <textarea name="alamat" class="form-control" id="alamat" rows="2" required>{{ $prof -> alamat }}</textarea>
-                            </div>
-                            <div class="form-group">
-                              <label for="telpon">Telepon</label>
-                              <input type="tel" pattern="^\d{12}$" name="telpon" value="{{ $prof -> telpon }}" class="form-control" id="telpon" placeholder="" required>
-                            </div>
-                            <div class="form-group">
-                              <label for="jenis_produk">Jenis Produk</label>
-                              <input type="text" name="jenis_produk" value="{{ $prof -> jenis_produk }}" class="form-control" id="jenis_produk" placeholder="" required>
-                            </div>
-
-                            <div class="form-group">
-                              <label for="tempat_pemasaran">Lokasi Pemasaran</label>
-                              <input type="text" name="tempat_pemasaran" value="{{ $prof -> tempat_pemasaran }}" class="form-control" id="tempat_pemasaran" placeholder="" required>
-                            </div>
-                            <div class="form-group">
-                              <label for="permasalahan">Permasalahan Pada Usaha Yang Dihadapi Saat Ini</label>
-                              <textarea name="permasalahan" class="form-control" id="permasalahan" rows="2">{{ $prof -> permasalahan }}</textarea>
-                            </div>
-                            <div class="form-group">
-                              <label for="jenis_bimtek">Jenis Bimtek Yang Diminati</label>
-                              <input type="text" name="jenis_bimtek" value="{{ $prof -> jenis_bimtek }}" class="form-control" id="jenis_bimtek" placeholder="">
-                            </div>
-
-                            @endforeach
-
-
-                            <button type="submit" class="btn btn-info btn-fill">Simpan Data</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                          </form>
-
-
-                            <!-- END FORM -->
-
+                              </tbody>
+                            </table>
                           </div>
 
 
@@ -143,34 +121,29 @@
 
     </div>
 
-    <script src="{{ asset('js/rupiah.js') }}"></script>
+
+      <script src="{{ asset('js/rupiah.js') }}"></script>
+
     <script type="text/javascript">
     var table;
     $(document).ready(function() {
 
-      var idUser = $( "#idUser" ).val();
 
-      justNum($('#jumlah'));
+      justNum($('#tahun'));
       justNum($('#harga'));
+      justNum($('#kapasitas'));
+      justNum($('#jumlah'));
 
 
       table = $('#staf-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ url('/api/profilikm') }}" + '/' + idUser,
+        ajax: "{{ route('api.kriteria') }}",
         columns: [
           {data: 'id', name: 'id'},
-          {data: 'nama_usaha', name: 'nama_usaha'},
-          {data: 'badan_hukum', name: 'badan_hukum'},
-          {data: 'izin_usaha', name: 'izin_usaha'},
-          {data: 'merk_produk', name: 'merk_produk'},
-          {data: 'alamat', name: 'alamat'},
-          {data: 'telpon', name: 'telpon'},
-          {data: 'jenis_produk', name: 'jenis_produk'},
-          {data: 'tempat_pemasaran', name: 'tempat_pemasaran'},
-          {data: 'permasalahan', name: 'permasalahan'},
-          {data: 'jenis_bimtek', name: 'jenis_bimtek'},
-          {data: 'tahun', name: 'tahun'},
+          {data: 'nama', name: 'nama'},
+          {data: 'keterangan', name: 'keterangan'},
+          {data: 'bobot', name: 'bobot'},
           {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
       });
@@ -195,7 +168,7 @@
             headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url : "{{ url('bahan') }}" + '/' + id,
+            url : "{{ url('kriteria') }}" + '/' + id,
             type: "POST",
             data: {'_method': 'DELETE', '_token': csrf_token},
             success: function(data) {
@@ -227,13 +200,13 @@
     function editData(id) {
       save_method = 'edit';
       $('input[name=_method]').val('PATCH');
-      urlAction = "{{ url('bahan') }}";
-      $('#modal-title').text('Edit Bahan Baku IKM');
+      urlAction = "{{ url('kriteria') }}";
+      $('#modal-title').text('Edit Peralatan IKM');
       console.log(id);
       // $('#modal-form')[0].reset();
       console.log(urlAction);
       $.ajax({
-        url: "{{ url('bahan') }}/" + id + "/edit",
+        url: "{{ url('kriteria') }}/" + id + "/edit",
         type: "GET",
         dataType: "JSON",
         success: function(data) {
@@ -245,14 +218,8 @@
           $("#modal-form").find("form").attr("action", urlAction + '/' + id);
 
           $('#id').val(data.id);
-          $('#jenis_bahan').val(data.jenis_bahan);
-          $('#tahun').val(data.tahun);
-          $('#satuan').val(data.satuan);
-          $('#jumlah').val(data.jumlah);
-          $('#harga').val(data.harga);
-          $('#asal').val(data.asal);
-
-          $("#tahun > [value=" + data.tahun + "]").attr("selected", "true");
+          $('#nama').val(data.nama);
+          $('#keterangan').val(data.keterangan);
 
         },
         error: function() {
@@ -273,14 +240,12 @@
         var data = $('form').serialize();
         console.log("Submit dipencet");
         var form_action = $("#modal-form").find("form").attr("action");
-        var jenis_alat = $("#modal-form").find("input[name='jenis_alat']").val();
         var csrf_token = $('meta[name="crsf_token"]').attr('content');
-        console.log(jenis_alat);
         console.log(form_action);
         $.ajax({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          },
+          // headers: {
+          //   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          // },
           url: form_action,
           type: "POST",
           dataType: "JSON",
@@ -326,15 +291,68 @@
       });
     });
 
-    function addForm(id) {
+    function addForm() {
       save_method = "add";
       $('input[name=_method]').val('POST');
       $('#modal-form').modal('show');
       $('#theForm')[0].reset();
-      $('.modal-title').text('Tambah Bahan Baku IKM');
+      $('.modal-title').text('Tambah Data Kriteria');
       console.log('Tampilkan Form ADD');
-      $("#modal-form").find("form").attr("action", "{{ url('bahan') }}/" + id);
+      $("#modal-form").find("form").attr("action", "{{ route('add.kriteria') }}");
     }
+
+    function showData(id) {
+      save_method = 'edit';
+      $('input[name=_method]').val('PATCH');
+      urlAction = "{{ url('peralatan') }}";
+      $('#modal-title').text('Peralatan IKM');
+      console.log(id);
+      // $('#modal-form')[0].reset();
+      console.log(urlAction);
+      $.ajax({
+        url: "{{ url('peralatan') }}/" + id + "/edit",
+        type: "GET",
+        dataType: "JSON",
+        success: function(data) {
+
+          $('#modal-form').modal('show');
+
+
+          // edit action pada form menjadi format URL patch di web.php
+          $("#modal-form").find("form").attr("action", urlAction + '/' + id);
+
+          $('#id').val(data.id);
+          $('#jenis_alat').val(data.jenis_alat);
+          $('#tahun').val(data.tahun);
+          $('#spesifikasi').hide();
+          $('#kapasitas').val(data.kapasitas);
+          $('#jumlah').val(data.jumlah);
+          $('#buatan').val(data.buatan);
+          $('#harga').val(data.harga);
+          $('#asal').val(data.asal);
+
+          data = data.spesifikasi;
+
+          $("#theForm input").prop("disabled", true);
+          $("#theForm textarea").prop("disabled", true);
+          $("#simpan").hide();
+          $("#par").text(data);
+
+
+        },
+        error: function() {
+          Swal({
+            position: 'top-end',
+            type: 'error',
+            title: 'Terjadi kesalahan',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        },
+      });
+    }
+
+
 
 
 

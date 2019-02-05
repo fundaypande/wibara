@@ -63,6 +63,39 @@ class IkmController extends Controller
   }
 
 
+  public function update(Request $request, $id, $idUser)
+  {
+    $bahan = ProfilIkm::find($id);
+
+    $this -> validate($request, [
+            'nama_usaha' => 'required|min:2',
+            'badan_hukum' => 'required|min:1',
+            'izin_usaha' => 'required|min:1',
+            'merk_produk' => 'required|min:1',
+            'alamat' => 'required|min:1',
+            'telpon' => 'required|min:1',
+            'tempat_pemasaran' => 'required|min:1',
+          ]);
+
+    $bahan -> update([
+      'nama_usaha' => $request -> nama_usaha,
+      'badan_hukum' => $request -> badan_hukum,
+      'izin_usaha' => $request -> izin_usaha,
+      'merk_produk' => $request -> merk_produk,
+      'alamat' => $request -> alamat,
+      'telpon' => $request -> telpon,
+      'jenis_produk' => $request -> jenis_produk,
+      'tempat_pemasaran' => $request -> tempat_pemasaran,
+      'permasalahan' => $request -> permasalahan,
+      'jenis_bimtek' => $request -> jenis_bimtek,
+      'tahun' => date("Y"),
+
+    ]);
+
+    return redirect('/profilikm/'.$idUser)->with('status', 'Berhasil menyimpan data');
+  }
+
+
   // ** end profil IKM
 
 

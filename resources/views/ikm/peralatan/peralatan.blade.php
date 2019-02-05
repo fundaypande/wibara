@@ -196,6 +196,7 @@
 
 
       table = $('#staf-table').DataTable({
+        order: [[ 0, 'desc' ]],
         processing: true,
         serverSide: true,
         ajax: "{{ url('/api/peralatan') }}" + '/' + idUser,

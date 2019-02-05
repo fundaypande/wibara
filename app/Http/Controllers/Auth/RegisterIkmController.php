@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\ProfilIkm;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -85,6 +86,13 @@ class RegisterIkmController extends Controller
             'token' => str_random(20),
             'role' => 1,
         ]);
+
+        $profilIkm = ProfilIkm::create([
+          'user_id' => $user -> id,
+          'status' => '0',
+        ]);
+
+
 
         Mail::to($user->email)->send(new UserRegistered($user ));
     }

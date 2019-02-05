@@ -25,6 +25,7 @@ class StafController extends Controller
     public function apiIkm()
     {
       $staf = User::where('role', '=', 1)
+                    ->orderBy('id', 'ASC')
                     ->get();
 
 

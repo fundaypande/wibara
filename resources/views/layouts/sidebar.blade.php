@@ -6,7 +6,10 @@
       <a class="has-arrow" href="/kelola-staf" aria-expanded="false"><span style="color: #8d9498" class="fa fa-university icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Kelola Staf</span></a>
   </li>
   <li>
-      <a class="has-arrow" href="/komoditi" aria-expanded="false"><span style="color: #8d9498" class="fa fa-filter icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Komoditi</span></a>
+      <a class="has-arrow" href="/komoditi" aria-expanded="false"><span style="color: #8d9498" class="fa fa-shopping-bag icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Komoditi</span></a>
+  </li>
+  <li>
+      <a class="has-arrow" href="/kriteria" aria-expanded="false"><span style="color: #8d9498" class="fa fa-filter icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Kriteria</span></a>
   </li>
 @endif
 

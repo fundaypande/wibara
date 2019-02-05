@@ -29,6 +29,11 @@ Route::group(['middleware' => ['auth']], function(){
   Route::get('/verify/{token}/{id}', 'VerifyEmail@verify');
 
 
+  // ** Ubah Password
+  Route::get('/ubah-password','HomeController@showChangePasswordForm');
+  Route::post('/ubah-password','HomeController@changePassword')->name('changePassword');
+
+
 
 
 });
@@ -69,13 +74,11 @@ Route::group(['middleware' => 'ikmStaf'], function(){
   Route::patch('/bahan/{id}', 'BahanController@update'); //-> Proses edit data
   Route::delete('/bahan/{id}', 'BahanController@destroy'); //->Mneghapus data
 
-  //Profil IKM yang dapat diedit oleh staf Profil IKM
-  Route::get('/profilIkm/{id}', 'IkmController@showIkm');
 
-  Route::post('/profilIkm/{id}', 'IkmController@store');
-  Route::get('/profilIkm/{id}/edit', 'IkmController@formEdit'); //--> menampilkan data di form edit
-  Route::patch('/profilIkm/{id}', 'IkmController@update'); //-> Proses edit data
-  Route::delete('/profilIkm/{id}', 'IkmController@destroy'); //->Mneghapus data
+  //Profil data IKM yang dapat diedit oleh staf Profil IKM
+  Route::get('/profilikm/{id}', 'IkmController@showIkm');
+
+  Route::put('/profilikm/{id}/{idUser}', 'IkmController@update'); //-> Proses edit data
 });
 
 
@@ -108,6 +111,18 @@ Route::group(['middleware' => 'admin'], function(){
   Route::get('/komoditi/{id}/edit', 'KomoditiController@formEdit'); //--> menampilkan data di form edit
   Route::patch('/komoditi/{id}', 'KomoditiController@update'); //-> Proses edit data
   Route::delete('/komoditi/{id}', 'KomoditiController@destroy'); //->Mneghapus data
+
+
+  // ** mengelola daftar kriteria
+  //Bahan Baku Profil IKM
+  Route::get('/kriteria', 'KriteriaController@show');
+  Route::get('/api/kriteria', 'KriteriaController@apiKriteria')->name('api.kriteria');
+
+  Route::post('/kriteria', 'KriteriaController@store')->name('add.kriteria');
+  Route::get('/kriteria/{id}/edit', 'KriteriaController@formEdit'); //--> menampilkan data di form edit
+  Route::patch('/kriteria/{id}', 'KriteriaController@update'); //-> Proses edit data
+  Route::delete('/kriteria/{id}', 'KriteriaController@destroy'); //->Mneghapus data
+
 });
 
 

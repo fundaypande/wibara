@@ -115,7 +115,7 @@ class ProfilIkmController extends Controller
     //-> API untuk menampilkan data profil IKM
     public function apiKelola()
     {
-      $staf = ProfilIkm::get();
+      $staf = ProfilIkm::orderBy('id', 'DESC')->get();
 
 
       return Datatables::of($staf)
