@@ -104,7 +104,7 @@ Route::group(['middleware' => 'admin'], function(){
   Route::delete('/profil/{id}', 'ProfilIkmController@destroy');
   Route::post('/profil/store', 'ProfilIkmController@store')->name('staf.addIkm');
 
-
+  // ** Kelola Komoditi
   Route::get('/komoditi', 'KomoditiController@show');
   Route::get('/api/komoditi', 'KomoditiController@apiKomoditi')->name('api.komoditi');
   Route::post('/komoditi', 'KomoditiController@store')->name('admin.addKomoditi');
@@ -156,10 +156,19 @@ Route::group(['middleware' => 'staf'], function(){
   Route::delete('/kelola-ikm/{id}', 'StafController@destroy');
   Route::get('/kelola-ikm/{id}/edit', 'StafController@formEdit');
   Route::patch('/kelola-ikm/{id}', 'StafController@update');
+
+
+  // ** Keloal Data Kriteria 'funday'
+  Route::get('/data-kriteria/{idUser}', 'DataKriteriaController@showTahun');
+  Route::get('api/data-kriteria/tahun/{idUser}', 'DataKriteriaController@apiListTahun');
+  Route::get('/api/data-kriteria/{idUser}', 'DataKriteriaController@apiTahun');
+
+  Route::get('/data-kriteria/{idUser}/edit', 'DataKriteriaController@showEdit');
+  Route::post('/data-kriteria/{id}', 'DataKriteriaController@store');
 });
 
 
-Route::group(['middleware' => ['ikm'], ['staf']], function(){
+Route::group(['middleware' => ['ikm']], function(){
   Route::get('/ikm', 'IkmController@dashboard');
 
   Route::get('/profil', 'ProfilIkmController@show');
