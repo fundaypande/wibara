@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
-use app\User;
+use App\User;
+use App\ProfilIkm;
 
 class StafController extends Controller
 {
@@ -16,6 +17,15 @@ class StafController extends Controller
     public function __construct()
     {
         // $this->middleware('auth');
+    }
+
+    public function showSumaryIkm($id)
+    {
+      $profils = ProfilIkm::where('user_id','=',$id)->get();
+
+      // dd($profils);
+
+      return view('ikm.show', ['profils' => $profils]);
     }
 
     public function showIkm(){

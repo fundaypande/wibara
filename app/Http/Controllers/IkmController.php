@@ -8,6 +8,7 @@ use App\BahanBaku;
 use App\JenisPeralatan;
 use App\NilaiProduksi;
 use App\ProfilIkm;
+use App\Komoditi;
 use Yajra\Datatables\Datatables;
 
 class IkmController extends Controller
@@ -23,11 +24,19 @@ class IkmController extends Controller
     die('ini halaman STAF');
   }
 
+
+  // ** API Komoditi
+  public function apiKomoditiStaf()
+  {
+    return $komoditi = Komoditi::get();
+  }
+
   public function show($id)
   {
     $profils = ProfilIkm::findOrFail($id);
     $userId = $profils -> user_id;
     $bahanBaku = BahanBaku::where('user_id', '=', $userId)->get();
+    $komoditi = Komoditi::all();
 
     return view('ikm.show', ['profils' => ProfilIkm::findOrFail($id)], ['bahanBaku' => $bahanBaku]);
   }
@@ -39,7 +48,11 @@ class IkmController extends Controller
   public function showIkm($id)
   {
     $user = User::findOrFail($id);
-    $profil = ProfilIkm::where('user_id', '=', $id)->get();
+    $profil = ProfilIkm::join('komoditis', 'komoditis.id', '=', 'profilikm.komoditi_id')
+                ->select('profilikm.*', 'komoditis.nama')
+                ->where('user_id', '=', $id)->get();
+
+    // dd($profil);
 
     return view('staf.ikm.profilIkm', ['user' => $user], ['profil' => $profil]);
   }
@@ -78,6 +91,7 @@ class IkmController extends Controller
           ]);
 
     $bahan -> update([
+      'komoditi_id' => $request -> get('komoditi'),
       'nama_usaha' => $request -> nama_usaha,
       'badan_hukum' => $request -> badan_hukum,
       'izin_usaha' => $request -> izin_usaha,
@@ -88,7 +102,6 @@ class IkmController extends Controller
       'tempat_pemasaran' => $request -> tempat_pemasaran,
       'permasalahan' => $request -> permasalahan,
       'jenis_bimtek' => $request -> jenis_bimtek,
-      'tahun' => date("Y"),
 
     ]);
 

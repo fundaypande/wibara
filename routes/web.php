@@ -75,6 +75,9 @@ Route::group(['middleware' => 'ikmStaf'], function(){
   Route::delete('/bahan/{id}', 'BahanController@destroy'); //->Mneghapus data
 
 
+  // ** API KOmoditi untuk dipasing ke profil IKM
+  Route::get('/api/komoditi/staf', 'IkmController@apiKomoditiStaf');
+
   //Profil data IKM yang dapat diedit oleh staf Profil IKM
   Route::get('/profilikm/{id}', 'IkmController@showIkm');
 
@@ -123,6 +126,10 @@ Route::group(['middleware' => 'admin'], function(){
   Route::patch('/kriteria/{id}', 'KriteriaController@update'); //-> Proses edit data
   Route::delete('/kriteria/{id}', 'KriteriaController@destroy'); //->Mneghapus data
 
+
+  // ** Pencarian Bobot Kriteria
+  Route::get('/kriteria-ahp', 'KriteriaController@showAhp');
+
 });
 
 
@@ -163,8 +170,18 @@ Route::group(['middleware' => 'staf'], function(){
   Route::get('api/data-kriteria/tahun/{idUser}', 'DataKriteriaController@apiListTahun');
   Route::get('/api/data-kriteria/{idUser}', 'DataKriteriaController@apiTahun');
 
-  Route::get('/data-kriteria/{idUser}/edit', 'DataKriteriaController@showEdit');
+  Route::get('/data-kriteria/{idUser}/add', 'DataKriteriaController@showAdd');
   Route::post('/data-kriteria/{id}', 'DataKriteriaController@store');
+  Route::get('/data-kriteria/{idUser}/{tahun}/edit', 'DataKriteriaController@showEdit');
+  Route::put('/data-kriteria/{idUser}/{tahun}', 'DataKriteriaController@update');
+  Route::delete('/data-kriteria/{idUser}/{tahun}', 'DataKriteriaController@destroy');
+
+  // ** API data kriteria untuk di tampilkan di sumary profil IKM
+  Route::get('/api/ikm/data-kriteria/{idUser}', 'DataKriteriaController@apiSumaryProfil');
+
+
+  // ** show sumary all data for IKM profile
+  Route::get('/ikm/show/{id}', 'StafController@showSumaryIkm');
 });
 
 

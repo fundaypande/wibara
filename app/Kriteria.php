@@ -13,8 +13,8 @@ class Kriteria extends Model
       'nama', 'keterangan', 'bobot'
   ];
 
-  // public function user()
-  // {
-  //   return $this->beLongsTo('App\User');
-  // }
+  public function dataKriteria()
+  {
+    return $this->hasMany('App\DataKriteria');
+  }
 }

@@ -28,7 +28,20 @@
 
             <div style="padding-left: 20px; padding-right: 20px" class="card">
                 <div class="card-header">
-                  <h3>Tambah Data Kriteria Pemilihan IKM Per Tahun Dari {{ $user -> name }}</h3>
+
+
+                  <br>
+
+                  <a href="{{ url('/kelola-ikm') }}">Kelola IKM</a> <i style="" class="fa fa-angle-double-right" aria-hidden="true"></i> Kriteria <i style="" class="fa fa-angle-double-right" aria-hidden="true"></i> <a href="{{ url('/data-kriteria/') }}/{{ $user -> id }}">{{ $user -> name }}</a>
+                  <i style="" class="fa fa-angle-double-right" aria-hidden="true"></i> {{ $dataKrit[0] -> tahun }}
+                  <i style="" class="fa fa-angle-double-right" aria-hidden="true"></i> Edit Data
+
+                  <div class="" style="margin-top: 20px">
+                      <!-- untuk batas kosong -->
+                  </div>
+
+
+                  <h3>Edit Data Kriteria Pemilihan IKM Per Tahun Dari {{ $user -> name }}</h3>
                   <input type="hidden" name="idUser" id="idUser" value="{{ $user -> id }}">
 
                 </div>
@@ -74,40 +87,18 @@
 
                           <div class="panel-body" style="overflow-x:auto;">
 
-                            <form method="post" action="/data-kriteria/{{ $user-> id }}" id="theForm">
-                              {{ csrf_field() }} {{ method_field('POST') }}
+                            <form method="post" action="/data-kriteria/{{ $user-> id }}/{{ $dataKrit[0] -> tahun }}" id="theForm">
+                              {{ csrf_field() }} {{ method_field('PUT') }}
 
-                              <div class="forn-group">
-                                <label for="tahun">Tahun</label>
-                                <select id="tahun" name="tahun" class="form-control">
-                                  <option value="">Pilih Tahun</option>
-                                  <option value="2018">2018</option>
-                                  <option value="2019">2019</option>
-                                  <option value="2020">2020</option>
-                                  <option value="2021">2021</option>
-                                  <option value="2022">2022</option>
-                                  <option value="2023">2023</option>
-                                  <option value="2024">2024</option>
-                                  <option value="2025">2025</option>
-                                  <option value="2026">2026</option>
-                                  <option value="2027">2027</option>
-                                  <option value="2028">2028</option>
-                                  <option value="2029">2029</option>
-                                  <option value="2030">2030</option>
-                                  <option value="2031">2031</option>
-                                  <option value="2032">2032</option>
-                                  <option value="2033">2033</option>
-                                </select>
-                              </div>
-                              <br>
 
                             <input type="hidden" name="idUser" value="{{ $user -> id }}" class="form-control" id="idUser" required placeholder="">
 
 
-                            @foreach($kriterias as $kriteria)
+                            @foreach($dataKrit as $data)
                               <div class="form-group">
-                                <label for="{{ $kriteria -> nama }}">{{ $kriteria -> nama }}</label>
-                                <input type="text" name="{{ $kriteria -> nama }}" value="" class="form-control" id="{{ $kriteria -> nama }}" required placeholder="">
+                                <label for="{{ $data -> nama }}">{{ $data -> nama }}</label>
+                                <input type="text" name="{{ $data -> nama }}" value="{{ $data -> nilai }}" class="form-control" id="{{ $data -> nama }}" required placeholder="">
+                                <input type="hidden" name="idData" value="{{ $data -> id }}" class="form-control">
                               </div>
                             @endforeach
 
@@ -189,8 +180,10 @@
 
     });
 
-    function deleteData(id){
+    function deleteData(id, tahun){
       var csrf_token = $('meta[name="crsf_token"]').attr('content');
+      console.log(id);
+      console.log(tahun);
       Swal({
         title: 'Hapus Data?',
         text: "Apakah anda yakin ingin menghapus data ini",
@@ -206,7 +199,7 @@
             headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url : "{{ url('kriteria') }}" + '/' + id,
+            url : "{{ url('kriteria') }}" + '/' + id + '/' + tahun,
             type: "POST",
             data: {'_method': 'DELETE', '_token': csrf_token},
             success: function(data) {

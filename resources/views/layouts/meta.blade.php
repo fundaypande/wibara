@@ -81,7 +81,3 @@
     <link rel="stylesheet" href="{!! asset('assets/datatables/css/dataTables.bootstrap.min.css') !!}">
 
     <link rel="stylesheet" href="{!! asset('assets/datatables/css/jquery.dataTables.min.css') !!}">
-
-</head>
-
-<body>

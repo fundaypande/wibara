@@ -21,6 +21,20 @@ class DataKriteriaController extends Controller
   }
 
 
+  public function apiSumaryProfil($idUser)
+  {
+    $user = User::findOrFail($idUser);
+    // menampilkan tahun2 dalam IKM
+    $dataKrit = DataKriteria::join('kriterias', 'kriterias.id', '=', 'data_kriterias.id_kriteria')
+                ->select('data_kriterias.*', 'kriterias.nama')
+                ->where('id_user', '=', $idUser)
+                ->get();
+
+    return Datatables::of($dataKrit)
+      ->make(true);
+  }
+
+
 
   //-> API untuk menampilkan data peralatan IKM
   public function apiTahun($idUser)
@@ -36,7 +50,8 @@ class DataKriteriaController extends Controller
     return Datatables::of($dataKrit)
       -> addColumn('action', function($dataKrit){
         return '
-          <a href="/data-kriteria/' . $dataKrit -> id_user . '/' . $dataKrit-> tahun . '" class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o"></i>Edit</a>
+          <a href="/data-kriteria/' . $dataKrit -> id_user . '/' . $dataKrit-> tahun . '/edit" class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o"></i>Edit</a>
+          <a onclick="deleteData(' . $dataKrit -> id_user .',' . $dataKrit -> tahun . ')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i>Delete</a>
         ';
       })
       ->make(true);
@@ -53,7 +68,7 @@ class DataKriteriaController extends Controller
   }
 
 
-  public function showEdit($idUser)
+  public function showAdd($idUser)
   {
     //querykan tahun per satu persatu
     $dataKrit = DataKriteria::where('id_user', '=', $idUser)
@@ -66,7 +81,7 @@ class DataKriteriaController extends Controller
     $user = User::findOrFail($idUser);
     $kriteria = Kriteria::all();
 
-    return view('staf.data-kriteria.showEdit', ['user' => $user], ['kriterias' => $kriteria]);
+    return view('staf.data-kriteria.showAdd', ['user' => $user], ['kriterias' => $kriteria]);
   }
 
 
@@ -97,30 +112,73 @@ class DataKriteriaController extends Controller
     return redirect('/data-kriteria/'.$id)->with('status', 'Berhasil menambahkan data kriteria baru');
   }
 
-  //--> mengambil data untuk kita edit
-  public function formEdit($id)
+
+
+  public function showEdit($idUser, $tahun)
   {
-    return $kriteria = Kriteria::find($id);
+    //querykan tahun per satu persatu
+    $dataKrit = DataKriteria::join('kriterias', 'kriterias.id', '=', 'data_kriterias.id_kriteria')
+                ->select('data_kriterias.*', 'kriterias.nama')
+                ->where([
+                    ['id_user', '=', $idUser],
+                    ['tahun', '=', $tahun]
+                  ])
+                ->get();
+
+    // dd($dataKrit);
+
+    $user = User::findOrFail($idUser);
+
+    return view('staf.data-kriteria.showEdit', ['user' => $user], ['dataKrit' => $dataKrit]);
   }
 
-  public function update(Request $request, $id)
+  //--> Input data ke database
+  public function update(Request $request, $idUser, $tahun)
   {
-    $kriteria = Kriteria::find($id);
 
-    $this -> validate($request, [
-            'nama' => 'required|min:2',
-          ]);
+    $dataKrit = DataKriteria::join('kriterias', 'kriterias.id', '=', 'data_kriterias.id_kriteria')
+                ->select('data_kriterias.*', 'kriterias.nama')
+                ->where([
+                    ['id_user', '=', $idUser],
+                    ['tahun', '=', $tahun]
+                  ])
+                ->get();
 
-    $kriteria -> update([
-      'nama' => $request -> nama,
-      'keterangan' => $request -> keterangan,
-    ]);
+    // dd($dataKrit);
 
-    return $kriteria;
+    foreach ($dataKrit as $key => $krit) {
+      // dd($request -> idData);
+      $name = $krit -> nama;
+      $dataKrito = DataKriteria::findOrFail($krit -> id);
+
+      $dataKrito -> update([
+          'nilai' => $request -> $name,
+        ]);
+    }
+
+    return back()->with('status', 'Berhasil mengedit data kriteria baru');
   }
 
-  public function destroy($id)
+
+
+  public function destroy($idUser, $tahun)
   {
-      Kriteria::destroy($id);
+    $dataKrit = DataKriteria::join('kriterias', 'kriterias.id', '=', 'data_kriterias.id_kriteria')
+                ->select('data_kriterias.*', 'kriterias.nama')
+                ->where([
+                    ['id_user', '=', $idUser],
+                    ['tahun', '=', $tahun]
+                  ])
+                ->get();
+
+
+    foreach ($dataKrit as $key => $krit) {
+      // dd($request -> idData);
+      $name = $krit -> nama;
+      $dataKrito = DataKriteria::destroy($krit -> id);
+
+    }
+
+    return back()->with('status', 'Berhasil menghapus data kriteria baru');
   }
 }

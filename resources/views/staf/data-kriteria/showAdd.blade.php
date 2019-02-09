@@ -12,45 +12,7 @@
         <h4 class="modal-title" id="modal-title">Tambah Peralatan IKM</h4>
       </div>
       <div class="modal-body">
-        <form method="post" data-toggle="validator" action="" id="theForm">
-          {{ csrf_field() }} {{ method_field('POST') }}
 
-          <div class="forn-group">
-            <label for="tahun">Tahun</label>
-            <select id="tahun" name="tahun" class="form-control">
-              <option value="2018">2018</option>
-              <option value="2019">2019</option>
-              <option value="2020">2020</option>
-              <option value="2021">2021</option>
-              <option value="2022">2022</option>
-              <option value="2023">2023</option>
-              <option value="2024">2024</option>
-              <option value="2025">2025</option>
-              <option value="2026">2026</option>
-              <option value="2027">2027</option>
-              <option value="2028">2028</option>
-              <option value="2029">2029</option>
-              <option value="2030">2030</option>
-              <option value="2031">2031</option>
-              <option value="2032">2032</option>
-              <option value="2033">2033</option>
-            </select>
-          </div>
-          <br>
-
-
-
-        @foreach($kriterias as $kriteria)
-          <div class="form-group">
-            <label for="{{ $kriteria -> id }}">{{ $kriteria -> nama }}</label>
-            <input type="text" name="{{ $kriteria -> id }}" value="" class="form-control" id="{{ $kriteria -> id }}" required placeholder="">
-          </div>
-        @endforeach
-
-
-        <button type="submit" class="btn btn-info btn-fill" id="simpan">Simpan Data</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </form>
       </div>
       <div class="modal-footer">
 
@@ -65,20 +27,18 @@
     <div class="row justify-content-center">
 
             <div style="padding-left: 20px; padding-right: 20px" class="card">
+
+              <br>
+
+              <a href="{{ url('/kelola-ikm') }}">Kelola IKM</a> <i style="" class="fa fa-angle-double-right" aria-hidden="true"></i> Kriteria <i style="" class="fa fa-angle-double-right" aria-hidden="true"></i> <a href="{{ url('/data-kriteria/') }}/{{ $user -> id }}">{{ $user -> name }}</a>
+              <i style="" class="fa fa-angle-double-right" aria-hidden="true"></i> Tambah Data
+
+              <div class="" style="margin-top: 20px">
+                  <!-- untuk batas kosong -->
+              </div>
+
                 <div class="card-header">
-
-                  <br>
-
-                  <a href="{{ url('/kelola-ikm') }}">Kelola IKM</a>
-                  <i style="" class="fa fa-angle-double-right" aria-hidden="true"></i> Kriteria
-                  <i style="" class="fa fa-angle-double-right" aria-hidden="true"></i> <a href="#">{{ $user -> name }}</a>
-
-                  <div class="" style="margin-top: 20px">
-                      <!-- untuk batas kosong -->
-                  </div>
-
-
-                  <h3>Kelola Kriteria Pemilihan IKM Per Tahun Dari {{ $user -> name }}</h3>
+                  <h3>Tambah Data Kriteria Pemilihan IKM Per Tahun Dari {{ $user -> name }}</h3>
                   <input type="hidden" name="idUser" id="idUser" value="{{ $user -> id }}">
 
                 </div>
@@ -114,7 +74,6 @@
           					  </div>
           					@endif
 
-                    <p>Daftar kriteria yang akan digunakan acuan dalam pemilihan IKM</p>
                     <br>
 
                     <!-- table show daftar user yang dapat mengakses sistem -->
@@ -122,24 +81,53 @@
                       <div class="com-md-12">
                         <div class="panel panel-default">
 
-                          <div class="panel-heading">
-                            <h5>Daftar Kriteria
-                              <a href="{{ url('/data-kriteria') }}/{{ $user->id }}/add" style="color:white" class="btn btn-primary pull-right">Tambah Data Kriteria </a>
-                            </h5>
-                          </div>
 
                           <div class="panel-body" style="overflow-x:auto;">
-                            <table id="staf-table" width="100%" class="table table-striped table-bordered table-hover">
-                              <thead>
-                                <tr>
-                                  <th>Tahun</th>
-                                  <th>Action</th>
-                                </tr>
-                              </thead>
-                              <tbody>
 
-                              </tbody>
-                            </table>
+                            <form method="post" action="/data-kriteria/{{ $user-> id }}" id="theForm">
+                              {{ csrf_field() }} {{ method_field('POST') }}
+
+                              <div class="forn-group">
+                                <label for="tahun">Tahun</label>
+                                <select id="tahun" name="tahun" class="form-control">
+                                  <option value="">Pilih Tahun</option>
+                                  <option value="2018">2018</option>
+                                  <option value="2019">2019</option>
+                                  <option value="2020">2020</option>
+                                  <option value="2021">2021</option>
+                                  <option value="2022">2022</option>
+                                  <option value="2023">2023</option>
+                                  <option value="2024">2024</option>
+                                  <option value="2025">2025</option>
+                                  <option value="2026">2026</option>
+                                  <option value="2027">2027</option>
+                                  <option value="2028">2028</option>
+                                  <option value="2029">2029</option>
+                                  <option value="2030">2030</option>
+                                  <option value="2031">2031</option>
+                                  <option value="2032">2032</option>
+                                  <option value="2033">2033</option>
+                                </select>
+                              </div>
+                              <br>
+
+                            <input type="hidden" name="idUser" value="{{ $user -> id }}" class="form-control" id="idUser" required placeholder="">
+
+
+                            @foreach($kriterias as $kriteria)
+                              <div class="form-group">
+                                <label for="{{ $kriteria -> nama }}">{{ $kriteria -> nama }}</label>
+                                <input type="text" name="{{ $kriteria -> nama }}" value="" class="form-control" id="{{ $kriteria -> nama }}" required placeholder="">
+                              </div>
+                            @endforeach
+
+
+                            <button type="submit" class="btn btn-info btn-fill" id="simpan">Simpan Data</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          </form>
+
+
+
                           </div>
 
 
@@ -161,13 +149,41 @@
     $(document).ready(function() {
 
 
+      // id USer apa?
+      var idUser = $( "#idUser" ).val();
+
+
+      $.ajax({
+
+        url: "/api/data-kriteria/tahun/" + idUser,
+        type: "GET",
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+
+        success: function (data) {
+            console.log(data.length);
+            var count = data.length;
+            for (var i = 0; i < data.length; i++) {
+              $("#tahun option[value='"+ data[i].tahun +"']").attr("disabled", true);
+              console.log(data[i].tahun);
+            }
+
+            // $("#tahun option[value='"+ data -> tahun +"']").attr("disabled", true);
+
+        },
+        error: function (errormessage) {
+            alert(errormessage.responseText);
+        }
+      });
+
+
+
       justNum($('#tahun'));
       justNum($('#harga'));
       justNum($('#kapasitas'));
       justNum($('#jumlah'));
 
-      // id USer apa?
-      var idUser = $( "#idUser" ).val();
+
 
 
       table = $('#staf-table').DataTable({
@@ -183,9 +199,7 @@
 
     });
 
-    function deleteData(id, tahun){
-      console.log(id);
-      console.log(tahun);
+    function deleteData(id){
       var csrf_token = $('meta[name="crsf_token"]').attr('content');
       Swal({
         title: 'Hapus Data?',
@@ -202,7 +216,7 @@
             headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url : "{{ url('data-kriteria') }}" + '/' + id + '/' + tahun,
+            url : "{{ url('kriteria') }}" + '/' + id,
             type: "POST",
             data: {'_method': 'DELETE', '_token': csrf_token},
             success: function(data) {

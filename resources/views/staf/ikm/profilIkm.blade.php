@@ -1,5 +1,14 @@
 @extends('layouts.admin')
 
+@section('css')
+
+  <!-- penambahan CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+   integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+   crossorigin=""/>
+
+@endsection
+
 @section('content')
 
 <div id="modal-form" class="modal fade" role="dialog" tabindex="1" aria-hidden="true" data-backdrop="static">
@@ -28,6 +37,15 @@
 
             <div style="padding-left: 20px; padding-right: 20px" class="card">
                 <div class="card-header">
+
+                  <br>
+
+                  <a href="{{ url('/kelola-ikm') }}">Kelola IKM</a> <i style="" class="fa fa-angle-double-right" aria-hidden="true"></i> <a href="#">{{ $user -> name }}</a>
+
+                  <div class="" style="margin-top: 20px">
+                      <!-- untuk batas kosong -->
+                  </div>
+
                   <h3>Kelola Data Profil IKM {{ $user -> name }}</h3>
                   <input type="hidden" name="idUser" id="idUser" value="{{ $user -> id }}">
 
@@ -78,6 +96,16 @@
                             <input type="hidden" name="_method" value="PUT">
 
 
+                            <div class="forn-group">
+                              <label for="komoditi">Komoditi</label>
+                              <select id="komoditi" name="komoditi" class="form-control">
+                                <option value='{{ $prof -> komoditi_id }}'>{{ $prof -> nama }}</option>
+                                <!-- diisi oleh ajax -->
+                              </select>
+                            </div>
+                            <br>
+
+
                             <div class="form-group">
                               <label for="nama_usaha">Nama Usaha</label>
                               <input type="text" name="nama_usaha" value="{{ $prof -> nama_usaha }}" class="form-control" id="nama_usaha" required placeholder="">
@@ -122,6 +150,10 @@
 
                             @endforeach
 
+                            <div id="mapid"></div>
+
+
+                            <br>
 
                             <button type="submit" class="btn btn-info btn-fill">Simpan Data</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -143,15 +175,59 @@
 
     </div>
 
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+     integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+     crossorigin="">
+   </script>
+
     <script src="{{ asset('js/rupiah.js') }}"></script>
     <script type="text/javascript">
     var table;
     $(document).ready(function() {
 
+      // MAPS JS
+      var mymap = L.map('mapid').setView([-8.0986973, 115.1908278], 13);
+
+      L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZnVuZGF5cGFuZGUiLCJhIjoiY2pyd3gzOTF6MGczOTN5bmNlMnRqaXFqeSJ9.jaVlZ0Z02cIPDO2KVoTnSw', {
+          attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+          maxZoom: 18,
+          id: 'mapbox.streets',
+          accessToken: 'pk.eyJ1IjoiZnVuZGF5cGFuZGUiLCJhIjoiY2pyd3gzOTF6MGczOTN5bmNlMnRqaXFqeSJ9.jaVlZ0Z02cIPDO2KVoTnSw'
+      }).addTo(mymap);
+
+
+      // END MAPS JS
+
+
       var idUser = $( "#idUser" ).val();
 
       justNum($('#jumlah'));
       justNum($('#harga'));
+
+      $.ajax({
+
+        url: "{{ url('/api/komoditi/staf') }}",
+        type: "GET",
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+
+        success: function (data) {
+            console.log(data.length);
+            var count = data.length;
+            for (var i = 0; i < data.length; i++) {
+              // $("#tahun option[value='"+ data[i].tahun +"']").attr("disabled", true);
+              $('#komoditi').append('<option value='+ data[i].id+'>'+data[i].nama+'</option>');
+              console.log(data[i].tahun);
+            }
+
+            // $("#tahun option[value='"+ data -> tahun +"']").attr("disabled", true);
+
+        },
+        error: function (errormessage) {
+            alert(errormessage.responseText);
+        }
+      });
 
 
       table = $('#staf-table').DataTable({

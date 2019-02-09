@@ -38,6 +38,19 @@
 
             <div style="padding-left: 20px; padding-right: 20px" class="card">
                 <div class="card-header">
+
+
+                  <br>
+
+                  <a href="{{ url('/kelola-ikm') }}">Kelola IKM</a>
+                  <i style="" class="fa fa-angle-double-right" aria-hidden="true"></i> Produksi
+                  <i style="" class="fa fa-angle-double-right" aria-hidden="true"></i> Add
+
+                  <div class="" style="margin-top: 20px">
+                      <!-- untuk batas kosong -->
+                  </div>
+
+
                   <h3>Tambah Data Produksi {{ $idUser -> name }}</h3>
 
                 </div>

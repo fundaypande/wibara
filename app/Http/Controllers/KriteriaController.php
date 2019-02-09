@@ -15,6 +15,13 @@ class KriteriaController extends Controller
     return view('admin.kriteria.kriteria');
   }
 
+  public function showAhp()
+  {
+    $kriteria = Kriteria::all();
+
+    return view('admin.kriteria.bobot', ['kriterias' => $kriteria]);
+  }
+
 
 
   //-> API untuk menampilkan data peralatan IKM
@@ -42,7 +49,7 @@ class KriteriaController extends Controller
 
     return Kriteria::create([
       'nama' => $request -> nama,
-      'keterangan' => $request -> keterangan,
+      'keterangan' => $request -> get('keterangan'),
     ]);
   }
 
@@ -62,7 +69,7 @@ class KriteriaController extends Controller
 
     $kriteria -> update([
       'nama' => $request -> nama,
-      'keterangan' => $request -> keterangan,
+      'keterangan' => $request -> get('keterangan'),
     ]);
 
     return $kriteria;

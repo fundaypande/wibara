@@ -101,18 +101,18 @@
                         $notif = null;
                         $bahan = null;
                         $userId = null;
-                        if($profils -> user_id){
+                        if($profils[0] -> user_id){
                           // dd('User ID ADA');
-                          if($profils -> user -> photo == null){
+                          if($profils[0] -> user -> photo == null){
                             $url = 'user.png';
                           } else {
-                            $url = $profils -> user -> photo;
+                            $url = $profils[0] -> user -> photo;
                           }
 
-                          $nama = $profils -> user -> name;
-                          $email= $profils -> user -> email;
-                          $bahan = $bahanBaku;
-                          $userId = $profils -> user_id;
+                          $nama = $profils[0] -> user -> name;
+                          $email= $profils[0] -> user -> email;
+                          // $bahan = $bahanBaku;
+                          $userId = $profils[0] -> user_id;
 
                         } else {
                           //jika user_id null maka data diinput oleh staf
@@ -160,64 +160,50 @@
 
                           <tr>
                             <td class="tdIkm"><b>Nama Usaha</b></td>
-                            <td>{{ $profils -> nama_usaha  }}</td>
+                            <td>{{ $profils[0] -> nama_usaha  }}</td>
+                          </tr>
+                          <tr>
+                            <td class="tdIkm"><b>Komoditi</b></td>
+                            <td>{{ $profils[0] -> komoditi -> nama  }}</td>
+                          </tr>
+                          <tr>
+                            <td class="tdIkm"><b>Badan Hukum</b></td>
+                            <td>{{ $profils[0] -> badan_hukum  }}</td>
+                          </tr>
+                          <tr>
+                            <td class="tdIkm"><b>Izin Usaha</b></td>
+                            <td>{{ $profils[0] -> izin_usaha  }}</td>
                           </tr>
                           <tr>
                             <td class="tdIkm"><b>Alamat</b></td>
-                            <td>{{ $profils -> alamat  }}</td>
+                            <td>{{ $profils[0] -> alamat  }}</td>
                           </tr>
                           <tr>
                             <td class="tdIkm"><b>Merk Produk</b></td>
-                            <td>{{ $profils -> merk_produk  }}</td>
+                            <td>{{ $profils[0] -> merk_produk  }}</td>
                           </tr>
                           <tr>
                             <td class="tdIkm"><b>Telepon</b></td>
-                            <td>{{ $profils -> telpon  }}</td>
+                            <td>{{ $profils[0] -> telpon  }}</td>
                           </tr>
                           <tr>
                             <td class="tdIkm"><b>Jenis Produk Yang Dihasilkan</b></td>
-                            <td>{{ $profils -> jenis_produk  }}</td>
+                            <td>{{ $profils[0] -> jenis_produk  }}</td>
+                          </tr>
+
+
+                          <tr>
+                            <td class="tdIkm"><b>Tempat Pemasaran</b></td>
+                            <td>{{ $profils[0] -> tempat_pemasaran  }}</td>
                           </tr>
 
                           <tr>
-                            <td class="tdIkm"><b>Jumlah Produksi Rata-rata</b></td>
-                            <td>{{ $profils -> rerata_produksi  }}</td>
-                          </tr>
-                          <tr>
-                            <td class="tdIkm"><b>Harga Rata-rata Produk</b></td>
-                            <td>{{ $profils -> rerata_harga  }}</td>
-                          </tr>
-                          <tr>
-                            <td class="tdIkm"><b>Rata-rata Nilai Penjualan</b></td>
-                            <td>{{ $profils -> rerata_penjualan  }}</td>
-                          </tr>
-                          <tr>
-                            <td class="tdIkm"><b>Tempat Pemasaran</b></td>
-                            <td>{{ $profils -> tempat_pemasaran  }}</td>
-                          </tr>
-                          <tr>
-                            <td class="tdIkm"><b>Total Peralatan dan Mesin Yang Dimiliki</b></td>
-                            <td>{{ $profils -> total_peralatan  }}</td>
-                          </tr>
-                          <tr>
-                            <td class="tdIkm"><b>Rata-rata Bahan Baku Yang Digunakan Pertahun</b></td>
-                            <td>{{ $profils -> total_bahan_baku  }}</td>
-                          </tr>
-                          <tr>
-                            <td class="tdIkm"><b>Jumlah Tenaga Kerja</b></td>
-                            <td>{{ $profils -> total_pekerja  }}</td>
-                          </tr>
-                          <tr>
-                            <td class="tdIkm"><b>Jarak Dari Dinas Ke Lokasi IKM</b></td>
-                            <td>{{ $profils -> jarak  }} KM</td>
-                          </tr>
-                          <tr>
                             <td class="tdIkm"><b>Permasalahan Pada Usaha Yang Dihadapi</b></td>
-                            <td>{{ $profils -> permasalahan  }}</td>
+                            <td>{{ $profils[0] -> permasalahan  }}</td>
                           </tr>
                           <tr>
                             <td class="tdIkm"><b>Jenis Bimtek Yang Diminati</b></td>
-                            <td>{{ $profils -> jenis_bimtek  }}</td>
+                            <td>{{ $profils[0] -> jenis_bimtek  }}</td>
                           </tr>
                         </table>
                       </div>
@@ -239,6 +225,7 @@
                             <th>Satuan</th>
                             <th>Harga</th>
                             <th>Asal</th>
+                            <th>Tahun</th>
                             <!-- <th>Action</th> -->
                           </tr>
                         </thead>
@@ -285,6 +272,7 @@
                             <th>Nilai Penjualan</th>
                             <th>Tujuan Pemasaran</th>
                             <th>Deskripsi Produk</th>
+                            <th>Tahun</th>
                             <th>Photo</th>
                             <!-- <th>Action</th> -->
                           </tr>
@@ -292,6 +280,22 @@
                         <tbody>
                         </tbody>
                       </table>
+
+                      <h3>Data Kriteria</h3>
+                      <table id="table-kriteria" width="100%" class="table table-striped table-bordered table-hover">
+                        <thead>
+                          <tr>
+                            <th width="50">ID</th>
+                            <th>Nama Kriteria</th>
+                            <th>Nilai</th>
+                            <th>Tahun</th>
+                            <!-- <th>Action</th> -->
+                          </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                      </table>
+
                     </div>
 
 
@@ -321,6 +325,7 @@
           {data: 'satuan', name: 'spesifikasi'},
           {data: 'harga', name: 'kapasitas'},
           {data: 'asal', name: 'jumlah'},
+          {data: 'tahun', name: 'tahun'},
           // {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
       });
@@ -361,11 +366,30 @@
           {data: 'nilai_penjualan', name: 'nilai_penjualan'},
           {data: 'tujuan', name: 'tujuan'},
           {data: 'ket', name: 'deskripsi'},
+          {data: 'tahun', name: 'tahun'},
           {data: 'photos', name: 'photos', orderable: false, searchable: false,
             render: function( data, type, full, meta ) {
                       return '<img src="' + data + '" height="50px" style="height: 50px;"/>';
                   }
           },
+          // {data: 'action', name: 'action', orderable: false, searchable: false}
+        ]
+      });
+
+
+      url = '/api/ikm/data-kriteria/'+idUser;
+      console.log(url);
+      table = $('#table-kriteria').DataTable({
+        order: [[ 3, 'desc' ]],
+        processing: true,
+        serverSide: true,
+        ajax: url,
+        timeout: 5000,
+        columns: [
+          {data: 'id', name: 'id'},
+          {data: 'nama', name: 'nama'},
+          {data: 'nilai', name: 'nilai'},
+          {data: 'tahun', name: 'tahun'},
           // {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
       });

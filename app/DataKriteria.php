@@ -18,8 +18,8 @@ class DataKriteria extends Model
     return $this->beLongsTo('App\User');
   }
 
-  // public function user()
-  // {
-  //   return $this->beLongsTo('App\User');
-  // }
+  public function kriteria()
+  {
+    return $this->beLongsTo('App\Kriteria');
+  }
 }

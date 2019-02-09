@@ -68,6 +68,18 @@
 
             <div style="padding-left: 20px; padding-right: 20px" class="card">
                 <div class="card-header">
+
+                  <br>
+
+                  <a href="{{ url('/kelola-ikm') }}">Kelola IKM</a>
+                  <i style="" class="fa fa-angle-double-right" aria-hidden="true"></i> Produksi
+                  <i style="" class="fa fa-angle-double-right" aria-hidden="true"></i> <a href="#">{{ $idUser -> name }}</a>
+
+                  <div class="" style="margin-top: 20px">
+                      <!-- untuk batas kosong -->
+                  </div>
+
+
                   <h3>Kelola Produksi</h3>
 
                   @if($idUser)

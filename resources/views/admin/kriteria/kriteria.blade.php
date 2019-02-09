@@ -22,7 +22,10 @@
 
         <div class="form-group">
           <label for="keterangan">Keterangan</label>
-          <textarea name="keterangan" class="form-control" id="keterangan" rows="2" ></textarea>
+          <select class="form-control" name="keterangan">
+            <option value="benefit">Benefit</option>
+            <option value="cost">Cost</option>
+          </select>
         </div>
 
 

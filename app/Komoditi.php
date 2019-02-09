@@ -13,8 +13,8 @@ class Komoditi extends Model
       'nama', 'keterangan'
   ];
 
-  // public function user()
-  // {
-  //   return $this->beLongsTo('App\User');
-  // }
+  public function profilIkm()
+  {
+    return $this->beLongsTo('App\ProfilIkm');
+  }
 }
