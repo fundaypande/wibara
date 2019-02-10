@@ -51,6 +51,16 @@
 
                 </div>
 
+                @if(count($errors) > 0)
+                <div class="alert alert-danger">
+                  <ul>
+                    @foreach ($errors-> all() as $error)
+                      <li>{{ $error }}</li>
+                    @endforeach
+                  </ul>
+                </div>
+                @endif
+
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -151,6 +161,15 @@
                             @endforeach
 
                             <div id="mapid"></div>
+                            <br>
+
+                            <input type="hidden" name="lat" value="{{ $profil[0] -> lat }}" class="form-control" id="lat" placeholder="">
+                            <input type="hidden" name="lng" value="{{ $profil[0] -> lng }}" class="form-control" id="lng" placeholder="">
+
+                            <div class="form-group">
+                              <label for="jarak">Jarak Dari Dinas Ke Lokasi IKM (Tahan dan geser marker pada peta)</label>
+                              <input type="text" name="jarak" value="{{ $profil[0] -> jarak }}" class="form-control" id="jarak" placeholder="Kilometer" required>
+                            </div>
 
 
                             <br>
@@ -187,7 +206,7 @@
     $(document).ready(function() {
 
       // MAPS JS
-      var mymap = L.map('mapid').setView([-8.0986973, 115.1908278], 13);
+      var mymap = L.map('mapid').setView([-8.1845948, 115.187649], 11.38);
 
       L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZnVuZGF5cGFuZGUiLCJhIjoiY2pyd3gzOTF6MGczOTN5bmNlMnRqaXFqeSJ9.jaVlZ0Z02cIPDO2KVoTnSw', {
           attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -195,6 +214,78 @@
           id: 'mapbox.streets',
           accessToken: 'pk.eyJ1IjoiZnVuZGF5cGFuZGUiLCJhIjoiY2pyd3gzOTF6MGczOTN5bmNlMnRqaXFqeSJ9.jaVlZ0Z02cIPDO2KVoTnSw'
       }).addTo(mymap);
+
+
+      // mymap.on('click',
+    	// function(e){
+    	// 	var coord = e.latlng.toString().split(',');
+    	// 	var lat = coord[0].split('(');
+    	// 	var lng = coord[1].split(')');
+    	// 	alert("You clicked the map at LAT: " + lat[1] + " and LONG: " + lng[0]);
+    	// 	L.marker(e.latlng).addTo(mymap);
+    	// });
+
+      //mengambil data koordinat dari database yang telah tersimpan
+
+      var lngData = $('#lng').val();
+      var latData = $('#lat').val();
+      console.log(lngData + '-' + latData);
+      var markerData = [latData, lngData];
+      var koordinatDef = [-8.195288, 115.167622];
+      var koordinat = null;
+
+      if(lngData == 0) koordinat = koordinatDef; else koordinat = markerData;
+
+      console.log('Ini adalah data koordinat default :' + koordinatDef);
+      console.log('Ini adalah data koordinat database :' + markerData);
+
+      console.log('koordinat hasil :' + koordinat);
+
+      var myMarker = L.marker(koordinat, {title: "MyPoint", alt: "The Big I", draggable: true})
+  		.addTo(mymap)
+  		.on('dragend', function() {
+  			var coord = String(myMarker.getLatLng()).split(',');
+  			console.log(coord);
+  			var lat = coord[0].split('(');
+  			console.log(lat);
+  			var lng = coord[1].split(')');
+  			console.log(lng);
+  			myMarker.bindPopup("Moved to: " + lat[1] + ", " + lng[0] + ".");
+
+        // set hidden input lat lng
+        $('#lat').val(lat[1]);
+        $('#lng').val(lng[0]);
+
+        // set jarak input
+        var distance = getDistance([lat[1], lng[0]], [-8.115213, 115.085471])/1000;
+        var hasil = distance.toFixed(4);
+        $('#jarak').val(hasil);
+
+  		});
+
+
+      // Fungsi menghitung jarak
+      function getDistance(origin, destination) {
+        // return distance in meters
+        var lon1 = toRadian(origin[1]),
+            lat1 = toRadian(origin[0]),
+            lon2 = toRadian(destination[1]),
+            lat2 = toRadian(destination[0]);
+
+        var deltaLat = lat2 - lat1;
+        var deltaLon = lon2 - lon1;
+
+        var a = Math.pow(Math.sin(deltaLat/2), 2) + Math.cos(lat1) * Math.cos(lat2) * Math.pow(Math.sin(deltaLon/2), 2);
+        var c = 2 * Math.asin(Math.sqrt(a));
+        var EARTH_RADIUS = 6371;
+        return c * EARTH_RADIUS * 1000;
+        }
+
+        function toRadian(degree) {
+            return degree*Math.PI/180;
+        }
+
+
 
 
       // END MAPS JS
@@ -218,7 +309,7 @@
             for (var i = 0; i < data.length; i++) {
               // $("#tahun option[value='"+ data[i].tahun +"']").attr("disabled", true);
               $('#komoditi').append('<option value='+ data[i].id+'>'+data[i].nama+'</option>');
-              console.log(data[i].tahun);
+
             }
 
             // $("#tahun option[value='"+ data -> tahun +"']").attr("disabled", true);

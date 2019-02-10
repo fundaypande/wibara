@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Kriteria;
 use App\User;
+use App\NilaiKriteria;
 use Auth;
 use Yajra\Datatables\Datatables;
 
@@ -18,8 +19,11 @@ class KriteriaController extends Controller
   public function showAhp()
   {
     $kriteria = Kriteria::all();
+    $nilai = NilaiKriteria::all();
 
-    return view('admin.kriteria.bobot', ['kriterias' => $kriteria]);
+    // dd($nilai);
+
+    return view('admin.kriteria.bobot', ['kriterias' => $kriteria], ['nilai' => $nilai]);
   }
 
 

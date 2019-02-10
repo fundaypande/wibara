@@ -80,6 +80,8 @@ class IkmController extends Controller
   {
     $bahan = ProfilIkm::find($id);
 
+
+
     $this -> validate($request, [
             'nama_usaha' => 'required|min:2',
             'badan_hukum' => 'required|min:1',
@@ -88,7 +90,10 @@ class IkmController extends Controller
             'alamat' => 'required|min:1',
             'telpon' => 'required|min:1',
             'tempat_pemasaran' => 'required|min:1',
+            'jarak' => 'required|min:1',
           ]);
+
+    // dd($request -> lng . ' - '. $request -> lat . ' - ' . $request -> jarak);
 
     $bahan -> update([
       'komoditi_id' => $request -> get('komoditi'),
@@ -102,7 +107,9 @@ class IkmController extends Controller
       'tempat_pemasaran' => $request -> tempat_pemasaran,
       'permasalahan' => $request -> permasalahan,
       'jenis_bimtek' => $request -> jenis_bimtek,
-
+      'lng' => $request -> lng,
+      'lat' => $request -> lat,
+      'jarak' => $request -> jarak,
     ]);
 
     return redirect('/profilikm/'.$idUser)->with('status', 'Berhasil menyimpan data');

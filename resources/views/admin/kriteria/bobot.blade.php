@@ -101,17 +101,47 @@
                          </div>
                          </div>
 
-
+                         <!-- jumlah = 3 -->
                          <?php
                           $jumlah = $kriterias -> count();
 
-                          foreach ($kriterias as $key => $kriteria) {
-                            for ($i=1; $i < $jumlah; $i++) {
-                              echo $kriteria -> nama;
-                              echo "<br />";
-                              echo $i;
-                            }
-                          }
+                          $bilahKiri = 0;
+
+                          for ($h=0; $h < $jumlah-1; $h++) {
+                            // echo $h
+                            $bilahKiri = $bilahKiri+1;
+                            for ($i=$bilahKiri; $i < $jumlah; $i++) {
+                              ?>
+                              <!-- Menampilkan Data -->
+                              <div class="col-xs-12 col-md-3">
+                               <div class="form-group">
+                                 <input type="text" class="form-control" value="<?php echo $kriterias[$h] -> nama ?>" readonly />
+                               </div>
+                               </div>
+
+
+                               <div class="col-xs-12 col-md-6">
+                                <div class="form-group">
+                                  <select id="tahun" name="tahun" class="form-control">
+                                    @foreach($nilai as $nil)
+                                      <option value="{{ $nil -> nilai }}">{{ $nil -> nilai }} - {{ $nil -> keterangan }}</option>
+                                    @endforeach
+                                  </select>
+                                </div>
+                                </div>
+
+                                <div class="col-xs-12 col-md-3">
+                                 <div class="form-group">
+                                   <input type="text" class="form-control" value="<?php echo $kriterias[$i] -> nama ?>" readonly />
+                                 </div>
+                                 </div>
+
+
+
+                              <?php
+                            } //end for kedua
+
+                          } //end for pertama
 
                           ?>
 
