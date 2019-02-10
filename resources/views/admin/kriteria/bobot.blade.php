@@ -60,6 +60,19 @@
                   </div>
                   @endif
 
+                  <?php
+                  if(!empty($_GET['message'])) {
+                    $message = $_GET['message'];
+                    ?>
+                    <div class="alert alert-warning ">
+                      Data Tidak Konsisten Silahkan Ulang Kembali Melakukan Perbandingan
+                    </div>
+
+                    <?php
+                  }
+                   ?>
+
+
 
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -101,6 +114,8 @@
                          </div>
                          </div>
 
+                     <form enctype="multipart/form-data" method="post" data-toggle="validator" action="{{ url('/bobot/perbandingan')}}" id="theForm">
+                       {{ csrf_field() }} {{ method_field('POST') }}
                          <!-- jumlah = 3 -->
                          <?php
                           $jumlah = $kriterias -> count();
@@ -114,6 +129,7 @@
                               ?>
                               <!-- Menampilkan Data -->
                               <div class="col-xs-12 col-md-3">
+
                                <div class="form-group">
                                  <input type="text" class="form-control" value="<?php echo $kriterias[$h] -> nama ?>" readonly />
                                </div>
@@ -122,7 +138,7 @@
 
                                <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
-                                  <select id="tahun" name="tahun" class="form-control">
+                                  <select id="tahun" name="{{ $h.$i }}" class="form-control">
                                     @foreach($nilai as $nil)
                                       <option value="{{ $nil -> nilai }}">{{ $nil -> nilai }} - {{ $nil -> keterangan }}</option>
                                     @endforeach
@@ -144,6 +160,9 @@
                           } //end for pertama
 
                           ?>
+                          <button type="submit" class="btn btn-info btn-fill">Selanjutnya</button>
+                        </form>
+
 
 
                       </div>

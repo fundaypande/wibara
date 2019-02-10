@@ -4,6 +4,11 @@
   width: 100%;
 }
 
+.countTable {
+  color: blue;
+  font-weight: 500;
+}
+
 #mapid { height: 300px; }
 
 .image {

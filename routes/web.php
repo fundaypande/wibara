@@ -128,7 +128,10 @@ Route::group(['middleware' => 'admin'], function(){
 
 
   // ** Pencarian Bobot Kriteria
-  Route::get('/kriteria-ahp', 'KriteriaController@showAhp');
+  Route::get('/kriteria-ahp', 'KriteriaController@showAhp')->name('pembobotan');
+
+  Route::post('/bobot/perbandingan', 'PerhitunganController@showMatrik');
+
 
 });
 
