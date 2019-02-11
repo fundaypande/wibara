@@ -131,6 +131,7 @@ Route::group(['middleware' => 'admin'], function(){
   Route::get('/kriteria-ahp', 'KriteriaController@showAhp')->name('pembobotan');
 
   Route::post('/bobot/perbandingan', 'PerhitunganController@showMatrik');
+  Route::post('/bobot/perbandingan/simpan', 'PerhitunganController@update');
 
 
 });

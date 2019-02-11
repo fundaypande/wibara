@@ -96,8 +96,8 @@
 
                             @foreach($dataKrit as $data)
                               <div class="form-group">
-                                <label for="{{ $data -> nama }}">{{ $data -> nama }}</label>
-                                <input type="text" name="{{ $data -> nama }}" value="{{ $data -> nilai }}" class="form-control" id="{{ $data -> nama }}" required placeholder="">
+                                <label for="{{ $data -> id }}">{{ $data -> nama }}</label>
+                                <input type="text" name="{{ $data -> id }}" value="{{ $data -> nilai }}" class="form-control" id="{{ $data -> id }}" required placeholder="">
                                 <input type="hidden" name="idData" value="{{ $data -> id }}" class="form-control">
                               </div>
                             @endforeach

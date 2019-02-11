@@ -64,6 +64,26 @@ class PerhitunganController extends Controller
     return view('admin.perhitungan.matrik', ['kriteria' => $kriteria])->with('matrik', $matKriteria);
   }
 
+  public function update(Request $request)
+  {
+    $kriteria = Kriteria::all();
+    $jumlahKriteria = $kriteria -> count();
+
+    // Update data
+    foreach ($kriteria as $key => $krit) {
+      $idKrit = $krit -> id;
+      $dataKrit = Kriteria::findOrFail($idKrit);
+
+      // dd($request -> $idKrit);
+
+      $dataKrit -> update([
+          'bobot' => $request -> $idKrit,
+        ]);
+    }
+
+    return redirect('/kriteria')->with('status', 'Berhasil menyimpan nilai bobot');
+  }
+
 
 
 

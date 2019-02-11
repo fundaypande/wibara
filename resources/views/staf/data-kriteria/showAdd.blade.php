@@ -116,8 +116,8 @@
 
                             @foreach($kriterias as $kriteria)
                               <div class="form-group">
-                                <label for="{{ $kriteria -> nama }}">{{ $kriteria -> nama }}</label>
-                                <input type="text" name="{{ $kriteria -> nama }}" value="" class="form-control" id="{{ $kriteria -> nama }}" required placeholder="">
+                                <label for="{{ $kriteria -> id }}">{{ $kriteria -> nama }}</label>
+                                <input type="text" name="{{ $kriteria -> id }}" value="" class="form-control" id="{{ $kriteria -> id }}" required placeholder="">
                               </div>
                             @endforeach
 

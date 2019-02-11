@@ -100,7 +100,8 @@ class DataKriteriaController extends Controller
           ]);
 
     foreach ($kriteria as $key => $krit) {
-      $name = $krit -> nama;
+      $name = $krit -> id;
+      // dd($request -> $name);
       $dataKrit = DataKriteria::create([
           'id_user' =>  $request -> idUser,
           'id_kriteria' => $krit -> id,
@@ -148,7 +149,7 @@ class DataKriteriaController extends Controller
 
     foreach ($dataKrit as $key => $krit) {
       // dd($request -> idData);
-      $name = $krit -> nama;
+      $name = $krit -> id;
       $dataKrito = DataKriteria::findOrFail($krit -> id);
 
       $dataKrito -> update([

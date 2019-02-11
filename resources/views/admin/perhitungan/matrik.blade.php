@@ -271,6 +271,26 @@
                      </div>
                 </div>
 
+                <form method="post" data-toggle="validator" action="{{ url('/bobot/perbandingan/simpan') }}" id="theForm">
+                  {{ csrf_field() }} {{ method_field('POST') }}
+
+                  <?php
+                    for ($i=0; $i < $jumlahKriteria ; $i++) {
+                      ?>
+
+                      <div class="form-group">
+                        <label for="nama">{{ $kriteria[$i] -> nama }}</label>
+                        <input type="text" name="{{ $kriteria[$i] -> id }}" value="{{ $sumHorizontal[$i] }}" class="form-control" id="nama" required placeholder="" readonly>
+                      </div>
+
+                      <?php
+                    }
+                   ?>
+
+                   <button type="submit" class="btn btn-info btn-fill" id="simpan">Simpan Bobot</button>
+
+                </form>
+
             </div>
 
     </div>
