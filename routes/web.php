@@ -141,6 +141,15 @@ Route::group(['middleware' => 'admin'], function(){
   //API tahun yang ada
     Route::get('/api/tahun/ready', 'PerangkinganController@apiTahunReady');
 
+  //Kelola data penerima
+  Route::post('/perangkingan/pilih', 'PenerimaController@createPerangkingan');
+
+  //Daftar penerima IKM
+  Route::get('/penerima', 'PenerimaController@show');
+  Route::get('/api/penerima', 'PenerimaController@apiPenerima')->name('api.penerima');
+
+
+  Route::delete('/penerima/{id}/{idUser}', 'PenerimaController@destroy'); //->Mneghapus data
 
 });
 
@@ -202,6 +211,9 @@ Route::group(['middleware' => ['ikm']], function(){
 
   Route::get('/profil', 'ProfilIkmController@show');
   Route::put('/profil/{id}', 'ProfilIkmController@update');
+
+  Route::get('/evaluasi', 'IkmController@showEvaluasi');
+
 });
 
 

@@ -7,6 +7,7 @@ use App\Kriteria;
 use App\DataKriteria;
 use App\User;
 use App\ProfilIkm;
+use App\DataEvaluasi;
 use Auth;
 use Yajra\Datatables\Datatables;
 

@@ -18,6 +18,11 @@ class IkmController extends Controller
       // $this->middleware('auth');
   }
 
+  public function showEvaluasi()
+  {
+    return view('ikm.evaluasi.evaluasi');
+  }
+
   public function dashboard(){
 
     // --> return view('Ke halaman staf')

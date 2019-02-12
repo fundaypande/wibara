@@ -23,6 +23,15 @@
     <script src="{!! asset('js/custom.js') !!}"></script>
 </head>
 <body>
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v3.2&appId=639432712764394&autoLogAppEvents=1';
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+
     <header class="site-header">
         <div class="nav-bar">
             <div class="container">
@@ -45,9 +54,9 @@
                                         @else
                                             <li><a href="{{ route('login') }}">Login</a></li>
 
-                                            @if (Route::has('register'))
+                                            <!-- @if (Route::has('register'))
                                                 <li><a href="{{ route('register') }}">Register</a></li>
-                                            @endif
+                                            @endif -->
                                         @endauth
                                     </div>
                                 @endif

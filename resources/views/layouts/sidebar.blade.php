@@ -17,10 +17,13 @@
   <li>
       <a class="has-arrow" href="/perangkingan" aria-expanded="false"><span style="color: #8d9498" class="fa fa-list-ol icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Perangkingan</span></a>
   </li>
+  <li>
+      <a class="has-arrow" href="/penerima" aria-expanded="false"><span style="color: #8d9498" class="fa fa-users icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Penerima</span></a>
+  </li>
 @endif
 
 @if(Auth::user() -> role == '1')
-<li>
+<!-- <li>
     <a class="has-arrow" href="/profil" aria-expanded="false"><span style="color: #8d9498" class="fa fa-user icon-wrap"></span> <span class="mini-click-non">Profile IKM</span></a>
 </li>
 <li>
@@ -31,9 +34,9 @@
 </li>
 <li>
     <a class="has-arrow" href="/bahan" aria-expanded="false"><span style="color: #8d9498" class="fa fa-flask icon-wrap"></span> <span class="mini-click-non">Bahan Baku</span></a>
-</li>
+</li> -->
 <li>
-    <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span style="color: #8d9498" class=" fa fa-bar-chart icon-wrap"></span> <span class="mini-click-non">Evaluasi</span></a>
+    <a class="has-arrow" href="{{ url('/evaluasi') }}" aria-expanded="false"><span style="color: #8d9498" class=" fa fa-bar-chart icon-wrap"></span> <span class="mini-click-non">Evaluasi</span></a>
 </li>
 @endif
 
@@ -41,9 +44,9 @@
 <li>
     <a class="has-arrow" href="/kelola-ikm" aria-expanded="false"><span style="color: #8d9498" class="fa fa-users icon-wrap"></span> <span class="mini-click-non">Kelola Profil IKM</span></a>
 </li>
-<li>
+<!-- <li>
     <a class="has-arrow" href="/validasi" aria-expanded="false"><span style="color: #8d9498" class="fa fa-check-circle icon-wrap"></span> <span class="mini-click-non">Validasi IKM</span></a>
-</li>
+</li> -->
 @endif
 
 <script type="text/javascript">

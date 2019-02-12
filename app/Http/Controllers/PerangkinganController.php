@@ -9,6 +9,7 @@ use App\Kriteria;
 use App\DataKriteria;
 use App\ProfilIkm;
 use App\Komoditi;
+use App\Penerima;
 
 class PerangkinganController extends Controller
 {
@@ -29,9 +30,13 @@ class PerangkinganController extends Controller
   public function showHasil(Request $request)
   {
     // dd($request -> all());
+    $penerima = Penerima::where('tahun', '=', $request->get('tahun'))
+                -> get();
+
     $kriteria = Kriteria::all();
+
     $ikm = ProfilIkm::join('users', 'users.id', '=', 'profilikm.user_id')
-                      -> select('user_id', 'users.name')
+                      -> select('user_id', 'users.name', 'komoditi_id', 'profilikm.status')
                       -> orderBy('user_id', 'asc')
                       -> get();
     $komoditi = Komoditi::findOrFail($request->get('komoditi'));
@@ -99,7 +104,7 @@ class PerangkinganController extends Controller
     // dd($arrayData);
 
 
-    return view('admin.perangkingan.hasil', ['kriteria' => $kriteria], ['ikm' => $ikm])->with('data', $arrayData);
+    return view('admin.perangkingan.hasil', ['kriteria' => $kriteria], ['ikm' => $ikm])->with('data', $arrayData)->with('tahun', $data[0]->tahun)->with('penerima', $penerima);
   }
 
   public function showData(Request $request){
