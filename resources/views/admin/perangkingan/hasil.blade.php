@@ -8,7 +8,6 @@
             <div style="padding-left: 20px; padding-right: 20px" class="card">
                 <div class="card-header">
                   <h3>Hasil Proses Perangkingan</h3>
-
                 </div>
 
                 <div class="card-body">
@@ -110,7 +109,7 @@
                                   print("<td>{$data[$baris][$kolom]}</td>");
                               }
 
-                              //menampilkan nilai bobot
+
                               print('</tr>');
                           }
 
@@ -190,6 +189,7 @@
                             <?php
                             for($j=0;$j<$jumlahKriteria;$j++) {
                                 print("<td>{$matrikNormBenefitCost[$i][$j]}</td>");
+                                // $bobotAlternatif[$i][$j] = $matrikNormBenefitCost[$j][$i];
                             }
 
                             //menampilkan nilai bobot
@@ -199,6 +199,65 @@
                        ?>
 
                      </table>
+
+
+                     <h3>Hasil Perangkingan IKM</h3>
+                     <!-- tampilkan bobobt -->
+                     <?php
+
+
+                      $bobot = null;
+                      for ($i=0; $i < $jumlahKriteria ; $i++) {
+                        $bobotKriteria[$i][0] = $kriteria[$i] -> bobot;
+                        // echo $bobotKriteria[$i][0];
+                        // echo "<br />";
+                      }
+                      // dd($matrikNormBenefitCost);
+                      $hasilPerangkingan = multiply($matrikNormBenefitCost, $bobotKriteria);
+
+                      // $hasilPerangkingan = multiply($array, $array);
+                      // dd($hasilPerangkingan);
+                      ?>
+
+
+                      <table id="hasil" width="100%" class="table table-striped table-bordered table-hover">
+                      <thead>
+                        <tr>
+                          <th>Nama IKM</th>
+                          <th>Rangking</th>
+                          <th>Acton</th>
+                        </tr>
+
+                      </thead>
+
+
+                      <?php
+                      //menampilkan matrik data alternative dalam tabel
+                      $s = 0;
+                        for($i=0;$i<$jumlahIkm;$i++) {
+                            print('<tr>');
+                            ?>
+                            <th> <?php echo $ikm[$s]->name; ?> </th>
+
+                            <?php
+                            print("<td>{$hasilPerangkingan[$i][0]}</td>");
+                                // $bobotAlternatif[$i][$j] = $matrikNormBenefitCost[$j][$i];
+
+
+                            //menampilkan id dari IKM
+                            print("<td> {$ikm[$s]->user_id} </td>");
+                            print('</tr>');
+
+                            $s++;
+                        }
+
+                       ?>
+
+                     </table>
+
+
+
+
 
 
 
@@ -221,13 +280,10 @@
     <script type="text/javascript">
 
     $(document).ready(function() {
-
-
-
-
-
-
-    });
+        $('#hasil').DataTable({
+          order: [[ 1, 'desc' ]],
+        });
+    } );
 
 
 

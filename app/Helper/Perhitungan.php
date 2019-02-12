@@ -49,4 +49,21 @@
     return $normMatrik;
   }
 
+  //multiply() untuk mengalikan matriks
+  function multiply($a, $b){
+  	$r=count($a);
+  	$c=count($b[0]);
+  	$p=count($b);
+    // dd(count($b[0]));
+  	for ($i=0; $i < $r; $i++){
+  			for($j=0; $j < $c; $j++){
+  					$result[$i][$j] = 0;
+  					for($k=0; $k < $p; $k++){
+  							$result[$i][$j] += $a[$i][$k] * $b[$k][$j];
+  					}
+  			}
+  	}
+  	return $result;
+  }
+
  ?>

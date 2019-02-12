@@ -35,6 +35,7 @@ class PerangkinganController extends Controller
                       -> orderBy('user_id', 'asc')
                       -> get();
     $komoditi = Komoditi::findOrFail($request->get('komoditi'));
+
     // dd($ikm);
 
     $data = DataKriteria::join('users', 'users.id', '=', 'data_kriterias.id_user')
