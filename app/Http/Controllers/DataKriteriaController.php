@@ -132,18 +132,18 @@ class DataKriteriaController extends Controller
                   ])
                 ->get();
 
-    // dd($dataKrit);
+    $kriteria = Kriteria::all();
 
 
     $user = User::findOrFail($idUser);
 
-    return view('staf.data-kriteria.showEdit', ['user' => $user], ['dataKrit' => $dataKrit]);
+    return view('staf.data-kriteria.showEdit', ['user' => $user], ['dataKrit' => $dataKrit])->with('kriteria', $kriteria);
   }
 
   //--> Input data ke database
   public function update(Request $request, $idUser, $tahun)
   {
-
+    $kriteria = Kriteria::all();
     $dataKrit = DataKriteria::join('kriterias', 'kriterias.id', '=', 'data_kriterias.id_kriteria')
                 ->select('data_kriterias.*', 'kriterias.nama')
                 ->where([
@@ -152,17 +152,37 @@ class DataKriteriaController extends Controller
                   ])
                 ->get();
 
-    // dd($dataKrit);
-
+    //update itu hapus dulu baru buat ulang
     foreach ($dataKrit as $key => $krit) {
       // dd($request -> idData);
-      $name = $krit -> id;
-      $dataKrito = DataKriteria::findOrFail($krit -> id);
+      $name = $krit -> nama;
+      $dataKrito = DataKriteria::destroy($krit -> id);
 
-      $dataKrito -> update([
+    }
+
+
+    foreach ($kriteria as $key => $krit) {
+      $name = $krit -> id;
+      // dd($request -> $name);
+      $dataKrit = DataKriteria::create([
+          'id_user' =>  $request -> idUser,
+          'id_kriteria' => $krit -> id,
           'nilai' => $request -> $name,
+          'tahun' => $tahun,
         ]);
     }
+
+    // dd($dataKrit);
+
+    // foreach ($dataKrit as $key => $krit) {
+    //   // dd($request -> idData);
+    //   $name = $krit -> id;
+    //   $dataKrito = DataKriteria::findOrFail($krit -> id);
+    //
+    //   $dataKrito -> update([
+    //       'nilai' => $request -> $name,
+    //     ]);
+    // }
 
     return back()->with('status', 'Berhasil mengedit data kriteria baru');
   }

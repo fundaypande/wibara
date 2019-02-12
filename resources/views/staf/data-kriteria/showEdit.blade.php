@@ -93,9 +93,9 @@
 
                             <input type="hidden" name="idUser" value="{{ $user -> id }}" class="form-control" id="idUser" required placeholder="">
 
-
-                            @foreach($dataKrit as $data)
-
+                            <?php $i = 0; ?>
+                            @foreach($kriteria as $data)
+                            <?php $data ?>
                             <!-- cek apakah nama kriteria adalah jarak, jika ia maka isikan nilainya -->
                             @if($data -> nama == 'jarak' || $data -> nama == 'Jarak')
                               <?php
@@ -105,11 +105,24 @@
                               {{ $read = null }}
                             @endif
 
+                            <?php
+                            //membatasi agar nilai dari kriteria yang belum diisi berinilai 0
+                            $dataNilai = null;
+                            // echo $i;
+                            // echo "<br />";
+                              if($i > $dataKrit -> count()-1){
+                                $dataNilai[$i] = 0;
+                              } else {
+                                $dataNilai[$i] = $dataKrit[$i] -> nilai;
+                              }
+                             ?>
+
                               <div class="form-group">
                                 <label for="{{ $data -> id }}">{{ $data -> nama }}</label>
-                                <input type="text" name="{{ $data -> id }}" value="{{ $data -> nilai }}" class="form-control" id="{{ $data -> id }}" required {{$read}}  placeholder="">
+                                <input type="text" name="{{ $data -> id }}" value="{{ $dataNilai[$i] }}" class="form-control" id="{{ $data -> id }}" required {{$read}}  placeholder="">
                                 <input type="hidden" name="idData" value="{{ $data -> id }}" class="form-control">
                               </div>
+                              <?php $i++; ?>
                             @endforeach
 
 

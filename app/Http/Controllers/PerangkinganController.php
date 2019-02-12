@@ -8,6 +8,7 @@ use Yajra\Datatables\Datatables;
 use App\Kriteria;
 use App\DataKriteria;
 use App\ProfilIkm;
+use App\Komoditi;
 
 class PerangkinganController extends Controller
 {
@@ -33,6 +34,7 @@ class PerangkinganController extends Controller
                       -> select('user_id', 'users.name')
                       -> orderBy('user_id', 'asc')
                       -> get();
+    $komoditi = Komoditi::findOrFail($request->get('komoditi'));
     // dd($ikm);
 
     $data = DataKriteria::join('users', 'users.id', '=', 'data_kriterias.id_user')
@@ -44,9 +46,23 @@ class PerangkinganController extends Controller
             ->orderBy('data_kriterias.id_user', 'asc')
             ->orderBy('data_kriterias.id_kriteria', 'asc')
             ->get();
+
+    $kriteriaOnData = $data -> count()/$ikm -> count();
+    $kriteriaReal = $kriteria -> count();
+    // echo "Kriteria real : ". $kriteriaReal;
+    // echo "<br />";
+    // echo "Kriteria terdata : ". $kriteriaOnData;
+    // echo "<br />";
+
+    if($kriteriaOnData < $kriteriaReal){
+      return redirect('/perangkingan')->with('warning', 'Tolong Lengkapi Data-data Kriteria Setiap IKM Khususnya Pada Komoditi '. $komoditi->nama . " Dan Tahun " . $request->get('tahun')  );
+    }
+
+
+
+
     $jumlahData = $data -> count();
     $jumlKritData = $kriteria -> count();
-    $jumlahKriteria = $kriteria -> count()+1;
 
 
     // dd($data);
