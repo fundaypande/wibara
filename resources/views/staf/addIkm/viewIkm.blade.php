@@ -165,7 +165,7 @@
               Swal({
                 position: 'top-end',
                 type: 'error',
-                title: 'Data berhasil dihapus',
+                title: 'Data gagal dihapus',
                 showConfirmButton: false,
                 timer: 1500
               })

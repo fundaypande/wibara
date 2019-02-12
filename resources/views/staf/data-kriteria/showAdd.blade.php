@@ -115,9 +115,20 @@
 
 
                             @foreach($kriterias as $kriteria)
+                              <!-- cek apakah nama kriteria adalah jarak, jika ia maka isikan nilainya -->
+                              @if($kriteria -> nama == 'jarak' || $kriteria -> nama == 'Jarak')
+                                <?php
+                                  $data = $profilIkm[0] -> jarak;
+                                  $read = 'readonly';
+                                 ?>
+                              @else
+                                {{ $data = null }}
+                                {{ $read = null }}
+                              @endif
+
                               <div class="form-group">
                                 <label for="{{ $kriteria -> id }}">{{ $kriteria -> nama }}</label>
-                                <input type="text" name="{{ $kriteria -> id }}" value="" class="form-control" id="{{ $kriteria -> id }}" required placeholder="">
+                                <input type="text" name="{{ $kriteria -> id }}" value="{{ $data }}" class="form-control" id="{{ $kriteria -> id }}" required {{$read}} placeholder="" >
                               </div>
                             @endforeach
 

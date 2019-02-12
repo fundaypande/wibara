@@ -95,9 +95,19 @@
 
 
                             @foreach($dataKrit as $data)
+
+                            <!-- cek apakah nama kriteria adalah jarak, jika ia maka isikan nilainya -->
+                            @if($data -> nama == 'jarak' || $data -> nama == 'Jarak')
+                              <?php
+                                $read = 'readonly';
+                               ?>
+                            @else
+                              {{ $read = null }}
+                            @endif
+
                               <div class="form-group">
                                 <label for="{{ $data -> id }}">{{ $data -> nama }}</label>
-                                <input type="text" name="{{ $data -> id }}" value="{{ $data -> nilai }}" class="form-control" id="{{ $data -> id }}" required placeholder="">
+                                <input type="text" name="{{ $data -> id }}" value="{{ $data -> nilai }}" class="form-control" id="{{ $data -> id }}" required {{$read}}  placeholder="">
                                 <input type="hidden" name="idData" value="{{ $data -> id }}" class="form-control">
                               </div>
                             @endforeach

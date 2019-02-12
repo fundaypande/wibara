@@ -42,7 +42,7 @@ class StafController extends Controller
       return Datatables::of($staf)
         -> addColumn('action', function($staf){
           return '
-            <a href="#" class="btn btn-info btn-xs"><i class="fa fa-eye"></i>Show</a>
+            <a href="/ikm/show/' . $staf-> id . '" class="btn btn-info btn-xs"><i class="fa fa-eye"></i>Show</a>
             <a onclick="editData(' . $staf-> id . ')" class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o"></i>Edit</a>
             <a onclick="deleteData(' . $staf-> id . ')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i>Delete</a>
           ';

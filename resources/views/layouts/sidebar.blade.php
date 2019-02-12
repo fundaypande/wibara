@@ -14,6 +14,9 @@
   <li>
       <a class="has-arrow" href="/kriteria-ahp" aria-expanded="false"><span style="color: #8d9498" class="fa fa-crosshairs icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Pembobotan</span></a>
   </li>
+  <li>
+      <a class="has-arrow" href="/perangkingan" aria-expanded="false"><span style="color: #8d9498" class="fa fa-list-ol icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Perangkingan</span></a>
+  </li>
 @endif
 
 @if(Auth::user() -> role == '1')

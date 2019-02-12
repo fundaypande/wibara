@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Kriteria;
 use App\DataKriteria;
 use App\User;
+use App\ProfilIkm;
 use Auth;
 use Yajra\Datatables\Datatables;
 
@@ -77,11 +78,16 @@ class DataKriteriaController extends Controller
                 ->get();
 
     // dd($dataKrit);
+    $profilIkm = ProfilIkm::select('jarak')
+                -> where('user_id', '=', $idUser)
+                -> get();
+
+    // dd($profilIkm);
 
     $user = User::findOrFail($idUser);
     $kriteria = Kriteria::all();
 
-    return view('staf.data-kriteria.showAdd', ['user' => $user], ['kriterias' => $kriteria]);
+    return view('staf.data-kriteria.showAdd', ['user' => $user], ['kriterias' => $kriteria])->with('profilIkm', $profilIkm);
   }
 
 
@@ -127,6 +133,7 @@ class DataKriteriaController extends Controller
                 ->get();
 
     // dd($dataKrit);
+
 
     $user = User::findOrFail($idUser);
 

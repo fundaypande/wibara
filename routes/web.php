@@ -110,6 +110,7 @@ Route::group(['middleware' => 'admin'], function(){
   // ** Kelola Komoditi
   Route::get('/komoditi', 'KomoditiController@show');
   Route::get('/api/komoditi', 'KomoditiController@apiKomoditi')->name('api.komoditi');
+    Route::get('/api/komoditi/admin', 'KomoditiController@apiKomoditiAdmin')->name('api.komoditiAdmin');
   Route::post('/komoditi', 'KomoditiController@store')->name('admin.addKomoditi');
   Route::get('/komoditi/{id}/edit', 'KomoditiController@formEdit'); //--> menampilkan data di form edit
   Route::patch('/komoditi/{id}', 'KomoditiController@update'); //-> Proses edit data
@@ -132,6 +133,13 @@ Route::group(['middleware' => 'admin'], function(){
 
   Route::post('/bobot/perbandingan', 'PerhitunganController@showMatrik');
   Route::post('/bobot/perbandingan/simpan', 'PerhitunganController@update');
+
+  // Melakukan perangkingan
+  Route::get('/perangkingan', 'PerangkinganController@showData');
+  Route::post('/perangkingan/hasil', 'PerangkinganController@showHasil');
+
+  //API tahun yang ada
+    Route::get('/api/tahun/ready', 'PerangkinganController@apiTahunReady');
 
 
 });

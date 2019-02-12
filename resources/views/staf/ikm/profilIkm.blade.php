@@ -105,7 +105,6 @@
                               {{ csrf_field() }}
                             <input type="hidden" name="_method" value="PUT">
 
-
                             <div class="forn-group">
                               <label for="komoditi">Komoditi</label>
                               <select id="komoditi" name="komoditi" class="form-control">

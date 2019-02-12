@@ -15,6 +15,11 @@ class KomoditiController extends Controller
     return view('admin.komoditi.show');
   }
 
+  public function apiKomoditiAdmin()
+  {
+    return $komoditi = Komoditi::get();
+  }
+
   public function apiKomoditi()
   {
     $komoditi = Komoditi::get();
