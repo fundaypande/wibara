@@ -57,7 +57,57 @@
                     <div class="row">
                       <div class="com-md-12">
 
-                        
+
+                        <div class="panel-body" style="overflow-x:auto;">
+
+                          <form method="post" action="{{ url('/evaluasi/edit') }}" id="theForm">
+                            {{ csrf_field() }} {{ method_field('PATCH') }}
+
+
+                          <input type="hidden" name="idUser" value="" class="form-control" id="idUser" required placeholder="">
+
+                          <?php $i = 0; ?>
+                          @foreach($evaluasi as $data)
+                          <?php $data ?>
+                          <!-- cek apakah nama kriteria adalah jarak, jika ia maka isikan nilainya -->
+                          @if($data -> nama == 'jarak' || $data -> nama == 'Jarak')
+                            <?php
+                              $read = 'readonly';
+                             ?>
+                          @else
+                            {{ $read = null }}
+                          @endif
+
+                          <?php
+                          //membatasi agar nilai dari kriteria yang belum diisi berinilai 0
+                          // $dataNilai = null;
+                          // // echo $i;
+                          // // echo "<br />";
+                          //   if($i > $dataKrit -> count()-1){
+                          //     $dataNilai[$i] = 0;
+                          //   } else {
+                          //     $dataNilai[$i] = $dataKrit[$i] -> nilai;
+                          //   }
+                           ?>
+
+                            <div class="form-group">
+                              <label for="{{ $data -> id }}">{{ $data -> nama }}</label>
+                              <input type="text" name="{{ $data -> id }}" value="{{ $data -> nilai }}" class="form-control" id="{{ $data -> id }}" required {{$read}}  placeholder="">
+                              <input type="hidden" name="idData" value="{{ $data -> id }}" class="form-control">
+                            </div>
+                            <?php $i++; ?>
+                          @endforeach
+
+
+                          <button type="submit" class="btn btn-info btn-fill" id="simpan">Simpan Data</button>
+
+                        </form>
+
+
+
+                        </div>
+
+
                       </div>
                     </div>
 

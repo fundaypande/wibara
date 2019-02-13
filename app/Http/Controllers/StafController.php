@@ -19,6 +19,28 @@ class StafController extends Controller
         // $this->middleware('auth');
     }
 
+
+    public function showPemetaan()
+    {
+      $user = User::all();
+
+      $profil = ProfilIkm::
+                select('user_id', 'lng', 'lat', 'nama_usaha')
+                -> get();
+
+      $data = [];
+      for ($i=0; $i < $profil->count(); $i++) {
+        $usaha = $profil[$i]->nama_usaha;
+        $link = $profil[$i]->user_id;
+        $data[] = "<a href='/ikm/show/$link' target='_blank'>$usaha</a>"  ;
+      }
+
+
+      // dd($data);
+      return view('staf.pemetaan.pemetaan', ['user' => $user], ['profil' => $profil])->with('nama', $data);
+    }
+
+
     public function showSumaryIkm($id)
     {
       $profils = ProfilIkm::where('user_id','=',$id)->get();

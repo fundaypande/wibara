@@ -148,27 +148,21 @@ Route::group(['middleware' => 'admin'], function(){
   Route::get('/penerima', 'PenerimaController@show');
   Route::get('/api/penerima', 'PenerimaController@apiPenerima')->name('api.penerima');
 
+
   Route::delete('/penerima/{id}/{idUser}', 'PenerimaController@destroy'); //->Mneghapus data
   Route::get('/penerima/{id}/{tahun}', 'PenerimaController@lihatEvaluasi'); //->Mneghapus data
 
-
-  //lihat data-data IKM
-  Route::get('/data-ikm', 'AdminController@showIkm');
 });
 
 
 
-Route::group(['middleware' => 'adminStaf'], function(){
+Route::group(['middleware' => 'staf'], function(){
   Route::get('/staf', 'StafController@dashboard');
 
   Route::get('/validasi', 'ValidasiController@showValidasi');
   Route::get('/api/ikm-validasi', 'ValidasiController@apiValidasi')->name('api.valid');  //API untuk menampilkan data profil IKM yang belum tervalidasi
   Route::get('/validasi/{id}/edit', 'ValidasiController@formEdit'); //memunculkan modal validasi
   Route::patch('/validasi/{id}', 'ValidasiController@updateStatus'); //menyimpan hasil validasi
-
-
-  //pemetaan IKM
-  Route::get('/pemetaan', 'StafController@showPemetaan');
 
 
   //--> Kelola Profil IKM

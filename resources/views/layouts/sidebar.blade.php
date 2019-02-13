@@ -3,7 +3,7 @@
 </li>
 @if(Auth::user() -> role == '3')
   <li>
-      <a class="has-arrow" href="/kelola-staf" aria-expanded="false"><span style="color: #8d9498" class="fa fa-university icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Kelola Staf</span></a>
+      <a class="has-arrow" href="/kelola-ikm" aria-expanded="false"><span style="color: #8d9498" class="fa fa-user icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Data IKM</span></a>
   </li>
   <li>
       <a class="has-arrow" href="/komoditi" aria-expanded="false"><span style="color: #8d9498" class="fa fa-shopping-bag icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Komoditi</span></a>
@@ -19,6 +19,12 @@
   </li>
   <li>
       <a class="has-arrow" href="/penerima" aria-expanded="false"><span style="color: #8d9498" class="fa fa-users icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Penerima</span></a>
+  </li>
+  <li>
+      <a class="has-arrow" href="/pemetaan" aria-expanded="false"><span style="color: #8d9498" class="fa fa-users icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Pemetaan IKM</span></a>
+  </li>
+  <li>
+      <a class="has-arrow" href="/kelola-staf" aria-expanded="false"><span style="color: #8d9498" class="fa fa-university icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Kelola Staf</span></a>
   </li>
 @endif
 

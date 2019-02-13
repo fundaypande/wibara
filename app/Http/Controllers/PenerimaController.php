@@ -7,6 +7,7 @@ use App\Penerima;
 use App\ProfilIkm;
 use App\User;
 use App\DataEvaluasi;
+use App\DataKriteria;
 use App\Kriteria;
 use Auth;
 use Yajra\Datatables\Datatables;
@@ -20,6 +21,51 @@ class PenerimaController extends Controller
     // dd($penerima);
 
     return view('admin.penerima.penerima');
+  }
+
+  public function lihatEvaluasi($id, $tahun)
+  {
+    //join dengan data_kriterias dan data_evaluasis
+
+    $dataKriteria = DataKriteria::join('kriterias', 'kriterias.id', '=', 'data_kriterias.id_kriteria')
+                  ->where('id_user', '=', $id)
+                  -> where('tahun', '=', $tahun)
+                  -> get();
+
+    $dataEvaluasi = DataEvaluasi::join('kriterias', 'kriterias.id', '=', 'data_evaluasis.id_kriteria')
+                  -> where('id_user', '=', $id)
+                  -> where('tahun', '=', $tahun)
+                  -> get();
+
+    $user = User::findOrFail($id);
+
+
+    //Data2 dalam chart
+    $category = [];
+
+  	$series[0]['name'] = 'Sebelum';
+  	$series[1]['name'] = 'Sesudah';
+
+    // $i = 0;
+    for ($i=0; $i < $dataKriteria->count(); $i++) {
+
+      $category[] = $dataKriteria[$i]->nama;
+
+      // $series[0]['data'][] = $dataKriteria[$i]->nilai;
+
+      $series[0]['data'][] = (float)$dataKriteria[$i]->nilai;
+
+    }
+
+    for ($i=0; $i < $dataEvaluasi->count(); $i++) {
+
+      $series[1]['data'][] = (float)$dataEvaluasi[$i]->nilai;
+
+    }
+
+    // dd( $dataKriteria->count());
+
+    return view('admin.evaluasi.evaluasi', ['dataKriteria' => $dataKriteria], ['dataEvaluasi' => $dataEvaluasi])->with('user', $user)->with('category', $category)->with('series', $series);
   }
 
   public function createPerangkingan(Request $request)
@@ -88,6 +134,8 @@ class PenerimaController extends Controller
       -> addColumn('action', function($penerima){
         return '
           <a onclick="deleteData(' . $penerima-> id . ', ' . $penerima-> user_id . ')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i>Delete</a>
+          <a href="/penerima/' . $penerima-> user_id . '/' . $penerima-> tahun . '" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i>Evaluasi</a>
+          <a href="/ikm/show/' . $penerima-> user_id . '" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i>Show</a>
         ';
       })
       ->make(true);
@@ -105,7 +153,10 @@ class PenerimaController extends Controller
     $profil = ProfilIkm::findOrFail($profilId);
 
     //hapus juga data evaluasinya
-    $dataEvaluasi = DataEvaluasi::where('id_user', '=', $idUser)->get();
+    $dataEvaluasi = DataEvaluasi::
+                    where('id_user', '=', $idUser)
+                  ->get();
+
     foreach ($dataEvaluasi as $key => $krit) {
       // dd($request -> idData);
       $name = $krit -> nama;

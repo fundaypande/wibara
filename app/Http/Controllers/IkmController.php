@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\DataEvaluasi;
 use App\BahanBaku;
 use App\JenisPeralatan;
 use App\NilaiProduksi;
 use App\ProfilIkm;
 use App\Komoditi;
+use Auth;
 use Yajra\Datatables\Datatables;
 
 class IkmController extends Controller
@@ -20,7 +22,47 @@ class IkmController extends Controller
 
   public function showEvaluasi()
   {
-    return view('ikm.evaluasi.evaluasi');
+    //id user yang login
+    $idUser = Auth::user();
+    // dd($idUser -> id);
+    $dataEvaluasi = DataEvaluasi::join('kriterias', 'kriterias.id', '=', 'data_evaluasis.id_kriteria')
+                  ->select('data_evaluasis.*', 'kriterias.nama')
+                  -> where('id_user', '=', $idUser->id)
+                  ->get();
+    // dd($dataEvaluasi);
+    return view('ikm.evaluasi.evaluasi', ['evaluasi' => $dataEvaluasi]);
+  }
+
+  public function updateEvaluasi(Request $request)
+  {
+    // dd('masuk');
+    $idUser = Auth::user();
+    $dataEvaluasi = DataEvaluasi::
+                  where('id_user', '=', $idUser->id)
+                  ->get();
+
+    // $evaluasi = DataEvaluasi::findOrFail(2);
+    // dd($evaluasi);
+
+    foreach ($dataEvaluasi as $key => $data) {
+      // code...
+
+      $idData =  $data -> id;
+      $idEvaluasi = $_POST[$idData];
+
+      // dd($idEvaluasi);
+
+      $evaluasi = DataEvaluasi::findOrFail($idData);
+
+      $evaluasi -> update([
+        'nilai' => $idEvaluasi
+      ]);
+
+    }
+
+    return back()->with('status', 'Berhasil Edit Data');
+    // return 'tersimpan';
+
   }
 
   public function dashboard(){
