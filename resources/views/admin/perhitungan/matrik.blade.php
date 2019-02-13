@@ -125,6 +125,8 @@
                     $s = 0;
                     $jumlahKriteria = $kriteria->count();
 
+                    $matrik = roundArray($matrik);
+
                       for($baris=$i;$baris<$jumlahKriteria;$baris++) {
                           print('<tr>');
                           ?>
@@ -167,6 +169,8 @@
                               $normMatrik[$kolom][$baris] = $matrik[$kolom][$baris] / $sumKolom[$kolom];
                             }
                           }
+
+                          $normMatrik = roundArray($normMatrik);
 
                           // dd($normMatrik);
                        ?>

@@ -1,6 +1,8 @@
 <!-- Join dengan tabel lain -->
 <?php
 
+{!! json_encode($series) !!}
+
 //membuat public function https://www.kerneldev.com/2017/12/05/how-to-add-a-global-function-in-laravel-using-composer/
 
 // join dengan tabel lain

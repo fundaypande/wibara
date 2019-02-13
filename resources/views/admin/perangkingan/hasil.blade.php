@@ -117,16 +117,17 @@
                         $arrayMax = maxVertikal($data, $jumlahIkm, $jumlahKriteria);
 
                         $arrayMin = minVertikal($data, $jumlahIkm, $jumlahKriteria);
+
                         $arrayMaxMin = null;
                         for ($i=0; $i < $jumlahKriteria ; $i++) {
                           if($kriteria[$i] -> keterangan == 'benefit'){
                             $arrayMaxMin[$i] = $arrayMax[$i];
-                          } else {
+                          } else if($kriteria[$i] -> keterangan == 'cost'){
                             $arrayMaxMin[$i] = $arrayMin[$i];
                           }
                         }
 
-                        // dd($arrayMaxMin);
+                        // dd($arrayMin);
 
                         $i = 0;
                         $j = 0;
@@ -191,7 +192,11 @@
                         }
                       }
 
-                        // dd($matrikNormBenefitCost);
+
+                      $matrikNormBenefitCost = roundArray($matrikNormBenefitCost);
+
+                      // dd($matrikNormBenefitCost);
+
                       ?>
 
                       <table id="staf-table" width="100%" class="table table-striped table-bordered table-hover">

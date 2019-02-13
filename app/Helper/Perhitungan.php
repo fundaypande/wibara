@@ -23,7 +23,7 @@
     $nilaiMin = null;
 
     for ($i=0;$i<$kolom;$i++){
-      $mini = $data[0][0];
+      $mini = $data[0][$i];
       for ($j=0;$j<$baris;$j++){
         if($data[$j][$i] < $mini){
           $mini = $data[$j][$i];
@@ -65,5 +65,16 @@
   	}
   	return $result;
   }
+
+
+  function roundArray($a){
+		$r=count($a);
+		for ($kolom=0;$kolom<$r;$kolom++){
+      for ($i=0; $i < count($a[0]); $i++) {
+        $c[$kolom][$i] = round($a[$kolom][$i], 4);
+      }
+		}
+		return $c;
+	}
 
  ?>
