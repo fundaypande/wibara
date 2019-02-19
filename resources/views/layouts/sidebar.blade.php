@@ -9,6 +9,9 @@
       <a class="has-arrow" href="/komoditi" aria-expanded="false"><span style="color: #8d9498" class="fa fa-shopping-bag icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Komoditi</span></a>
   </li>
   <li>
+      <a class="has-arrow" href="/bimtek" aria-expanded="false"><span style="color: #8d9498" class="fa fa-ticket icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Bimtek</span></a>
+  </li>
+  <li>
       <a class="has-arrow" href="/kriteria" aria-expanded="false"><span style="color: #8d9498" class="fa fa-filter icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Kriteria</span></a>
   </li>
   <li>
@@ -21,7 +24,7 @@
       <a class="has-arrow" href="/penerima" aria-expanded="false"><span style="color: #8d9498" class="fa fa-users icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Penerima</span></a>
   </li>
   <li>
-      <a class="has-arrow" href="/pemetaan" aria-expanded="false"><span style="color: #8d9498" class="fa fa-users icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Pemetaan IKM</span></a>
+      <a class="has-arrow" href="/pemetaan" aria-expanded="false"><span style="color: #8d9498" class="fa fa-map-marker icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Pemetaan IKM</span></a>
   </li>
   <li>
       <a class="has-arrow" href="/kelola-staf" aria-expanded="false"><span style="color: #8d9498" class="fa fa-university icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Kelola Staf</span></a>

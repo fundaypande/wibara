@@ -64,18 +64,20 @@
                             {{ csrf_field() }} {{ method_field('PATCH') }}
 
 
-                          <input type="hidden" name="idUser" value="" class="form-control" id="idUser" required placeholder="">
+                          <input type="hidden" name="idUser" value="" class="form-control" id="idUser" placeholder="">
 
                           <?php $i = 0; ?>
                           @foreach($evaluasi as $data)
                           <?php $data ?>
                           <!-- cek apakah nama kriteria adalah jarak, jika ia maka isikan nilainya -->
-                          @if($data -> nama == 'jarak' || $data -> nama == 'Jarak')
+                          @if($data -> nama == 'jarak' || $data -> nama == 'Jarak' || $data -> nama == 'Lama Berdirinya Usaha (Tahun)')
                             <?php
-                              $read = 'readonly';
+                              $read = 'hidden';
                              ?>
                           @else
-                            {{ $read = null }}
+                          <?php
+                            $read = 'text';
+                           ?>
                           @endif
 
                           <?php
@@ -92,7 +94,7 @@
 
                             <div class="form-group">
                               <label for="{{ $data -> id }}">{{ $data -> nama }}</label>
-                              <input type="text" name="{{ $data -> id }}" value="{{ $data -> nilai }}" class="form-control" id="{{ $data -> id }}" required {{$read}}  placeholder="">
+                              <input type="{{$read}}" name="{{ $data -> id }}" value="{{ $data -> nilai }}" class="form-control" id="{{ $data -> id }}" required  placeholder="">
                               <input type="hidden" name="idData" value="{{ $data -> id }}" class="form-control">
                             </div>
                             <?php $i++; ?>

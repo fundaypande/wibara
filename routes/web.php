@@ -41,6 +41,11 @@ Route::group(['middleware' => ['auth']], function(){
 
 // *** midleware staf dan IKM
 Route::group(['middleware' => 'adminStaf'], function(){
+
+  // API untuk cek data apakah sudah terisi
+
+
+
   // --> Kumpulan API yang bisa diakses oleh user auth
   Route::get('/api/bahan/{id}', 'BahanController@apiBahan');
   Route::get('/api/peralatan/{id}', 'PeralatanController@apiPeralatan');
@@ -99,7 +104,7 @@ Route::group(['middleware' => 'admin'], function(){
 
 
   //--> Kelola Profil IKM
-  Route::get('/kelola-ikm', 'ProfilIkmController@showKelola');
+  // Route::get('/kelola-ikms', 'ProfilIkmController@showKelola');
   Route::get('/api/kelola-ikm', 'ProfilIkmController@apiKelola')->name('api.kelolaIkm');  //API untuk menampilkan data profil IKM yang belum tervalidasi
 
   Route::get('/profil/{id}/edit', 'ProfilIkmController@showModal'); //--> arahkan ke modal EDIT
@@ -115,6 +120,16 @@ Route::group(['middleware' => 'admin'], function(){
   Route::get('/komoditi/{id}/edit', 'KomoditiController@formEdit'); //--> menampilkan data di form edit
   Route::patch('/komoditi/{id}', 'KomoditiController@update'); //-> Proses edit data
   Route::delete('/komoditi/{id}', 'KomoditiController@destroy'); //->Mneghapus data
+
+
+  // ** Kelola bimtek
+  Route::get('/bimtek', 'BimtekController@show');
+  Route::get('/api/bimtek', 'BimtekController@apiBimtek')->name('api.bimtek');
+    // Route::get('/api/komoditi/admin', 'KomoditiController@apiKomoditiAdmin')->name('api.komoditiAdmin');
+  Route::post('/bimtek', 'BimtekController@store')->name('admin.addBimtek');
+  Route::get('/bimtek/{id}/edit', 'BimtekController@formEdit'); //--> menampilkan data di form edit
+  Route::patch('/bimtek/{id}', 'BimtekController@update'); //-> Proses edit data
+  Route::delete('/bimtek/{id}', 'BimtekController@destroy'); //->Mneghapus data
 
 
   // ** mengelola daftar kriteria
@@ -159,6 +174,12 @@ Route::group(['middleware' => 'admin'], function(){
 
 
 Route::group(['middleware' => 'adminStaf'], function(){
+
+
+  //Api cek data profil IKM
+  Route::get('/api/cek/profilikm/{id}', 'ApiController@cekProfilIkm');
+
+
   Route::get('/staf', 'StafController@dashboard');
 
   Route::get('/validasi', 'ValidasiController@showValidasi');
@@ -210,6 +231,9 @@ Route::group(['middleware' => 'adminStaf'], function(){
 
   // ** show sumary all data for IKM profile
   Route::get('/ikm/show/{id}', 'StafController@showSumaryIkm');
+
+  //api yang bisa diakses staf dan admin
+  Route::get('/api/bimtek/all', 'BimtekController@apiBimtekAll')->name('api.bimtek.all');
 });
 
 

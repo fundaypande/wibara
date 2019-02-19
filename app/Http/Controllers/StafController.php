@@ -61,6 +61,7 @@ class StafController extends Controller
                     ->get();
 
 
+
       return Datatables::of($staf)
         -> addColumn('action', function($staf){
           return '
@@ -71,6 +72,8 @@ class StafController extends Controller
         })
         // mengirimkan ID untuk dirender di ajax show viewIkm.blade.php
         -> addColumn('ikm', function($staf){
+          //Validasi apakah setia data itu ada datanya
+
           return $staf -> id;
         })
 

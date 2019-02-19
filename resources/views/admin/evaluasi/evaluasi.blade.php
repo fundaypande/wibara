@@ -50,14 +50,22 @@
                             print('<div class="col-md-6">');
                             print('<h4> Sebelum Menerima Bantuan</h4>');
                             for ($i=0; $i < $dataKriteria->count() ; $i++) {
+                            $read = 'text';
+
 
 
 
                               ?>
-
+                              @if($dataKriteria[$i] -> nama == 'jarak' || $dataKriteria[$i] -> nama == 'Jarak'|| $dataKriteria[$i] -> nama == 'Lama Berdirinya Usaha (Tahun)')
+                                <?php
+                                  $read = 'hidden';
+                                 ?>
+                              @else
+                                {{ $read = null }}
+                              @endif
                                 <div class="form-group">
                                   <label for="jenis_bahan">{{ $dataKriteria[$i] -> nama }}</label>
-                                  <input type="text" name="jenis_bahan" value="{{ $dataKriteria[$i] -> nilai }}" class="form-control" id="jenis_bahan" readonly required placeholder="">
+                                  <input type="{{ $read }}" name="jenis_bahan" value="{{ $dataKriteria[$i] -> nilai }}" class="form-control" id="jenis_bahan" readonly required placeholder="">
                                 </div>
 
 
@@ -72,14 +80,22 @@
                             print('<div class="col-md-6">');
                             print('<h4> Setelah Menerima Bantuan</h4>');
                             for ($i=0; $i < $dataEvaluasi->count() ; $i++) {
-
+                              $read = 'text';
 
 
                               ?>
 
+                              @if($dataKriteria[$i] -> nama == 'jarak' || $dataKriteria[$i] -> nama == 'Jarak' || $dataKriteria[$i] -> nama == 'Lama Berdirinya Usaha (Tahun)')
+                                <?php
+                                  $read = 'hidden';
+                                 ?>
+                              @else
+                                {{ $read = null }}
+                              @endif
+
                                 <div class="form-group">
                                   <label for="jenis_bahan">{{ $dataEvaluasi[$i] -> nama }}</label>
-                                  <input type="text" name="jenis_bahan" value="{{ $dataEvaluasi[$i] -> nilai }}" class="form-control" id="jenis_bahan" readonly required placeholder="">
+                                  <input type="{{ $read }}" name="jenis_bahan" value="{{ $dataEvaluasi[$i] -> nilai }}" class="form-control" id="jenis_bahan" readonly required placeholder="">
                                 </div>
 
 
@@ -114,7 +130,6 @@
 
     <script src="{!! asset('js/highcharts.js') !!}"></script>
 
-    <script src="{{ asset('js/rupiah.js') }}"></script>
     <script type="text/javascript">
 
 

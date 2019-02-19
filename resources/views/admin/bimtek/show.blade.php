@@ -15,15 +15,39 @@
         <form method="post" data-toggle="validator" action="" id="theForm">
           {{ csrf_field() }} {{ method_field('POST') }}
         <div class="form-group">
-          <label for="nama">Nama Komoditi</label>
+          <label for="nama">Nama Bimtek</label>
           <input type="text" name="nama" value="" class="form-control" id="nama" required placeholder="">
         </div>
 
 
         <div class="form-group">
-          <label for="spesifikasi">Spesifikasi</label>
+          <label for="spesifikasi">Keterangan</label>
           <textarea name="keterangan" class="form-control" id="keterangan" rows="2" ></textarea>
         </div>
+
+        <div class="forn-group">
+          <label for="tahun">Tahun</label>
+          <select id="tahun" name="tahun" class="form-control">
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
+            <option value="2027">2027</option>
+            <option value="2028">2028</option>
+            <option value="2029">2029</option>
+            <option value="2030">2030</option>
+            <option value="2031">2031</option>
+            <option value="2032">2032</option>
+            <option value="2033">2033</option>
+          </select>
+        </div>
+
+        <br>
 
 
         <button type="submit" class="btn btn-info btn-fill" id="simpan">Simpan Data</button>
@@ -44,7 +68,7 @@
 
             <div style="padding-left: 20px; padding-right: 20px" class="card">
                 <div class="card-header">
-                  <h3>Kelola Komoditi Pemilihan IKM</h3>
+                  <h3>Kelola Data Bantuan Bimbingan Teknis</h3>
 
                 </div>
 
@@ -79,7 +103,7 @@
           					  </div>
           					@endif
 
-                    <p>Daftar komoditi yang akan digunakan acuan dalam pemilihan IKM</p>
+                    <p>Daftar bimbingan teknis</p>
                     <br>
 
                     <!-- table show daftar user yang dapat mengakses sistem -->
@@ -88,8 +112,8 @@
                         <div class="panel panel-default">
 
                           <div class="panel-heading">
-                            <h5>Daftar Komoditi
-                              <a onclick="addForm()" style="color:white" class="btn btn-primary pull-right">Tambah Komoditi </a>
+                            <h5>Daftar Bimtek
+                              <a onclick="addForm()" style="color:white" class="btn btn-primary pull-right">Tambah Bimtek </a>
                             </h5>
                           </div>
 
@@ -98,8 +122,9 @@
                               <thead>
                                 <tr>
                                   <th width="50">ID</th>
-                                  <th>Nama Komoditi</th>
+                                  <th>Nama Bimtek</th>
                                   <th>Keterangan</th>
+                                  <th>Tahun</th>
                                   <th>Action</th>
                                 </tr>
                               </thead>
@@ -121,27 +146,20 @@
     </div>
 
 
-      <script src="{{ asset('js/rupiah.js') }}"></script>
-
     <script type="text/javascript">
     var table;
     $(document).ready(function() {
 
 
-      justNum($('#tahun'));
-      justNum($('#harga'));
-      justNum($('#kapasitas'));
-      justNum($('#jumlah'));
-
-
       table = $('#staf-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('api.komoditi') }}",
+        ajax: "{{ route('api.bimtek') }}",
         columns: [
           {data: 'id', name: 'id'},
           {data: 'nama', name: 'nama'},
           {data: 'keterangan', name: 'keterangan'},
+          {data: 'tahun', name: 'tahun'},
           {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
       });
@@ -166,7 +184,7 @@
             headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url : "{{ url('komoditi') }}" + '/' + id,
+            url : "{{ url('bimtek') }}" + '/' + id,
             type: "POST",
             data: {'_method': 'DELETE', '_token': csrf_token},
             success: function(data) {
@@ -184,9 +202,9 @@
               Swal({
                 position: 'top-end',
                 type: 'error',
-                title: 'Data Belum Bisa Dihapus Karena Masih Digunakan di Profil IKM',
-                showConfirmButton: true,
-                timer: 8000
+                title: 'Data berhasil dihapus',
+                showConfirmButton: false,
+                timer: 1500
               })
             }
           });
@@ -198,13 +216,13 @@
     function editData(id) {
       save_method = 'edit';
       $('input[name=_method]').val('PATCH');
-      urlAction = "{{ url('komoditi') }}";
+      urlAction = "{{ url('bimtek') }}";
       $('#modal-title').text('Edit Peralatan IKM');
       console.log(id);
       // $('#modal-form')[0].reset();
       console.log(urlAction);
       $.ajax({
-        url: "{{ url('komoditi') }}/" + id + "/edit",
+        url: "{{ url('bimtek') }}/" + id + "/edit",
         type: "GET",
         dataType: "JSON",
         success: function(data) {
@@ -218,6 +236,7 @@
           $('#id').val(data.id);
           $('#nama').val(data.nama);
           $('#keterangan').val(data.keterangan);
+            $('#tahun').val(data.tahun);
 
         },
         error: function() {
@@ -294,9 +313,9 @@
       $('input[name=_method]').val('POST');
       $('#modal-form').modal('show');
       $('#theForm')[0].reset();
-      $('.modal-title').text('Tambah Data Komoditi');
+      $('.modal-title').text('Tambah Data Bimtek');
       console.log('Tampilkan Form ADD');
-      $("#modal-form").find("form").attr("action", "{{ route('admin.addKomoditi') }}");
+      $("#modal-form").find("form").attr("action", "{{ route('admin.addBimtek') }}");
     }
 
     function showData(id) {

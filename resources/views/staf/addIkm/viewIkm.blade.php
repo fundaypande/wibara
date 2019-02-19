@@ -9,23 +9,27 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit Data</h4>
+        <h4 class="modal-title">Edit Data Profil IKM</h4>
       </div>
       <div class="modal-body">
-        <form method="post" data-toggle="validator">
-          {{ csrf_field() }} {{ method_field('POST') }}
-        <input type="hidden" name="id" id="id" value="">
-        <div class="form-group">
-          <label for="email">Email address:</label>
-          <input type="email" class="form-control" id="email" disabled>
-        </div>
-        <div class="form-group">
-          <label for="name">Nama Pemilik IKM:</label>
-          <input type="name" class="form-control" id="name" name="name">
-        </div>
-        <br>
+        <div class="row">
+          <div class="col-md-6">
+            <a style="color:white; width: 200px; margin-top:10px" href="#" id="btn-profil" class="btn" target="_blank">Data Profil Ikm</a>
+            <br>
+            <a style="color:white; width: 200px; margin-top:10px" href="#" id="btn-kriteria" class="btn" target="_blank">Data Kriteria</a>
+            <br>
+            <a style="color:white; width: 200px; margin-top:10px" href="#" id="btn-produksi" class="btn" target="_blank">Data Produksi</a>
+            <br>
+          </div>
+          <div class="col-md-6">
+            <a style="color:white; width: 200px; margin-top:10px" href="#" id="btn-bahan" class="btn" target="_blank">Data Bahan Baku</a>
+            <br>
+            <a style="color:white; width: 200px; margin-top:10px" href="#" id="btn-peralatan" class="btn" target="_blank">Data Peralatan</a>
+          </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+
+
       </form>
       </div>
       <div class="modal-footer">
@@ -110,7 +114,52 @@
 
     <script type="text/javascript">
     var table;
+
+
+    //cak data
+    function cekData(id) {
+      $('#modal-form').modal('show');
+      $.ajax({
+        url: "{{ url('/api/cek/profilikm/') }}"+"/"+id,
+        type: "GET",
+        dataType: "JSON",
+        success: function(data) {
+          $('#modal-title').modal('Edit Data Profil');
+
+          $('#btn-profil').removeClass('btn-danger');
+          $('#btn-kriteria').removeClass('btn-danger');
+          $('#btn-produksi').removeClass('btn-danger');
+          $('#btn-bahan').removeClass('btn-danger');
+          $('#btn-peralatan').removeClass('btn-danger');
+
+          $('#btn-profil').removeClass('btn-primary');
+          $('#btn-kriteria').removeClass('btn-primary');
+          $('#btn-produksi').removeClass('btn-primary');
+          $('#btn-bahan').removeClass('btn-primary');
+          $('#btn-peralatan').removeClass('btn-primary');
+
+
+          $('#btn-profil').addClass(data[0]);
+          $('#btn-kriteria').addClass(data[1]);
+          $('#btn-produksi').addClass(data[2]);
+          $('#btn-bahan').addClass(data[3]);
+          $('#btn-peralatan').addClass(data[4]);
+
+          $('#btn-profil').attr('href', '{{ url("profilikm/") }}'+'/'+id);
+          $('#btn-kriteria').attr('href', '{{ url("data-kriteria/") }}'+'/'+id);
+          $('#btn-produksi').attr('href', '{{ url("produksi/") }}'+'/'+id);
+          $('#btn-bahan').attr('href', '{{ url("bahan/") }}'+'/'+id);
+          $('#btn-peralatan').attr('href', '{{ url("peralatan/") }}'+'/'+id);
+        },
+        error: function() {
+          alert("Tidak ada data");
+        },
+      });
+    }
+
     $(document).ready(function() {
+
+
       table = $('#staf-table').DataTable({
         order: [[ 0, 'desc' ]],
         processing: true,
@@ -122,13 +171,12 @@
           {data: 'email', name: 'email'},
           {data: 'ikm', name: 'ikm', orderable: false, searchable: false,
             render: function( data, type, row ) {
-                      return '<a href="{{ url('profilikm') }}/'+ data +'" class="btn btn-info btn-xs"><i class="fa fa-eye"></i>Profil</a> <a href="{{ url('data-kriteria') }}/'+ data +'" class="btn btn-info btn-xs"><i class="fa fa-eye"></i>Kriteria</a> <a href="{{ url('produksi') }}/'+ data +'" class="btn btn-info btn-xs"><i class="fa fa-eye"></i>Produksi</a> <a href="{{ url('bahan') }}/'+ data +'" class="btn btn-info btn-xs"><i class="fa fa-eye"></i>Bahan Baku</a> <a href="{{ url('peralatan') }}/'+ data +'" class="btn btn-info btn-xs"><i class="fa fa-eye"></i>Peralatan</a>';
+                      return '<a onclick="cekData('+ data +')" class="btn btn-info btn-xs"><i class="fa fa-eye"></i>Edit Data IKM</a>';
                   }
           },
           {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
       });
-
     });
 
     function deleteData(id){

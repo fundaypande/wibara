@@ -127,6 +127,7 @@ class IkmController extends Controller
   {
     $bahan = ProfilIkm::find($id);
 
+    // dd($request -> all());
 
 
     $this -> validate($request, [
@@ -153,7 +154,7 @@ class IkmController extends Controller
       'jenis_produk' => $request -> jenis_produk,
       'tempat_pemasaran' => $request -> tempat_pemasaran,
       'permasalahan' => $request -> permasalahan,
-      'jenis_bimtek' => $request -> jenis_bimtek,
+      'jenis_bimtek' => $request -> get('jenis_bimtek'),
       'lng' => $request -> lng,
       'lat' => $request -> lat,
       'jarak' => $request -> jarak,

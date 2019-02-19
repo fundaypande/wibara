@@ -150,20 +150,32 @@
                             </div>
                             <div class="form-group">
                               <label for="permasalahan">Permasalahan Pada Usaha Yang Dihadapi Saat Ini</label>
-                              <textarea name="permasalahan" class="form-control" id="permasalahan" rows="2">{{ $prof -> permasalahan }}</textarea>
+                              <textarea name="permasalahan" class="form-control" id="permasalahan" rows="2" required>{{ $prof -> permasalahan }}</textarea>
                             </div>
                             <div class="form-group">
                               <label for="jenis_bimtek">Jenis Bimtek Yang Diminati</label>
-                              <input type="text" name="jenis_bimtek" value="{{ $prof -> jenis_bimtek }}" class="form-control" id="jenis_bimtek" placeholder="">
+                              <select id="jenis_bimtek" name="jenis_bimtek" class="form-control" required>
+                                <option value="{{ $prof -> jenis_bimtek }}">{{ $prof -> jenis_bimtek }}</option>
+                              </select>
                             </div>
 
                             @endforeach
 
+                            <div class="form-group">
+                              <label for="lat">Latitude</label>
+                              <input type="text" name="lat" value="{{ $profil[0] -> lat }}" class="form-control" id="lat" required placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                              <label for="lng">Longitude</label>
+                              <input type="text" name="lng" value="{{ $profil[0] -> lng }}" class="form-control" id="lng" required placeholder="">
+                            </div>
+
+                            <a href="https://google.com/maps" target="_blank">Google Maps</a>
+
                             <div id="mapid"></div>
                             <br>
 
-                            <input type="hidden" name="lat" value="{{ $profil[0] -> lat }}" class="form-control" id="lat" placeholder="">
-                            <input type="hidden" name="lng" value="{{ $profil[0] -> lng }}" class="form-control" id="lng" placeholder="">
 
                             <div class="form-group">
                               <label for="jarak">Jarak Dari Dinas Ke Lokasi IKM (Tahan dan geser marker pada peta)</label>
@@ -201,6 +213,34 @@
 
     <script src="{{ asset('js/rupiah.js') }}"></script>
     <script type="text/javascript">
+
+
+    // mengambil data jenis bimtek dari API
+    $.ajax({
+
+      url: "{{ url('/api/bimtek/all') }}",
+      type: "GET",
+      contentType: "application/json;charset=utf-8",
+      dataType: "json",
+
+      success: function (data) {
+          console.log(data.length);
+          console.log(data);
+          var count = data.length;
+          for (var i = 0; i < count; i++) {
+            // $("#tahun option[value='"+ data[i].tahun +"']").attr("disabled", true);
+            $('#jenis_bimtek').append('<option >'+data[i].nama+'</option>');
+
+          }
+
+          // $("#tahun option[value='"+ data -> tahun +"']").attr("disabled", true);
+
+      },
+      error: function (errormessage) {
+          alert(errormessage.responseText);
+      }
+    });
+
     var table;
     $(document).ready(function() {
 
