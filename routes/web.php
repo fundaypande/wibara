@@ -192,7 +192,7 @@ Route::group(['middleware' => 'adminStaf'], function(){
   Route::get('/pemetaan', 'StafController@showPemetaan');
 
 
-  //--> Kelola Profil IKM
+//--> Kelola Profil IKM
   // Route::get('/kelola-ikm', 'ProfilIkmController@showKelola');
   // Route::get('/api/kelola-ikm', 'ProfilIkmController@apiKelola')->name('api.kelolaIkm');  //API untuk menampilkan data profil IKM yang belum tervalidasi
 

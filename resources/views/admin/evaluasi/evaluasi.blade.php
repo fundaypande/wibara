@@ -113,11 +113,80 @@
                       </div>
 
                       <div class="col-md-12">
-                				<div class="panel panel-default">
-                					<div class="panel-body">
-                						<div id="grafik"></div>
-                					</div>
-                				</div>
+                        <div class="row">
+
+                          <!-- col MD 6 -->
+                          <div class="col-md-6">
+                            <div class="panel panel-default">
+                    					<div class="panel-body">
+                    						<div id="grafik-0"></div>
+                    					</div>
+                    				</div>
+                          </div>
+                          <!-- end md 6 -->
+
+                          <!-- col MD 6 -->
+                          <div class="col-md-6">
+                            <div class="panel panel-default">
+                    					<div class="panel-body">
+                    						<div id="grafik-1"></div>
+                    					</div>
+                    				</div>
+                          </div>
+                          <!-- end md 6 -->
+
+                        </div>
+
+                        <div class="col-md-12">
+                          <div class="row">
+
+                            <!-- col MD 6 -->
+                            <div class="col-md-6">
+                              <div class="panel panel-default">
+                      					<div class="panel-body">
+                      						<div id="grafik-2"></div>
+                      					</div>
+                      				</div>
+                            </div>
+                            <!-- end md 6 -->
+
+                            <!-- col MD 6 -->
+                            <div class="col-md-6">
+                              <div class="panel panel-default">
+                      					<div class="panel-body">
+                      						<div id="grafik-3"></div>
+                      					</div>
+                      				</div>
+                            </div>
+                            <!-- end md 6 -->
+
+                          </div>
+
+                          <div class="col-md-12">
+                            <div class="row">
+
+                              <!-- col MD 6 -->
+                              <div class="col-md-6">
+                                <div class="panel panel-default">
+                        					<div class="panel-body">
+                        						<div id="grafik-4"></div>
+                        					</div>
+                        				</div>
+                              </div>
+                              <!-- end md 6 -->
+
+                              <!-- col MD 6 -->
+                              <div class="col-md-6">
+                                <div class="panel panel-default">
+                        					<div class="panel-body">
+                        						<div id="grafik-5"></div>
+                        					</div>
+                        				</div>
+                              </div>
+                              <!-- end md 6 -->
+
+                            </div>
+
                 			</div>
 
                     </div>
@@ -135,12 +204,12 @@
 
 
     $(function(){
-			Highcharts.chart('grafik', {
+			Highcharts.chart('grafik-0', {
 			    chart: {
 			        type: 'column'
 			    },
 			    title: {
-			        text: 'Perbandingan Nilai Kriteria'
+			        text: 'Perbandingan Nilai Kriteria Produksi Perbulan'
 			    },
 			    subtitle: {
 			        text: 'Per Kriteria'
@@ -169,198 +238,194 @@
 			            borderWidth: 0
 			        }
 			    },
-			    series: {!! json_encode($series) !!}
+			    series: {!! json_encode($series0) !!}
 			});
 
+      Highcharts.chart('grafik-1', {
+			    chart: {
+			        type: 'column'
+			    },
+			    title: {
+			        text: 'Perbandingan Nilai Kriteria Rerata Harga'
+			    },
+			    subtitle: {
+			        text: 'Per Kriteria'
+			    },
+			    xAxis: {
+			        categories: {!! json_encode($category) !!},
+			        crosshair: true
+			    },
+			    yAxis: {
+			        min: 0,
+			        title: {
+			            text: 'Jumlah'
+			        }
+			    },
+			    tooltip: {
+			        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+			        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+			            '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+			        footerFormat: '</table>',
+			        shared: true,
+			        useHTML: true
+			    },
+			    plotOptions: {
+			        column: {
+			            pointPadding: 0.2,
+			            borderWidth: 0
+			        }
+			    },
+			    series: {!! json_encode($series1) !!}
+			});
 
+      Highcharts.chart('grafik-2', {
+          chart: {
+              type: 'column'
+          },
+          title: {
+              text: 'Perbandingan Nilai Kriteria Jumlah Peralatan'
+          },
+          subtitle: {
+              text: 'Per Kriteria'
+          },
+          xAxis: {
+              categories: {!! json_encode($category) !!},
+              crosshair: true
+          },
+          yAxis: {
+              min: 0,
+              title: {
+                  text: 'Jumlah'
+              }
+          },
+          tooltip: {
+              headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+              pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                  '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+              footerFormat: '</table>',
+              shared: true,
+              useHTML: true
+          },
+          plotOptions: {
+              column: {
+                  pointPadding: 0.2,
+                  borderWidth: 0
+              }
+          },
+          series: {!! json_encode($series2) !!}
+      });
 
+      Highcharts.chart('grafik-3', {
+          chart: {
+              type: 'column'
+          },
+          title: {
+              text: 'Perbandingan Nilai Kriteria Jumlah Pegawai'
+          },
+          subtitle: {
+              text: 'Per Kriteria'
+          },
+          xAxis: {
+              categories: {!! json_encode($category) !!},
+              crosshair: true
+          },
+          yAxis: {
+              min: 0,
+              title: {
+                  text: 'Jumlah'
+              }
+          },
+          tooltip: {
+              headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+              pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                  '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+              footerFormat: '</table>',
+              shared: true,
+              useHTML: true
+          },
+          plotOptions: {
+              column: {
+                  pointPadding: 0.2,
+                  borderWidth: 0
+              }
+          },
+          series: {!! json_encode($series3) !!}
+      });
+
+      Highcharts.chart('grafik-4', {
+          chart: {
+              type: 'column'
+          },
+          title: {
+              text: 'Perbandingan Nilai Kriteria Nilai Penjualan'
+          },
+          subtitle: {
+              text: 'Per Kriteria'
+          },
+          xAxis: {
+              categories: {!! json_encode($category) !!},
+              crosshair: true
+          },
+          yAxis: {
+              min: 0,
+              title: {
+                  text: 'Jumlah'
+              }
+          },
+          tooltip: {
+              headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+              pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                  '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+              footerFormat: '</table>',
+              shared: true,
+              useHTML: true
+          },
+          plotOptions: {
+              column: {
+                  pointPadding: 0.2,
+                  borderWidth: 0
+              }
+          },
+          series: {!! json_encode($series4) !!}
+      });
+
+      Highcharts.chart('grafik-5', {
+          chart: {
+              type: 'column'
+          },
+          title: {
+              text: 'Perbandingan Nilai Kriteria Bahan Baku'
+          },
+          subtitle: {
+              text: 'Per Kriteria'
+          },
+          xAxis: {
+              categories: {!! json_encode($category) !!},
+              crosshair: true
+          },
+          yAxis: {
+              min: 0,
+              title: {
+                  text: 'Jumlah'
+              }
+          },
+          tooltip: {
+              headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+              pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                  '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+              footerFormat: '</table>',
+              shared: true,
+              useHTML: true
+          },
+          plotOptions: {
+              column: {
+                  pointPadding: 0.2,
+                  borderWidth: 0
+              }
+          },
+          series: {!! json_encode($series5) !!}
+      });
 		})
-
-
-
-
-    var table;
-    $(document).ready(function() {
-
-      var idUser = $( "#idUser" ).val();
-
-      justNum($('#jumlah'));
-      justNum($('#harga'));
-
-
-      table = $('#staf-table').DataTable({
-        order: [[ 0, 'desc' ]],
-        processing: true,
-        serverSide: true,
-        ajax: "{{ route('api.penerima') }}",
-        columns: [
-          {data: 'id', name: 'id'},
-          {data: 'name', name: 'name'},
-          {data: 'tahun', name: 'tahun'},
-          {data: 'action', name: 'action', orderable: false, searchable: false}
-        ]
-      });
-
-
-    });
-
-    function deleteData(id, userId){
-      var csrf_token = $('meta[name="crsf_token"]').attr('content');
-      Swal({
-        title: 'Hapus Data?',
-        text: "Apakah anda yakin ingin menghapus data ini",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Ya, Hapus!',
-        cancelButtonText: 'Batal'
-      }).then((result) => {
-        if (result.value) {
-          $.ajax({
-            headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            url : "{{ url('penerima') }}" + '/' + id + '/' + userId,
-            type: "POST",
-            data: {'_method': 'DELETE', '_token': csrf_token},
-            success: function(data) {
-              table.ajax.reload();
-              console.log(data);
-              Swal({
-                position: 'top-end',
-                type: 'success',
-                title: 'Data berhasil dihapus',
-                showConfirmButton: false,
-                timer: 1500
-              })
-            },
-            error: function(){
-              Swal({
-                position: 'top-end',
-                type: 'error',
-                title: 'Data berhasil dihapus',
-                showConfirmButton: false,
-                timer: 1500
-              })
-            }
-          });
-        }
-      });
-    }
-
-
-    function editData(id) {
-      save_method = 'edit';
-      $('input[name=_method]').val('PATCH');
-      urlAction = "{{ url('bahan') }}";
-      $('#modal-title').text('Edit Bahan Baku IKM');
-      console.log(id);
-      // $('#modal-form')[0].reset();
-      console.log(urlAction);
-      $.ajax({
-        url: "{{ url('bahan') }}/" + id + "/edit",
-        type: "GET",
-        dataType: "JSON",
-        success: function(data) {
-
-          $('#modal-form').modal('show');
-
-
-          // edit action pada form menjadi format URL patch di web.php
-          $("#modal-form").find("form").attr("action", urlAction + '/' + id);
-
-          $('#id').val(data.id);
-          $('#jenis_bahan').val(data.jenis_bahan);
-          $('#tahun').val(data.tahun);
-          $('#satuan').val(data.satuan);
-          $('#jumlah').val(data.jumlah);
-          $('#harga').val(data.harga);
-          $('#asal').val(data.asal);
-
-          $("#tahun > [value=" + data.tahun + "]").attr("selected", "true");
-
-        },
-        error: function() {
-          Swal({
-            position: 'top-end',
-            type: 'error',
-            title: 'Terjadi kesalahan',
-            showConfirmButton: false,
-            timer: 1500
-          })
-        },
-      });
-    }
-
-    $(function(){
-      $('#modal-form form').validator().on('submit', function (e) {
-        e.preventDefault();
-        var data = $('form').serialize();
-        console.log("Submit dipencet");
-        var form_action = $("#modal-form").find("form").attr("action");
-        var jenis_alat = $("#modal-form").find("input[name='jenis_alat']").val();
-        var csrf_token = $('meta[name="crsf_token"]').attr('content');
-        console.log(jenis_alat);
-        console.log(form_action);
-        $.ajax({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          },
-          url: form_action,
-          type: "POST",
-          dataType: "JSON",
-          data: data,
-          success: function(data) {
-            table.ajax.reload();
-            $(".modal").modal('hide');
-            Swal({
-              position: 'top-end',
-              type: 'success',
-              title: 'Selamat data berhasi disimpan',
-              showConfirmButton: false,
-              timer: 1500
-            });
-          },
-          error: function(jqXhr, json, errorThrown){// this are default for ajax errors
-            var errors = jqXhr.responseJSON;
-            var errorsHtml = '';
-            $.each(errors['errors'], function (index, value) {
-                errorsHtml += '<ul class="list-group"><li class="list-group-item alert alert-danger">' + value + '</li></ul>';
-            });
-            //I use SweetAlert2 for this
-            swal({
-                title: "Error " + jqXhr.status + ': ' + errorThrown,// this will output "Error 422: Unprocessable Entity"
-                html: errorsHtml,
-                width: 'auto',
-                confirmButtonText: 'Try again',
-                cancelButtonText: 'Cancel',
-                confirmButtonClass: 'btn',
-                cancelButtonClass: 'cancel-class',
-                showCancelButton: true,
-                closeOnConfirm: true,
-                closeOnCancel: true,
-                type: 'error'
-            }, function(isConfirm) {
-                if (isConfirm) {
-                     $('#openModal').click();//this is when the form is in a modal
-                }
-            });
-
-          } //error close
-        });
-      });
-    });
-
-    function addForm(id) {
-      save_method = "add";
-      $('input[name=_method]').val('POST');
-      $('#modal-form').modal('show');
-      $('#theForm')[0].reset();
-      $('.modal-title').text('Tambah Bahan Baku IKM');
-      console.log('Tampilkan Form ADD');
-      $("#modal-form").find("form").attr("action", "{{ url('bahan') }}/" + id);
-    }
 
 
 

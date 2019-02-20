@@ -43,29 +43,61 @@ class PenerimaController extends Controller
     //Data2 dalam chart
     $category = [];
 
-  	$series[0]['name'] = 'Sebelum';
-  	$series[1]['name'] = 'Sesudah';
+  	$series0[0]['name'] = 'Sebelum';
+  	$series0[1]['name'] = 'Sesudah';
+
+    $series1[0]['name'] = 'Sebelum';
+  	$series1[1]['name'] = 'Sesudah';
+
+    $series2[0]['name'] = 'Sebelum';
+  	$series2[1]['name'] = 'Sesudah';
+
+    $series3[0]['name'] = 'Sebelum';
+  	$series3[1]['name'] = 'Sesudah';
+
+    $series4[0]['name'] = 'Sebelum';
+  	$series4[1]['name'] = 'Sesudah';
+
+    $series5[0]['name'] = 'Sebelum';
+  	$series5[1]['name'] = 'Sesudah';
 
     // $i = 0;
-    for ($i=0; $i < $dataKriteria->count(); $i++) {
+    // for ($i=0; $i < $dataKriteria->count(); $i++) {
+    //   $category[] = $dataKriteria[$i]->nama;
+    //   // $series0[0]['data'][] = $dataKriteria[$i]->nilai;
+    //   $series0[0]['data'][] = (float)$dataKriteria[$i]->nilai;
+    // }
+    //
+    // for ($i=0; $i < $dataEvaluasi->count(); $i++) {
+    //   $series0[1]['data'][] = (float)$dataEvaluasi[$i]->nilai;
+    // }
 
-      $category[] = $dataKriteria[$i]->nama;
+    $series0[0]['data'][] = (float)$dataKriteria[0]->nilai;
+    $series0[1]['data'][] = (float)$dataEvaluasi[0]->nilai;
 
-      // $series[0]['data'][] = $dataKriteria[$i]->nilai;
+    $series1[0]['data'][] = (float)$dataKriteria[1]->nilai;
+    $series1[1]['data'][] = (float)$dataEvaluasi[1]->nilai;
 
-      $series[0]['data'][] = (float)$dataKriteria[$i]->nilai;
+    $series2[0]['data'][] = (float)$dataKriteria[2]->nilai;
+    $series2[1]['data'][] = (float)$dataEvaluasi[2]->nilai;
 
-    }
+    $series3[0]['data'][] = (float)$dataKriteria[3]->nilai;
+    $series3[1]['data'][] = (float)$dataEvaluasi[3]->nilai;
 
-    for ($i=0; $i < $dataEvaluasi->count(); $i++) {
+    $series4[0]['data'][] = (float)$dataKriteria[5]->nilai;
+    $series4[1]['data'][] = (float)$dataEvaluasi[5]->nilai;
 
-      $series[1]['data'][] = (float)$dataEvaluasi[$i]->nilai;
-
-    }
+    $series5[0]['data'][] = (float)$dataKriteria[6]->nilai;
+    $series5[1]['data'][] = (float)$dataEvaluasi[6]->nilai;
 
     // dd( $dataKriteria->count());
 
-    return view('admin.evaluasi.evaluasi', ['dataKriteria' => $dataKriteria], ['dataEvaluasi' => $dataEvaluasi])->with('user', $user)->with('category', $category)->with('series', $series);
+    return view('admin.evaluasi.evaluasi', ['dataKriteria' => $dataKriteria], ['dataEvaluasi' => $dataEvaluasi])->with('user', $user)->with('category', $category)->with('series0', $series0)
+    ->with('series1', $series1)
+    ->with('series2', $series2)
+    ->with('series3', $series3)
+    ->with('series4', $series4)
+    ->with('series5', $series5);
   }
 
   public function createPerangkingan(Request $request)
