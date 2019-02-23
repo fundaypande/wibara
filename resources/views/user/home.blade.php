@@ -76,10 +76,23 @@
 
                     <!-- IKM -->
                     @if(Auth::user() -> role == 1)
+                      <!-- cek apakah IKM ini adalah seorang penerima bantuan -->
+
                       <ul style="list-style: outside; margin-left:25px">
                         <li>Menginput data profil IKM diri sendiri</li>
                         <li>Mengelola data produk yang dimiliki oleh IKM</li>
                       </ul>
+
+                      <br>
+                      <br>
+
+                      @foreach($penerima as $penerim)
+                        @if($penerim -> user_id == Auth::user() -> id)
+                        <div class="alert alert-success" role="alert">
+                            Selamat anda terpilih sebagai penerima program bantuan BIMTEK
+                        </div>
+                        @endif
+                      @endforeach
 
 
                     @endif

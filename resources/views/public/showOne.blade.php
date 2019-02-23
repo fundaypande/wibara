@@ -32,12 +32,12 @@ if($produksi -> user -> photo == null){
 
 
 
-                                  <div class="col-md-8">
+                                  <div class="col-md-6">
                                     <header class="entry-header">
                                         <h1>{{ $produksi -> jenis_produksi }}</h1>
                                     </header><!-- .entry-header -->
 
-                                    <div class="entry-content md-4">
+                                    <div class="entry-content md-6">
                                         <p>{{ $produksi -> deskripsi }}</p>
                                     </div><!-- .entry-content -->
 

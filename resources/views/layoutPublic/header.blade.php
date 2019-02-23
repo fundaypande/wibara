@@ -45,12 +45,12 @@
                             <ul class="d-flex flex-column flex-lg-row justify-content-lg-end align-items-center">
                                 <!-- <li class="current-menu-item"><a href="/">Beranda</a></li> -->
                                 <li><a href="/">Beranda</a></li>
-                                <li><a href="/produk">Produksi</a></li>
+                                <li><a href="/produk">Produk IKM</a></li>
                                 <li><a href="/tentang">Tentang Kami</a></li>
 
                                 @if (Route::has('login'))
                                         @auth
-                                            <li><a href="{{ url('/home') }}">Beranda</a></li>
+                                            <li><a href="{{ url('/home') }}">{{ Auth::user()->name }}</a></li>
                                         @else
                                             <li><a href="{{ route('login') }}">Login</a></li>
 
