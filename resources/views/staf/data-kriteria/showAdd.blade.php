@@ -134,7 +134,7 @@
 
 
                             <button type="submit" class="btn btn-info btn-fill" id="simpan">Simpan Data</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
                           </form>
 
 
@@ -154,8 +154,15 @@
 
 
       <script src="{{ asset('js/rupiah.js') }}"></script>
+      <script type="text/javascript">
+          $(".form-control").inputFilter(function(value) {
+            return /^\d*$/.test(value);
+          });
+      </script>
 
     <script type="text/javascript">
+
+
     var table;
     $(document).ready(function() {
 

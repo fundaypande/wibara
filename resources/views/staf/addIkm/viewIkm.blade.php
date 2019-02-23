@@ -2,9 +2,46 @@
 
 @section('content')
 
+
+<div id="modal-edit" class="modal fade" role="dialog" tabindex="1" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog">
+    <!-- Modal content untuk edit nama-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Data Profil IKM</h4>
+      </div>
+      <div class="modal-body">
+        <form method="post" data-toggle="validator">
+          {{ csrf_field() }} {{ method_field('POST') }}
+        <input type="hidden" name="id" id="id" value="">
+        <div class="form-group">
+          <label for="email">Email address:</label>
+          <input type="email" class="form-control" id="email" readonly>
+        </div>
+        <div class="form-group">
+          <label for="name">Nama Pemilik IKM:</label>
+          <input type="name" class="form-control" id="name" name="name" required>
+
+          <br>
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- end modal dit content -->
+
+
 <div id="modal-form" class="modal fade" role="dialog" tabindex="1" aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog">
-
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -234,11 +271,11 @@
         dataType: "JSON",
         success: function(data) {
 
-          $('#modal-form').modal('show');
+          $('#modal-edit').modal('show');
           $('#modal-title').modal('Edit Role');
 
           // edit action pada form menjadi format URL patch di web.php
-          $("#modal-form").find("form").attr("action", urlAction + '/' + id);
+          $("#modal-edit").find("form").attr("action", urlAction + '/' + id);
 
           $('#id').val(data.id);
           $('#email').val(data.email);
@@ -252,11 +289,11 @@
     }
 
     $(function(){
-      $('#modal-form form').validator().on('submit', function (e) {
+      $('#modal-edit form').validator().on('submit', function (e) {
         e.preventDefault();
         var data = $('form').serialize();
         console.log("Submit dipencet");
-        var form_action = $("#modal-form").find("form").attr("action");
+        var form_action = $("#modal-edit").find("form").attr("action");
 
         var csrf_token = $('meta[name="crsf_token"]').attr('content');
         $.ajax({

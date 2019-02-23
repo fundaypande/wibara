@@ -8,9 +8,9 @@
   <li>
       <a class="has-arrow" href="/komoditi" aria-expanded="false"><span style="color: #8d9498" class="fa fa-shopping-bag icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Komoditi</span></a>
   </li>
-  <li>
+  <!-- <li>
       <a class="has-arrow" href="/bimtek" aria-expanded="false"><span style="color: #8d9498" class="fa fa-ticket icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Bimtek</span></a>
-  </li>
+  </li> -->
   <li>
       <a class="has-arrow" href="/kriteria" aria-expanded="false"><span style="color: #8d9498" class="fa fa-filter icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Kriteria</span></a>
   </li>

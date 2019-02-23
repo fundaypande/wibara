@@ -139,8 +139,16 @@
                                <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
                                   <select id="tahun" name="{{ $h.$i }}" class="form-control">
+
                                     @foreach($nilai as $nil)
-                                      <option value="{{ $nil -> nilai }}">{{ $nil -> nilai }} - {{ $nil -> keterangan }}</option>
+                                      <?php
+                                        $selec = '';
+                                        if($nil -> nilai == '1'){
+                                          $selec = 'selected';
+                                        }
+                                       ?>
+                                       
+                                      <option {{$selec}} value="{{ $nil -> nilai }}">{{ $nil -> nilai }} - {{ $nil -> keterangan }}</option>
                                     @endforeach
                                   </select>
                                 </div>

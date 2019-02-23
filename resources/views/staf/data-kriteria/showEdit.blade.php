@@ -146,7 +146,12 @@
     </div>
 
 
-      <script src="{{ asset('js/rupiah.js') }}"></script>
+    <script src="{{ asset('js/rupiah.js') }}"></script>
+    <script type="text/javascript">
+        $(".form-control").inputFilter(function(value) {
+          return /^\d*$/.test(value);
+        });
+    </script>
 
     <script type="text/javascript">
     var table;

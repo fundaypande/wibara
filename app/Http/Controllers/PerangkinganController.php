@@ -38,6 +38,8 @@ class PerangkinganController extends Controller
     $ikm = ProfilIkm::join('users', 'users.id', '=', 'profilikm.user_id')
                       -> select('user_id', 'users.name', 'komoditi_id', 'profilikm.status')
                       -> orderBy('user_id', 'asc')
+                      -> where('profilikm.status', '=', '0')
+                      -> where('komoditi_id', '=', $request->get('komoditi'))
                       -> get();
     $komoditi = Komoditi::findOrFail($request->get('komoditi'));
 
@@ -49,9 +51,16 @@ class PerangkinganController extends Controller
             ->select('data_kriterias.*', 'jarak', 'kriterias.nama')
             ->where('tahun', '=', $request->get('tahun'))
             ->where('komoditi_id', '=', $request->get('komoditi'))
+            ->where('profilikm.status', '=', '0')
             ->orderBy('data_kriterias.id_user', 'asc')
             ->orderBy('data_kriterias.id_kriteria', 'asc')
             ->get();
+
+    // dd($data);
+
+    if ($kriteriaOnData = $data -> count() == 0) {
+      return redirect('/perangkingan')->with('warning', 'Tolong Lengkapi Data-data Kriteria Setiap IKM Khususnya Pada Komoditi '. $komoditi->nama . " Dan Tahun " . $request->get('tahun')  );
+    }
 
     $kriteriaOnData = $data -> count()/$ikm -> count();
     $kriteriaReal = $kriteria -> count();

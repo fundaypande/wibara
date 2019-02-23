@@ -153,10 +153,10 @@
                               <textarea name="permasalahan" class="form-control" id="permasalahan" rows="2" required>{{ $prof -> permasalahan }}</textarea>
                             </div>
                             <div class="form-group">
-                              <label for="jenis_bimtek">Jenis Bimtek Yang Diminati</label>
-                              <select id="jenis_bimtek" name="jenis_bimtek" class="form-control" required>
-                                <option value="{{ $prof -> jenis_bimtek }}">{{ $prof -> jenis_bimtek }}</option>
-                              </select>
+                              <label for="jenis_bimtek">Bantuan Yang Pernah Diterima</label>
+
+                              <input type="text" name="jenis_bimtek" value="{{ $prof -> jenis_bimtek }}" class="form-control" id="jenis_bimtek" placeholder="" required>
+
                             </div>
 
                             @endforeach
