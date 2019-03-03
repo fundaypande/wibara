@@ -16,7 +16,7 @@
                             <div class="row h-100">
                                 <div class="col-12 col-lg-6 d-flex flex-column justify-content-center align-items-start">
                                     <header class="entry-header" style="    margin-top: -100px;">
-                                        <h1>Cari Produk IKM</h1>
+                                        <h2 style="color:black">Cari Produk IKM</h2>
                                     </header><!-- .entry-header -->
 
                                     <form method="post" style="width: 100%;" action="/produk/search">

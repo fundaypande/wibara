@@ -9,11 +9,11 @@
                             <div class="row h-100">
                                 <div class="col-12 col-lg-6 d-flex flex-column justify-content-center align-items-start">
                                     <header class="entry-header">
-                                        <h1>Dinas<br>Perdagangan dan Perindustrian</h1>
+                                        <h2 style="color:black">Dinas<br>Perdagangan dan Perindustrian</h2>
                                     </header><!-- .entry-header -->
 
-                                    <div class="entry-content mt-4">
-                                        <p>Sistem Pendukung Keputusan Penentuan Prioritas Pemberian Bantuan Kepada IKM di Dinas Perdagangan dan Perindustrian Kabupaten Buleleng</p>
+                                    <div  class="entry-content mt-4">
+                                        <p style="color:black">Sistem Pendukung Keputusan Penentuan Prioritas Pemberian Bantuan Kepada IKM di Dinas Perdagangan dan Perindustrian Kabupaten Buleleng</p>
                                     </div><!-- .entry-content -->
 
                                     <footer class="entry-footer d-flex flex-wrap align-items-center mt-4">

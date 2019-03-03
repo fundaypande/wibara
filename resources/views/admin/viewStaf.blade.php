@@ -86,7 +86,7 @@
 
                           <div class="panel-heading">
                             <h4>Daftar Pengguna
-                              <a href="/add-staf" class="btn btn-primary pull-right"> Tambah Pengguna </a>
+                              <a href="/add-staf" style="color: white;" class="btn btn-primary pull-right"> Tambah Pengguna </a>
                             </h4>
                           </div>
 

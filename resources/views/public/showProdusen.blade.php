@@ -22,7 +22,7 @@ if($data -> user -> photo == null){
                         <div class="container h-100" style="margin-top: 150px">
 
                           <header class="entry-header">
-                              <h1>{{ $data -> nama_usaha }}</h1>
+                              <h2 style="color:black">{{ $data -> nama_usaha }}</h2>
                           </header><!-- .entry-header -->
                           <!-- Untuk Data Barang -->
                           <div class="container">

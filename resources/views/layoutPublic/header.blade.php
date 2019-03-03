@@ -5,7 +5,7 @@
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <link rel="shortcut icon" href="{{{ asset('images/buleleng-kecil.png') }}}">
+    <link rel="shortcut icon" href="{!! asset('images/buleleng-kecil.png') !!}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS {!! asset('css/sweetalert2.css') !!} -->

@@ -137,7 +137,7 @@
                             </div>
                             <div class="form-group">
                               <label for="telpon">Telepon</label>
-                              <input type="tel" pattern="^\d{12}$" name="telpon" value="{{ $prof -> telpon }}" class="form-control" id="telpon" placeholder="" required>
+                              <input type="text" name="telpon" value="{{ $prof -> telpon }}" class="form-control" id="telpon" placeholder="" >
                             </div>
                             <div class="form-group">
                               <label for="jenis_produk">Jenis Produk</label>

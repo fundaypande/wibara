@@ -116,7 +116,7 @@
 
                           <div class="panel-heading">
                             <h4>Daftar IKM
-                              <a href="/add-ikm" class="btn btn-primary pull-right"> Tambah Pengguna IKM</a>
+                              <a href="/add-ikm" style="color: white;" class="btn btn-primary pull-right"> Tambah Pengguna IKM</a>
                             </h4>
                           </div>
 
