@@ -12,7 +12,7 @@
     <div class="left-sidebar-pro">
         <nav id="sidebar" class="">
             <div class="sidebar-header">
-                <a href="{{ url('/') }}"><img class="main-logo" src="{!! asset('images/buleleng-kecil.png') !!}" alt="" /></a>
+                <a href="{{ url('/') }}"><img style="width: 100px;margin-top: 20px;margin-bottom: 10px;" class="main-logo" src="{!! asset('images/buleleng-kecil.png') !!}" alt="" /></a>
                 <strong><a href="{{ url('/') }}"><img src="{!! asset('images/buleleng-kecil.png') !!}" alt="" /></a></strong>
             </div>
             <div class="left-custom-menu-adp-wrap comment-scrollbar">

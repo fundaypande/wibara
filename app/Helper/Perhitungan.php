@@ -77,4 +77,51 @@
 		return $c;
 	}
 
+  function minArray($data)
+  {
+    $mini = $data[0];
+    $index = 0;
+    for ($j=0;$j<count($data);$j++){
+      if($data[$j] < $mini){
+        $index = $j;
+        $mini = $data[$j];
+      } else {
+        $mini = $mini;
+        $index = $index;
+      }
+    }
+    return $index;
+  }
+
+
+  function averageBobot($data)
+  {
+    // dd(count($data[0]));
+    for ($i=0; $i < count($data); $i++) {
+      $hasil = 0;
+      for ($j=0; $j < count($data[0]); $j++) {
+        $hasil = $hasil + $data[$i][$j];
+      }
+      $aray[$i] = $hasil;
+    }
+
+    for ($k=0; $k < count($aray); $k++) {
+      $aray[$k] = $aray[$k]/count($data[0]);
+    }
+
+    $total = 0;
+    for ($s=0; $s < count($aray); $s++) {
+      $total = $total + $aray[$s];
+    }
+
+    for ($n=0; $n < count($aray); $n++) {
+      $average[$n] = $aray[$n]/$total;
+      $average[$n] = round($average[$n],4);
+    }
+
+    return $average;
+  }
+
+
+
  ?>

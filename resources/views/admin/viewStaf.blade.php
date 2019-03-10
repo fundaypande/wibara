@@ -22,15 +22,15 @@
         <div class="form-group">
           <label for="role">Role</label>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="radio" id="radioAdmin" value="3">
+            <input class="form-check-input" type="radio" name="radio" id="radioAdmin" value="0">
             <label class="form-check-label" for="exampleRadios1">
               Admin
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="radio" id="radioStaf" value="2">
+            <input class="form-check-input" type="radio" name="radio" id="radioStaf" value="1">
             <label class="form-check-label" for="exampleRadios2">
-              Staf
+              Evaluator
             </label>
           </div>
         </div>
@@ -53,7 +53,7 @@
 
             <div style="padding-left: 20px; padding-right: 20px" class="card">
                 <div class="card-header">
-                  <h3>Kelola Staf</h3>
+                  <h3>User Management</h3>
 
                 </div>
 
@@ -76,7 +76,7 @@
           					  </div>
           					@endif
 
-                    <p>Daftar staf yang dapat mengakses sistem</p>
+                    <p>List of Users Who Can Access The Sistem</p>
                     <br>
 
                     <!-- table show daftar user yang dapat mengakses sistem -->
@@ -85,8 +85,8 @@
                         <div class="panel panel-default">
 
                           <div class="panel-heading">
-                            <h4>Daftar Pengguna
-                              <a href="/add-staf" style="color: white;" class="btn btn-primary pull-right"> Tambah Pengguna </a>
+                            <h4>List Users
+                              <a href="/add-staf" style="color: white;" class="btn btn-primary pull-right"> Add User </a>
                             </h4>
                           </div>
 
@@ -95,7 +95,7 @@
                               <thead>
                                 <tr>
                                   <th width="50">ID</th>
-                                  <th>Nama</th>
+                                  <th>Name</th>
                                   <th>Email</th>
                                   <th>Role</th>
                                   <th>Action</th>
@@ -141,8 +141,8 @@
     function deleteData(id){
       var csrf_token = $('meta[name="crsf_token"]').attr('content');
       Swal({
-        title: 'Hapus Data?',
-        text: "Apakah anda yakin ingin menghapus data ini",
+        title: 'Delete Data?',
+        text: "Are You Sure To Delete This Data",
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -163,7 +163,7 @@
               Swal({
                 position: 'top-end',
                 type: 'success',
-                title: 'Data berhasil dihapus',
+                title: 'Data deleted',
                 showConfirmButton: false,
                 timer: 1500
               })
@@ -172,7 +172,7 @@
               Swal({
                 position: 'top-end',
                 type: 'error',
-                title: 'Data berhasil dihapus',
+                title: 'Cannot delete this data',
                 showConfirmButton: false,
                 timer: 1500
               })
@@ -201,7 +201,7 @@
 
           $('#id').val(data.id);
           $('#email').val(data.email);
-          if(data.role == 3) $('#radioAdmin').prop('checked', true); else $('#radioStaf').prop('checked', true);
+          if(data.role == 0) $('#radioAdmin').prop('checked', true); else $('#radioStaf').prop('checked', true);
 
         },
         error: function() {
@@ -230,10 +230,22 @@
           success: function(data) {
             table.ajax.reload();
             $(".modal").modal('hide');
-            alert("Berhasil Edit Data");
+            Swal({
+              position: 'top-end',
+              type: 'success',
+              title: 'Data edited',
+              showConfirmButton: false,
+              timer: 1500
+            })
           },
           error: function() {
-            alert("Tidak ada data -" + role + " - " + form_action);
+            Swal({
+              position: 'top-end',
+              type: 'error',
+              title: 'Cannot delete this data',
+              showConfirmButton: false,
+              timer: 1500
+            })
           },
         });
       });

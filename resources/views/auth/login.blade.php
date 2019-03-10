@@ -3,9 +3,6 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<span class="login100-form-title" style="margin-top: -120px;">
-					DINAS PERDAGANGAN DAN PERINDUSTRIAN KABUPATEN BULELENG
-				</span>
 				<div class="login100-pic js-tilt" data-tilt>
 					<a href="{{ url('/') }}"><img src="images/buleleng.png" alt="IMG"></a>
 				</div>
@@ -13,7 +10,7 @@
 				<form class="login100-form validate-form" action="{{ route('login') }}" method="POST">
 					@csrf
 					<span class="login100-form-title">
-						FORM LOGIN
+						LOGIN FORM
 					</span>
 
 					@if(session('warning'))
@@ -72,7 +69,7 @@
 
 					<div class="text-center p-t-12">
 						<span class="txt1">
-							Lupa
+							Forget
 						</span>
 
 						@if (Route::has('password.request'))
@@ -84,10 +81,6 @@
 					</div>
 
 					<div class="text-center p-t-136">
-						<a class="txt2" href="/register">
-							Daftar IKM Baru
-							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-						</a>
 					</div>
 				</form>
 			</div>

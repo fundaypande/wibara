@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Bobot;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -67,7 +68,7 @@ class RegisterStafController extends Controller
 
         event(new Registered($user = $this->create($request->all())));
 
-        return redirect('/kelola-staf')->with('status', 'Staf baru berhasil ditambahkan');
+        return redirect('/users')->with('status', 'New User Added');
     }
 
     /**
@@ -78,13 +79,34 @@ class RegisterStafController extends Controller
      */
     protected function create(array $data)
     {
+      $aneka = ['Accountability','Nationalism','Public Ethics','Quality Commitment', 'Anti-Corruption'];
+      $thk = ['Parahyangan','Pawongan','Palemahan'];
+
+      // dd(count($aneka));
+
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'token' => str_random(20),
-            'role' => 2,
+            'role' => 1,
         ]);
+
+        //membuat bobot kosong dulu ketika user evaluator dibuat
+        for ($j=0; $j < count($thk); $j++) {
+          for ($i=0; $i < count($aneka) ; $i++) {
+            $bobotEvaluator = Bobot::create([
+                'user_id' => $user -> id,
+                'thk' => $thk[$j],
+                'aneka' => $aneka[$i],
+                'nilai' => 0,
+            ]);
+          }
+        }
+
+
+
+
 
         Mail::to($user->email)->send(new UserRegistered($user ));
     }

@@ -31,8 +31,7 @@ class AdminController extends Controller
     // --> memanggil data dari json
     public function apiStaf()
     {
-      $staf = User::where('role', '>', 1)
-                    ->get();
+      $staf = User::all();
 
 
       return Datatables::of($staf)
@@ -75,14 +74,6 @@ class AdminController extends Controller
     {
       User::destroy($id);
     }
-
-
-
-
-
-
-
-
 
 
 }

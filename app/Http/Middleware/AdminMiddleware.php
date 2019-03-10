@@ -23,7 +23,7 @@ class AdminMiddleware
           return $next($request);
         }
       } else{
-        return redirect('/login')->with('warning', 'Silahkan login untuk menakses halaman ini');
+        return redirect('/login')->with('warning', 'Please login to access this page');
       }
 
 
