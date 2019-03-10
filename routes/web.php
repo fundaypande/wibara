@@ -73,6 +73,13 @@ Route::get('/weight', 'BobotController@show');
   Route::post('/weight/process', 'BobotController@process')->name('bobot.edit');
   Route::post('/weight/save', 'BobotController@update')->name('bobot.update');
 
+  //kelola form
+Route::get('/form', 'FormController@show');
+  Route::get('/api/weights', 'BobotController@apiBobot')->name('api.bobot');
+  Route::get('/weight/edit', 'BobotController@showEdit')->name('bobot.edit');
+  Route::post('/weight/process', 'BobotController@process')->name('bobot.edit');
+  Route::post('/weight/save', 'BobotController@update')->name('bobot.update');
+
 
 });
 
