@@ -6,6 +6,12 @@ Route::get('/', function () {
 });
 
 
+//** Respon Responden
+Route::get('/form/{formId}/{hash}', 'DataFormController@showForm');
+Route::get('/form/success', 'DataFormController@showSuccess');
+Route::post('/form/{id}/add', 'DataFormController@store');
+
+
 
 Route::group(['middleware' => ['auth']], function(){
   Route::get('/user/{id?}', 'UserController@user');
@@ -13,8 +19,6 @@ Route::group(['middleware' => ['auth']], function(){
   Route::put('/user/edit/{id}', 'UserController@update');
 
   Route::get('/home', 'HomeController@index')->name('home');
-
-
 
 
   // --> Route untuk verifikasi Email
