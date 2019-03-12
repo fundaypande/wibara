@@ -1,5 +1,13 @@
 @extends('layouts.admin')
 
+@section('css')
+
+<style>
+  input, button, submit { border:none; }
+</style>
+
+@endsection
+
 @section('content')
 
     <div class="row justify-content-center">
@@ -47,8 +55,10 @@
                     <div class="row">
                       <div class="com-md-12">
 
+                      <form method="post" data-toggle="validator" action="/form/store" id="theForm">
+                          {{ csrf_field() }} {{ method_field('POST') }}
                         <div class="col-sm-2">
-                          <a href="#">
+                          <button style="width: 100%;" type="submit">
                             <div class="produk-card">
                               <div class="produk-images">
                                 <div class="produksi-tumb" style="background-image: url({!! asset('images/add.png') !!})"></div>
@@ -57,12 +67,13 @@
                                 <p>Create New Form</p>
                               </div>
                             </div>
-                          </a>
+                          </button>
                         </div>
+                      </form>
 
                         @foreach($form as $key => $data)
                           <div class="col-sm-2">
-                            <a href="#">
+                            <a href="/form/{{$data -> id}}">
                               <div class="produk-card">
                                 <div class="produk-images">
                                   <div class="produksi-tumb" style="background-image: url({!! asset('images/patern/'.$key.'.png') !!})"></div>

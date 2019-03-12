@@ -61,7 +61,7 @@ class DataFormController extends Controller
 
     // return $data;
 
-    return redirect('/form/success');
+    return redirect()->back()->with('status', 'Congratulations all your data has been saved!');
   }
 
 

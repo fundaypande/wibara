@@ -79,10 +79,12 @@ Route::get('/weight', 'BobotController@show');
 
   //kelola form
 Route::get('/form', 'FormController@show');
-  Route::get('/api/weights', 'BobotController@apiBobot')->name('api.bobot');
-  Route::get('/weight/edit', 'BobotController@showEdit')->name('bobot.edit');
-  Route::post('/weight/process', 'BobotController@process')->name('bobot.edit');
-  Route::post('/weight/save', 'BobotController@update')->name('bobot.update');
+  Route::post('/form/store', 'FormController@createData');
+  Route::delete('/form/{id}', 'FormController@destroy'); //->Mneghapus data
+
+//kelola satu form
+Route::get('/form/{id}', 'FormController@showData');
+
 
 
 });

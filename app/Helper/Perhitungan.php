@@ -93,7 +93,7 @@
     return $index;
   }
 
-
+ //ANEKA project
   function averageBobot($data)
   {
     // dd(count($data[0]));
