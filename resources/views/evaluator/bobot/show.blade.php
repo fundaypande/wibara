@@ -66,6 +66,10 @@
                                   <th width="50">ID</th>
                                   <th>Tri Hita Karana Aspects</th>
                                   <th>ANEKA Components</th>
+                                  <th>Antecedents Standar</th>
+                                  <th>Transaction Standar</th>
+                                  <th>Outcomes Standar</th>
+                                  <th>Average</th>
                                   <th>Weight</th>
                                 </tr>
                               </thead>
@@ -94,7 +98,6 @@
 
 
       table = $('#staf-table').DataTable({
-        order: [[ 1, 'desc' ]],
         processing: true,
         serverSide: true,
         ajax: "{{ route('api.bobot') }}",
@@ -102,6 +105,10 @@
           {data: 'id', name: 'id'},
           {data: 'thk', name: 'thk'},
           {data: 'aneka', name: 'aneka'},
+          {data: 'antecedents', name: 'antecedents'},
+          {data: 'transaction', name: 'transaction'},
+          {data: 'outcomes', name: 'outcomes'},
+          {data: 'average', name: 'average'},
           {data: 'nilai', name: 'nilai'},
         ]
       });

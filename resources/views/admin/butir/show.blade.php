@@ -27,8 +27,8 @@
           <select class="form-control" name="component" id="component">
             <option value="Accountability">Accountability</option>
             <option value="Nationalism">Nationalism</option>
-            <option value="Public Ethics">Public Ethics</option>
-            <option value="Public Ethics">Public Ethics</option>
+            <option value="Public-Ethics">Public Ethics</option>
+            <option value="Quality-Commitment">Quality Commitment</option>
             <option value="Anti-Corruption">Anti-Corruption</option>
           </select>
         </div>
@@ -234,6 +234,9 @@
 
            $("#thk > [value=" + data.thk + "]").attr("selected", "true");
            $("#component > [value=" + data.aneka + "]").attr("selected", "true");
+
+           console.log('ANEKA:'+data.aneka);
+           console.log('THK:'+data.thk);
 
         },
         error: function() {

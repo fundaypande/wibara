@@ -45,6 +45,36 @@
               <button onclick="deleteForm({{$form->id}})" type="button" name="share" class="btn btn-danger" style="float:right; margin-right: 20px">Delete</button>
               <button onclick="addForm()" type="button" name="share" class="btn btn-primary" style="float:right; margin-right: 20px">Share Form</button>
 
+
+              @if(count($errors) > 0)
+              <div class="alert alert-danger">
+                <ul>
+                  @foreach ($errors-> all() as $error)
+                    <li>{{ $error }}</li>
+                  @endforeach
+                </ul>
+              </div>
+              @endif
+
+
+                @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
+                @endif
+
+                @if(session('warning'))
+                  <div class="alert alert-warning ">
+                    {{session('warning')}}
+                  </div>
+                @endif
+
+                @if(session('notif'))
+                  <div class="alert alert-primary">
+                    {{session('notif')}}
+                  </div>
+                @endif
+
               <br>
               <br>
               <h4>Total Respondent: {{ count($responden) }}</h4>
@@ -80,6 +110,23 @@
 
             </table>
           </div>
+
+          <form method="post" data-toggle="validator" action="/form/{{$form->id}}/update-average" id="theForm">
+            {{ csrf_field() }} {{ method_field('POST') }}
+
+            <?php for ($i=0; $i < $butir; $i++) {
+              // code...
+            ?>
+
+            <input type="hidden" name="{{$i}}" value="{{$average[$i]}}">
+
+
+            <?php }  ?>
+
+
+            <button style="width:200px; margin-left: 20px" type="submit" class="btn btn-info btn-fill" id="simpan">Update Averages</button>
+
+          </form>
 
     </div>
 

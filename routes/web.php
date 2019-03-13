@@ -74,13 +74,25 @@ Route::group(['middleware' => 'staf'], function(){
 Route::get('/weight', 'BobotController@show');
   Route::get('/api/weights', 'BobotController@apiBobot')->name('api.bobot');
   Route::get('/weight/edit', 'BobotController@showEdit')->name('bobot.edit');
-  Route::post('/weight/process', 'BobotController@process')->name('bobot.edit');
+  Route::post('/weight/process/{id}', 'BobotController@process')->name('bobot.edit');
   Route::post('/weight/save', 'BobotController@update')->name('bobot.update');
 
   //kelola form
 Route::get('/form', 'FormController@show');
   Route::post('/form/store', 'FormController@createData');
   Route::delete('/form/{id}', 'FormController@destroy'); //->Mneghapus data
+
+//kelola data average
+Route::post('/form/{idForm}/update-average', 'DataAverageController@update');
+
+//proses perangkingan
+Route::get('/forms/{idForm}', 'DataAverageController@show');
+  Route::get('/api/average/{idForm}', 'DataAverageController@apiAverage')->name('api.average');
+  //kelola data outcomes
+  Route::post('/form/{idForm}/update-outcome', 'OutcomeController@update');
+
+  Route::get('/forms/{idForm}/judgement', 'OutcomeController@show');
+  Route::get('/api/outcome/{idForm}', 'OutcomeController@apiOutcome');
 
 //kelola satu form
 Route::get('/form/{id}', 'FormController@showData');

@@ -42,7 +42,7 @@
     $normMatrik = null;
     for ($i=0;$i<$baris;$i++){
       for ($j=0;$j<$kolom;$j++){
-        $normMatrik[$i][$j] = $matrik[$i][$j] / $pembagi[$i];
+        $normMatrik[$i][$j] = $matrik[$i][$j] / $pembagi[$j];
       }
     }
 
@@ -51,20 +51,21 @@
 
   //multiply() untuk mengalikan matriks
   function multiply($a, $b){
-  	$r=count($a);
-  	$c=count($b[0]);
-  	$p=count($b);
-    // dd(count($b[0]));
-  	for ($i=0; $i < $r; $i++){
-  			for($j=0; $j < $c; $j++){
-  					$result[$i][$j] = 0;
-  					for($k=0; $k < $p; $k++){
-  							$result[$i][$j] += $a[$i][$k] * $b[$k][$j];
-  					}
-  			}
-  	}
-  	return $result;
-  }
+    	$r=count($a);
+    	$c=count($b[0]);
+      // $p=count($);
+      // dd(count($b[0]));
+    	for ($i=0; $i < $r; $i++){
+    			for($j=0; $j < $c; $j++){
+    					$result[$i][$j] = 0;
+    					for($k=0; $k < 3; $k++){
+    							$result[$i][$j] += $a[$i][$k] * $b[$i];
+    					}
+    			}
+    	}
+    	return $result;
+    }
+
 
 
   function roundArray($a){
@@ -94,6 +95,30 @@
   }
 
  //ANEKA project
+ function rerata($data)
+ {
+   for ($i=0; $i < count($data); $i++) {
+     $hasil = 0;
+     for ($j=0; $j < count($data[0]); $j++) {
+       $hasil = $hasil + $data[$i][$j];
+     }
+     $aray[$i] = $hasil;
+   }
+
+   for ($k=0; $k < count($aray); $k++) {
+     $aray[$k] = $aray[$k]/count($data[0]);
+     $roundAray[$k] = round($aray[$k],4);
+   }
+
+   $total = 0;
+   for ($s=0; $s < count($aray); $s++) {
+     $total = $total + $aray[$s];
+   }
+
+   return $roundAray;
+ }
+
+
   function averageBobot($data)
   {
     // dd(count($data[0]));
@@ -107,12 +132,15 @@
 
     for ($k=0; $k < count($aray); $k++) {
       $aray[$k] = $aray[$k]/count($data[0]);
+      $roundAray[$k] = round($aray[$k],4);
     }
 
     $total = 0;
     for ($s=0; $s < count($aray); $s++) {
       $total = $total + $aray[$s];
     }
+
+    // dd($roundAray);
 
     for ($n=0; $n < count($aray); $n++) {
       $average[$n] = $aray[$n]/$total;
@@ -121,6 +149,34 @@
 
     return $average;
   }
+
+  function maxVer($data)
+  {
+    $nilaiMax = null;
+    for ($i=0;$i<count($data);$i++){
+      $maxi = 0;
+      for ($j=0;$j<count($data[0]);$j++){
+        if($data[$j][$i] > $maxi){
+          $maxi = $data[$j][$i];
+        } else {
+          $maxi = $maxi;
+        }
+      }
+      $nilaiMax[$i] = $maxi;
+    }
+    // dd($nilaiMax);
+    return $nilaiMax;
+  }
+
+
+  // function akhir($a, $b)
+  // {
+  //   for ($i=0; $i < count($a); $i++) {
+  //     for ($j=0; $j < count($a[0]); $j++) {
+  //       $data[$i] = ($b[$i]*$a[$i][$j])+
+  //     }
+  //   }
+  // }
 
 
 

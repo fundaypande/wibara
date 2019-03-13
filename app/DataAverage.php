@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Bobot extends Model
+class DataAverage extends Model
 {
 
-  protected $table = 'bobots';
+  protected $table = 'data_averages';
 
   protected $fillable = [
-      'thk', 'aneka', 'nilai', 'user_id', 'antecedents', 'transaction', 'outcomes', 'average'
+      'form_id', 'butir_id', 'average'
   ];
 
   // public function profilIkm()

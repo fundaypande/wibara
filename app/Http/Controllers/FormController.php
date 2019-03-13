@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Form;
 use App\DataForm;
+use App\DataAverage;
+use App\Outcome;
 use App\User;
 use App\Butir;
 use Auth;
@@ -52,16 +54,24 @@ class FormController extends Controller
       //ada koma di hasil pembagian dengan butir sebenarnya (DP) maka form ini sudah timpang
 
       //membuat matrik data responden
+      // dd($responden -> all());
       for ($i=0; $i < count($responden); $i++) {
-        $data[] = DataForm::where('email', '=', $responden[$i] -> email)
+        $data[] = DataForm::where('form_id', '=', $id)
+                ->where('email', '=', $responden[$i] -> email)
+
                 -> get();
+        // $data = DataForm::where('email', '=', $responden[$i] -> email)
+        //         -> get();
       }
+      // dd($data);
       //membuat matrik data responden
       for ($i=0; $i < count($responden); $i++) {
         for ($j=0; $j < $butirArray; $j++) {
           $dataResponden[$i][$j] = $data[$i][$j] -> nilai;
         }
       }
+
+
 
       //mencari nilai rata2 per butir
       //mencari total dulu
@@ -115,6 +125,31 @@ class FormController extends Controller
       'user_id' => Auth::user() -> id,
       'hash' => time(),
     ]);
+
+    //buat data average untuk responden
+    $butir = Butir::all();
+
+    for ($i=0; $i < count($butir); $i++) {
+      //buat masing2 data average menjadi 0
+
+      $dataAverage = DataAverage::create([
+        'form_id' => $form -> id,
+        'butir_id' => $butir[$i] -> id,
+        'average' => 0
+      ]);
+    }
+
+
+    //buat data outcomes untuk menampung data minimal hasil filtrasi
+    for ($i=0; $i < 15; $i++) {
+      // create data
+      $outcome = Outcome::create([
+        'form_id' => $form -> id,
+        'butir_id' => $butir[$i] -> id,
+        'average' => 0
+        ]);
+
+    }
 
     // dd($form);
 

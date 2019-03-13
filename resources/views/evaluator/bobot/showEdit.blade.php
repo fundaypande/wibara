@@ -57,7 +57,7 @@
                           $standar = ['Antecedents Standard','Transaction Standard','Outcomes Standard'];
                          ?>
 
-                     <form method="post" data-toggle="validator" action="{{ url('/weight/process/') }}" id="theForm">
+                     <form method="post" data-toggle="validator" action="{{ url('/weight/process/') }}/{{Auth::user() -> id}}" id="theForm">
                       {{ csrf_field() }} {{ method_field('POST') }}
 
                         <h4>Parahyangan</h4>
