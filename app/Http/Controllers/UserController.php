@@ -61,12 +61,15 @@ class UserController extends Controller
 
   public function update(Request $request, $id){
       $user = User::findOrFail($id);
+
+      // dd($request -> all());
       $this -> validate($request, [
               'name' => 'required|min:3',
             ]);
       if(Auth::User() -> id == $user -> id){
         $user -> update([
           'name' => $request -> name,
+          'affiliation' => $request -> affiliation,
         ]);
       } else abort(404);
       return redirect('/user')->with('notif', 'Data Profile Berhasil Diedit');

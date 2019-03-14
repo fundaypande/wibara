@@ -18,6 +18,13 @@ class DataAverageController extends Controller
     $aneka = ['Accountability','Nationalism','Public-Ethics','Quality-Commitment', 'Anti-Corruption'];
     $thk = ['Parahyangan','Pawongan','Palemahan'];
 
+    $form = Form::findOrFail($idForm);
+    $butir = Butir::all();
+
+    if($form -> user_id != Auth::user() -> id){
+      return redirect()->back()->with('warning', 'You are not the owner of this form');
+    }
+
     //membagi data2 ke kolom aray
     for ($i=0; $i < count($aneka); $i++) {
       for ($j=0; $j < count($thk); $j++) {
@@ -49,8 +56,7 @@ class DataAverageController extends Controller
     // dd($data);
 
 
-    $form = Form::findOrFail($idForm);
-    $butir = Butir::all();
+
 
     return view('evaluator.perangkingan.average')->with('form', $form)->with('arayMin', $arrayMin)->with('butir', $butir);
   }

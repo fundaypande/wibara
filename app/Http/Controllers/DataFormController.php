@@ -17,6 +17,12 @@ class DataFormController extends Controller
     $form = Form::findOrFail($formId);
     $butir = Butir::all();
 
+    if($form -> user_id != Auth::user() -> id){
+      return redirect()->back()->with('warning', 'You are not the owner of this form');
+    }
+
+
+
     //jika URL tidak sesuai maka tampilkan abort
     if($form -> hash != $hash) abort(404);
 

@@ -106,6 +106,7 @@
                           </div>
 
                           <?php
+                          // dd($matrikA);
                             //normalisasi matrik
                             $normA = roundArray(normalisasiMatrik($matrikA, $maxA, 5, 3));
                             $normB = roundArray(normalisasiMatrik($matrikB, $maxB, 5, 3));
@@ -141,19 +142,20 @@
                             // dd($perkalianA);
                            ?>
 
-                           <h4>Normalization</h4>
+                           <!-- <h4>Normalization</h4> -->
 
                           <!-- menampilkan data -->
                           <div class="panel-body" style="overflow-x:auto;">
-                            <h4>Parahyangan</h4>
+                            <h4>List of Priority Indicators on Parahyangan Aspects</h4>
                             <?php
                               $aneka = ['Accountability','Nationalism','Public Ethics','Quality Commitment', 'Anti-Corruption'];
                               $standar = ['Antecedents Standard','Transaction Standard','Outcomes Standard'];
                              ?>
-                            <table id="staf-table" width="100%" class="table table-striped table-bordered table-hover">
+                            <table id="thkA" width="100%" class="table table-striped table-bordered table-hover">
                               <thead>
                                 <tr>
                                   <th>ANEKA Aspect</th>
+                                  <th>Indicators</th>
                                   <th>Antecedents Standard </th>
                                   <th>Transaction Standard</th>
                                   <th>Outcomes Standard</th>
@@ -165,6 +167,7 @@
                                  ?>
                                   <tr>
                                     <td>{{$aneka[$i]}}</td>
+                                    <td>{{$indicatorA[$i]}}</td>
                                     <?php for ($j=0; $j < 3; $j++) {
                                     ?>
                                       <td>{{ $matrikA[$i][$j] }}</td>
@@ -174,12 +177,13 @@
 
                                   </tr>
                                 <?php } ?>
-                                <tr>
+                                <!-- <tr>
                                   <b><td style="color:blue">Max Value</td></b>
                                 @foreach($maxA as $key => $makA)
                                   <b><td style="color:blue">{{$makA}}</td></b>
                                 @endforeach
-                                </tr>
+                                  <b><td style="color:blue">-</td></b>
+                                </tr> -->
 
                               </tbody>
                             </table>
@@ -187,15 +191,16 @@
 
 
                           <div class="panel-body" style="overflow-x:auto;">
-                            <h4>Pawongan</h4>
+                            <h4>List of Priority Indicators on Pawongan Aspects</h4>
                             <?php
                               $aneka = ['Accountability','Nationalism','Public Ethics','Quality Commitment', 'Anti-Corruption'];
                               $standar = ['Antecedents Standard','Transaction Standard','Outcomes Standard'];
                              ?>
-                            <table id="staf-table" width="100%" class="table table-striped table-bordered table-hover">
+                            <table id="thkB" width="100%" class="table table-striped table-bordered table-hover">
                               <thead>
                                 <tr>
                                   <th>ANEKA Aspect</th>
+                                  <th>Indicators</th>
                                   <th>Antecedents Standard </th>
                                   <th>Transaction Standard</th>
                                   <th>Outcomes Standard</th>
@@ -207,6 +212,7 @@
                                  ?>
                                   <tr>
                                     <td>{{$aneka[$i]}}</td>
+                                    <td>{{$indicatorB[$i]}}</td>
                                     <?php for ($j=0; $j < 3; $j++) {
                                     ?>
                                       <td>{{ $matrikB[$i][$j] }}</td>
@@ -217,27 +223,28 @@
 
                                   </tr>
                                 <?php } ?>
-                                <tr>
+                                <!-- <tr>
                                   <b><td style="color:blue">Max Value</td></b>
                                 @foreach($maxB as $key => $makB)
                                   <b><td style="color:blue">{{$makB}}</td></b>
                                 @endforeach
-                                </tr>
+                                </tr> -->
                               </tbody>
                             </table>
                           </div>
 
 
                           <div class="panel-body" style="overflow-x:auto;">
-                            <h4>Palemahan</h4>
+                            <h4>List of Priority Indicators on Palemahan Aspects</h4>
                             <?php
                               $aneka = ['Accountability','Nationalism','Public Ethics','Quality Commitment', 'Anti-Corruption'];
                               $standar = ['Antecedents Standard','Transaction Standard','Outcomes Standard'];
                              ?>
-                            <table id="staf-table" width="100%" class="table table-striped table-bordered table-hover">
+                            <table id="thkC" width="100%" class="table table-striped table-bordered table-hover">
                               <thead>
                                 <tr>
                                   <th>ANEKA Aspect</th>
+                                  <th>Indicators</th>
                                   <th>Antecedents Standard </th>
                                   <th>Transaction Standard</th>
                                   <th>Outcomes Standard</th>
@@ -249,6 +256,7 @@
                                  ?>
                                   <tr>
                                     <td>{{$aneka[$i]}}</td>
+                                    <td>{{$indicatorC[$i]}}</td>
                                     <?php for ($j=0; $j < 3; $j++) {
                                     ?>
                                       <td>{{ $matrikC[$i][$j] }}</td>
@@ -259,21 +267,78 @@
 
                                   </tr>
                                 <?php } ?>
-                                <tr>
+                                <!-- <tr>
                                   <b><td style="color:blue">Max Value</td></b>
                                 @foreach($maxC as $key => $makC)
                                   <b><td style="color:blue">{{$makC}}</td></b>
                                 @endforeach
-                                </tr>
+                                </tr> -->
                               </tbody>
                             </table>
                           </div>
 
 
 
+                          <!-- mencari nilai perangkingan -->
+                          <?php
+                            //agar data perkalian matrik menjadi 1 baris array
+                            for ($i=0; $i < 5; $i++) {
+                              $rangkingA[] = $perkalianA[$i][0];
+                              $rangkingB[] = $perkalianB[$i][0];
+                              $rangkingC[] = $perkalianC[$i][0];
+                            }
+
+                            // dd($rangkingA);
+                            //mencari nilai minimal perangkingan dan indexks nilai minimalnya
+                            $idMinA = array_keys(($rangkingA), min($rangkingA));
+                            $dataMinA = min($rangkingA);
+
+                            $idMinB = array_keys(($rangkingB), min($rangkingB));
+                            $dataMinB = min($rangkingB);
+
+                            $idMinC = array_keys(($rangkingC), min($rangkingC));
+                            $dataMinC = min($rangkingC);
+
+                            //indeks minimal yang didapat diatas digunakan untuk mencari nomor butirnya
+                            $finalA[0] = $butirA[$idMinA[0]];
+                            $finalB[0] = $butirB[$idMinB[0]];
+                            $finalC[0] = $butirC[$idMinC[0]];
+
+                            $finalA[1] = $dataMinA;
+                            $finalB[1] = $dataMinB;
+                            $finalC[1] = $dataMinC;
+                          ?>
 
 
+                        <form method="post" data-toggle="validator" action="/form/{{$form -> id}}/decision" id="theForm">
+                          {{ csrf_field() }} {{ method_field('POST') }}
+                          <div class="row" style="padding: 0px 30px 10px 30px">
+                            <div class="col-md-6">
+                              <label for="butirA">Priority Indicator on Parahyangan Aspect</label>
+                              <input type="text" name="butirA" value="{{$indicatorA[$idMinA[0]]}}" class="form-control" id="" required placeholder="" readonly>
+                              <br>
+                              <label for="butirB">Priority Indicator on Pawongan Aspect</label>
+                              <input type="text" name="butirB" value="{{$indicatorB[$idMinB[0]]}}" class="form-control" id="butirB" required placeholder="" readonly>
+                                <br>
+                              <label for="butirC">Priority Indicator on Palemahan Aspect</label>
+                              <input type="text" name="butirC" value="{{$indicatorC[$idMinC[0]]}}" class="form-control" id="butirC" required placeholder="" readonly>
+                            </div>
 
+                            <div class="col-md-6">
+                              <label for="valueA">Value</label>
+                              <input type="text" name="valueA" value="{{$finalA[1]}}" class="form-control" id="valueA" required placeholder="" readonly>
+                                <br>
+                              <label for="valueB">Value</label>
+                              <input type="text" name="valueB" value="{{$finalB[1]}}" class="form-control" id="valueB" required placeholder="" readonly>
+                                <br>
+                              <label for="valueC">Value</label>
+                              <input type="text" name="valueC" value="{{$finalC[1]}}" class="form-control" id="valueC" required placeholder="" readonly>
+                            </div>
+                          </div>
+
+
+                          <!-- <button style="margin: 10px 30px 10px 30px" type="submit" class="btn btn-info btn-fill" id="simpan">Make Decision</button> -->
+                        </form>
 
 
 
@@ -307,6 +372,17 @@
           {data: 'butir', name: 'butir'},
           {data: 'value', name: 'value'},
         ]
+      });
+
+
+      $('#thkA').DataTable({
+          order: [[ 5, 'asc' ]],
+      });
+      $('#thkB').DataTable({
+          order: [[ 5, 'asc' ]],
+      });
+      $('#thkC').DataTable({
+          order: [[ 5, 'asc' ]],
       });
 
 

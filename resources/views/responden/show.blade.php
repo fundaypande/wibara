@@ -41,7 +41,7 @@
           {{ csrf_field() }} {{ method_field('POST') }}
 
           <div class="form-group">
-            <label for="nama">Respondent</label>
+            <label for="nama">Name</label>
             <input type="text" name="name" value="" class="form-control" id="name" required placeholder="">
           </div>
 

@@ -131,6 +131,16 @@
                                     <label>Name</label>
                                     <input id="name" name="name" type="text" value="{{ $users -> name }}" class="form-control" >
                                 </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Affiliation</label>
+                                    <input id="affiliation" name="affiliation" type="text" value="{{ $users -> affiliation }}" class="form-control" >
+                                </div>
+
                             </div>
                         </div>
 

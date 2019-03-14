@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Dinas Perdagangan Dan Perindustrian Kabupaten Buleleng</title>
+    <title>Application Of Countenance Evaluation Based On Tri Hita Karana - ANEKA</title>
     <link rel="shortcut icon" href="{{{ asset('images/buleleng-kecil.png') }}}">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">

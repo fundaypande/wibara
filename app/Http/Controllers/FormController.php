@@ -19,7 +19,6 @@ class FormController extends Controller
     $form = Form::where('user_id', '=', Auth::user()->id)
                   -> get();
 
-
     return view('evaluator.form.show')->with('form', $form);
   }
 
@@ -37,6 +36,10 @@ class FormController extends Controller
     $idForm = DataForm::where('form_id', '=', $id)
                 ->select('id')
                 ->get();
+
+    if($form -> user_id != Auth::user() -> id){
+      return redirect()->back()->with('warning', 'You are not the owner of this form');
+    }
 
 
     // dd($butirArray);
@@ -141,6 +144,16 @@ class FormController extends Controller
 
 
     //buat data outcomes untuk menampung data minimal hasil filtrasi
+    for ($i=0; $i < 15; $i++) {
+      // create data
+      $outcome = Outcome::create([
+        'form_id' => $form -> id,
+        'butir_id' => $butir[$i] -> id,
+        'average' => 0
+        ]);
+    }
+
+    //buat data keputusan untuk menampung data perangkingan
     for ($i=0; $i < 15; $i++) {
       // create data
       $outcome = Outcome::create([

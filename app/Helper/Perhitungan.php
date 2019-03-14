@@ -39,7 +39,19 @@
 
   function normalisasiMatrik($matrik, $pembagi, $baris, $kolom)
   {
+
     $normMatrik = null;
+
+    if (count($matrik) == 0) {
+      return $normMatrik;
+    }
+
+    if (count($pembagi) == 0) {
+      return $normMatrik;
+    }
+
+    // dd($pembagi);
+
     for ($i=0;$i<$baris;$i++){
       for ($j=0;$j<$kolom;$j++){
         $normMatrik[$i][$j] = $matrik[$i][$j] / $pembagi[$j];
@@ -70,6 +82,7 @@
 
   function roundArray($a){
 		$r=count($a);
+    $c = null;
 		for ($kolom=0;$kolom<$r;$kolom++){
       for ($i=0; $i < count($a[0]); $i++) {
         $c[$kolom][$i] = round($a[$kolom][$i], 4);

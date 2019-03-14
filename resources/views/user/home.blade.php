@@ -38,7 +38,7 @@
 
             <div style="padding-left: 20px; padding-right: 20px" class="card">
                 <div class="card-header">
-                  <h3>Selamat Datang {{ Auth::user()->name }}</h3>
+
 
                 </div>
 
@@ -63,40 +63,28 @@
 
                     <?php
                       if(Auth::user() -> role == 1){
-                        $role = "IKM";
+                        $role = "Evaluator";
                       } else if(Auth::user() -> role == 2) {
                         $role = "Staf";
                       } else $role = "Admin";
 
                      ?>
 
-                    <p>Anda login sebagai {{ $role }}</p>
-                    <p>Pengguna tipe {{ $role }} dapat melakukan beberapa aksi diantaranya:</p>
+                     <div class="">
+                       <center>
+                         <br>
+                         <br>
+                         <h2>Application Of Countenance Evaluation Based On Tri Hita Karana - ANEKA</h2>
+                         <h4>Wellcome {{ Auth::user()->name }}</h4>
+                         <p>you are login as: {{ $role }}</p>
+                         <br>
+                         <img src="{{ asset('images/home.png') }}" width="500px" alt="">
+                       </center>
+                     </div>
 
 
 
 
-
-                    <!-- Staf -->
-                    @if(Auth::user() -> role == 2)
-                      <ul style="list-style: outside; margin-left:25px">
-                        <li>Mengelola Profil IKM termasuk diantaranya menambahkan, mengedit dan menghapus Profil IKM</li>
-                        <li>Melakukan validasi terhadap profil IKM yang diinputkan oleh pengguna IKM</li>
-                      </ul>
-
-
-                    @endif
-
-                    <!-- Admin -->
-                    @if(Auth::user() -> role == 3)
-                      <ul style="list-style: outside; margin-left:25px">
-                        <li>Mengelola pengguna yang dapat mengakses sistem serta menentukan role atau batasan yang dimiliki oleh setiap pengguna yang dapat mengakses sistem</li>
-                        <li>Menginput data perbandingan metode AHP</li>
-                        <li>Menentukan calon bakal IKM yang akan menerima bantuan Bimtek</li>
-                      </ul>
-
-
-                    @endif
 
 
                 </div>

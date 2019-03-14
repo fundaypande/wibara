@@ -32,7 +32,7 @@
 </head>
 <body>
 
-	<div class="bg-container-contact100" style="background-image: url(/images/responden/bg-01.jpg);">
+	<div class="bg-container-contact100" style="background-image: url(/images/bg1.jpg);">
 		<div class="contact100-header flex-sb-m">
 
 
@@ -46,7 +46,10 @@
 				<i class="zmdi zmdi-close"></i>
 			</button>
 
-			<div class="contact100-form-title" style="background-image: url(/images/responden/bg-02.jpg);">
+			<div class="contact100-form-title" style="background-image: url(/images/bg2.jpg);">
+				<span>Application Of Countenance Evaluation Based On Tri Hita Karana - ANEKA</span>
+				<br>
+				<br>
 				<span>Input Scores From Respondents</span>
 			</div>
 

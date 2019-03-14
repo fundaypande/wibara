@@ -18,6 +18,12 @@ class OutcomeController extends Controller
   {
     $form = Form::findOrFail($idForm);
 
+    // if($form -> user_id != Auth::user() -> id){
+    //   return redirect()->back()->with('warning', 'You are not the owner of this form');
+    // }
+
+
+
     $outcomesA = Outcome::where('form_id', '=', $idForm)
                 -> join('butir', 'butir.id', '=', 'outcomes.butir_id')
                 -> where('thk', '=', 'parahyangan')
@@ -33,9 +39,12 @@ class OutcomeController extends Controller
                 -> where('thk', '=', 'palemahan')
                 -> get();
 
-    // dd($outcomesB);
 
-    $bobot = Bobot::where('user_id', '=', Auth::user() -> id)
+    if(($outcomesA[0] -> value) == "0.0000"){
+      return redirect()->back()->with('warning', 'The form is empty');
+    }
+
+    $bobot = Bobot::where('user_id', '=', $form -> user_id)
               // -> orderBy('thk', 'asc')
               -> get();
 
@@ -43,16 +52,22 @@ class OutcomeController extends Controller
     $j=0;
     for ($i=0; $i < 5; $i++) {
       $dataOutcome[$i] = $outcomesA[$j] -> value;
+      $butirA[$i] = $outcomesA[$j] -> butir_id;
+      $indicatorA[$i] = $outcomesA[$j] -> butir;
       $j++;
     }
     $j=0;
     for ($i=5; $i < 10; $i++) {
       $dataOutcome[$i] = $outcomesB[$j] -> value;
+      $butirB[$j] = $outcomesB[$j] -> butir_id;
+      $indicatorB[$j] = $outcomesB[$j] -> butir;
       $j++;
     }
     $j=0;
     for ($i=10; $i < 15; $i++) {
       $dataOutcome[$i] = $outcomesC[$j] -> value;
+      $butirC[$j] = $outcomesC[$j] -> butir_id;
+      $indicatorC[$j] = $outcomesC[$j] -> butir;
       $j++;
     }
 
@@ -72,13 +87,14 @@ class OutcomeController extends Controller
     }
 
     //masukkan value bobot ke dalam array
+    $nilaiBobot = null;
     for ($i=0; $i < count($bobot); $i++) {
       $nilaiBobot[$i] = $bobot[$i] -> nilai;
     }
 
     // dd($nilaiBobot);
 
-
+    $dataNorm = null;
     for ($i=0; $i < count($bobot); $i++) {
       for ($j=0; $j < 3; $j++) {
         // $dataNorm[2][0] = $dataOutcome[2]*$dataBobot[2][0]/$dataAverage[2];
@@ -121,6 +137,8 @@ class OutcomeController extends Controller
 
     return view('evaluator.perangkingan.outcome')->with('form', $form)
     ->with('matrikA', $matrikA)->with('matrikB', $matrikB)->with('matrikC', $matrikC)
+    ->with('butirA', $butirA)->with('butirB', $butirB)->with('butirC', $butirC)
+    ->with('indicatorA', $indicatorA)->with('indicatorB', $indicatorB)->with('indicatorC', $indicatorC)
     ->with('maxA', $maxA)->with('maxB', $maxB)->with('maxC', $maxC)
     ->with('nilaiBobot', $nilaiBobot);
   }
@@ -139,6 +157,28 @@ class OutcomeController extends Controller
 
   public function update(Request $request, $idForm)
   {
+    $outcomes = Outcome::where('form_id', '=', $idForm)
+                    -> get();
+
+    // dd($dataAverage[0] -> id);
+
+    for ($i=0; $i < count($outcomes); $i++) {
+      $dataOutcome = Outcome::findOrFail($outcomes[$i] -> id);
+
+      $dataOutcome -> update([
+        'butir_id' => $request -> get('id'.$i),
+        'value' => $request -> get('min'.$i),
+      ]);
+    }
+
+    // return redirect()->back()->with('status', 'Average Updated');
+    return redirect('/forms/'.$idForm.'/judgement');
+  }
+
+  //menyimpan data decision
+  public function decision(Request $request, $idForm)
+  {
+
     $outcomes = Outcome::where('form_id', '=', $idForm)
                     -> get();
 

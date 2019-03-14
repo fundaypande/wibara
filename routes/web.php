@@ -33,6 +33,17 @@ Route::group(['middleware' => ['auth']], function(){
 
 
 Route::group(['middleware' => 'admin'], function(){
+  //mencari keputusan
+  Route::get('/search', 'SearchController@show');
+  Route::get('/api/search', 'SearchController@apiSearch')->name('api.search');
+
+
+
+
+  //melihat keputusan
+    Route::get('/forms/{idForm}/judgement', 'OutcomeController@show');
+
+
   Route::get('/admin', 'AdminController@dashboard');
 
   Route::get('/users', 'AdminController@showStaf');
@@ -65,10 +76,33 @@ Route::group(['middleware' => 'admin'], function(){
     Route::delete('/indicators/{id}', 'ButirController@destroy'); //->Mneghapus data
 
 
+    Route::get('/form', 'FormController@show');
+      Route::post('/form/store', 'FormController@createData');
+      Route::delete('/form/{id}', 'FormController@destroy'); //->Mneghapus data
+
+    //kelola data average
+    Route::post('/form/{idForm}/update-average', 'DataAverageController@update');
+
+    //proses perangkingan
+    Route::get('/forms/{idForm}', 'DataAverageController@show');
+      Route::get('/api/average/{idForm}', 'DataAverageController@apiAverage')->name('api.average');
+      //kelola data outcomes
+      Route::post('/form/{idForm}/update-outcome', 'OutcomeController@update');
+
+      //menyimpan data rangking
+      Route::post('/form/{idForm}/decision', 'OutcomeController@decision');
+
+      Route::get('/forms/{idForm}/judgement', 'OutcomeController@show');
+      Route::get('/api/outcome/{idForm}', 'OutcomeController@apiOutcome');
+
+    //kelola satu form
+    Route::get('/form/{id}', 'FormController@showData');
+
+
 });
 
 
-Route::group(['middleware' => 'staf'], function(){
+Route::group(['middleware' => 'adminStaf'], function(){
 
   //kelola bobot
 Route::get('/weight', 'BobotController@show');
@@ -90,6 +124,9 @@ Route::get('/forms/{idForm}', 'DataAverageController@show');
   Route::get('/api/average/{idForm}', 'DataAverageController@apiAverage')->name('api.average');
   //kelola data outcomes
   Route::post('/form/{idForm}/update-outcome', 'OutcomeController@update');
+
+  //menyimpan data rangking
+  Route::post('/form/{idForm}/decision', 'OutcomeController@decision');
 
   Route::get('/forms/{idForm}/judgement', 'OutcomeController@show');
   Route::get('/api/outcome/{idForm}', 'OutcomeController@apiOutcome');

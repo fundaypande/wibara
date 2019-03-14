@@ -3,7 +3,10 @@
 </li>
 @if(Auth::user() -> role == '0')
   <li>
-      <a class="has-arrow" href="/indicators" aria-expanded="false"><span style="color: #8d9498" class="fa fa-users icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Indicators</span></a>
+      <a class="has-arrow" href="/search" aria-expanded="false"><span style="color: #8d9498" class="fa fa-search icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Search Evaluator</span></a>
+  </li>
+  <li>
+      <a class="has-arrow" href="/indicators" aria-expanded="false"><span style="color: #8d9498" class="fa fa-list icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Indicators</span></a>
   </li>
   <li>
       <a class="has-arrow" href="/users" aria-expanded="false"><span style="color: #8d9498" class="fa fa-users icon-wrap" aria-hidden="true"></span> <span class="mini-click-non">Users</span></a>
@@ -12,10 +15,10 @@
 
 @if(Auth::user() -> role == '1')
 <li>
-    <a class="has-arrow" href="{{ url('/weight') }}" aria-expanded="false"><span style="color: #8d9498" class=" fa fa-bar-chart icon-wrap"></span> <span class="mini-click-non">Weight</span></a>
+    <a class="has-arrow" href="{{ url('/weight') }}" aria-expanded="false"><span style="color: #8d9498" class="fa fa-crosshairs icon-wrap"></span> <span class="mini-click-non">Weight</span></a>
 </li>
 <li>
-    <a class="has-arrow" href="{{ url('/form') }}" aria-expanded="false"><span style="color: #8d9498" class=" fa fa-bar-chart icon-wrap"></span> <span class="mini-click-non">Form</span></a>
+    <a class="has-arrow" href="{{ url('/form') }}" aria-expanded="false"><span style="color: #8d9498" class=" fa fa-check-square-o icon-wrap"></span> <span class="mini-click-non">Form</span></a>
 </li>
 @endif
 
