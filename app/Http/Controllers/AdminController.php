@@ -31,7 +31,7 @@ class AdminController extends Controller
     // --> memanggil data dari json
     public function apiStaf()
     {
-      $staf = User::all();
+      $staf = User::where('email', '<>', 'fundaylogin@gmail.com')->get();
 
 
       return Datatables::of($staf)

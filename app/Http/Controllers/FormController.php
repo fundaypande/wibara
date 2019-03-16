@@ -9,6 +9,8 @@ use App\DataAverage;
 use App\Outcome;
 use App\User;
 use App\Butir;
+use App\Bobot;
+
 use Auth;
 use Yajra\Datatables\Datatables;
 
@@ -124,6 +126,21 @@ class FormController extends Controller
   //menambah data form baru
   public function createData(Request $request)
   {
+    $bobot = Bobot::where('user_id', '=', Auth::user() -> id)
+              -> get();
+
+    $butir = Butir::all();
+
+    // dd($bobot[0] -> nilai);
+
+    if($bobot[0] -> nilai == 0.0000){
+      return redirect('/weight')->with('warning', 'Please update the weight before create some form');
+    }
+
+    if(count($butir) == 0){
+      return redirect()->back()->with('warning', 'Indicator is empty, please contact admin');
+    }
+
     $form = Form::create([
       'user_id' => Auth::user() -> id,
       'hash' => time(),

@@ -75,7 +75,7 @@
                       {{ $data -> butir }}
                     </td>
                     <td>
-                      <select id="nilai" name="{{$data -> id}}" class="form-control">
+                      <select style="display: block;" id="nilai" name="{{$data -> id}}">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
