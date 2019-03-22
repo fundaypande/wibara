@@ -44,7 +44,7 @@
 
             <div style="padding-left: 20px; padding-right: 20px" class="card">
                 <div class="card-header">
-                  <h3>Judgement</h3>
+                  <h2>Judgement Matrix</h2>
                   <input type="hidden" name="" value="{{$form -> id}}" id="idForm">
 
                 </div>
@@ -113,6 +113,8 @@
                             $normC = roundArray(normalisasiMatrik($matrikC, $maxC, 5, 3));
 
 
+
+
                             //memecah nilai bobot menjadi 3 bagian thk
                             $x = 0;
                             for ($i=0; $i < 5; $i++) {
@@ -142,7 +144,121 @@
                             // dd($perkalianA);
                            ?>
 
-                           <!-- <h4>Normalization</h4> -->
+
+                           <!-- START Tambahkan tabel normalisasi  -->
+
+                           <h3 style="margin-left: 20px">Normalization Process</h3>
+
+
+                           <div class="panel-body" style="overflow-x:auto;">
+                           <h4>Normalization Process of Parahyangan</h4>
+                           <?php
+                             $aneka = ['Accountability','Nationalism','Public Ethics','Quality Commitment', 'Anti-Corruption'];
+                             $standar = ['Antecedents Standard','Transaction Standard','Outcomes Standard'];
+                            ?>
+                           <table id="" width="100%" class="table table-striped table-bordered table-hover">
+                             <thead>
+                               <tr>
+                                 <th>ANEKA Aspect</th>
+                                 <th>Antecedents Standard </th>
+                                 <th>Transaction Standard</th>
+                                 <th>Outcomes Standard</th>
+                               </tr>
+                             </thead>
+                             <tbody>
+                               <?php for ($i=0; $i < 5; $i++) {
+                                ?>
+                                 <tr>
+                                   <td>{{$aneka[$i]}}</td>
+                                   <?php for ($j=0; $j < 3; $j++) {
+                                   ?>
+                                     <td>{{ $normA[$i][$j] }}</td>
+                                   <?php }  ?>
+
+
+                                 </tr>
+                               <?php } ?>
+
+                             </tbody>
+                           </table>
+                         </div>
+
+
+                         <div class="panel-body" style="overflow-x:auto;">
+                         <h4>Normalization Process of Pawongan</h4>
+                         <?php
+                           $aneka = ['Accountability','Nationalism','Public Ethics','Quality Commitment', 'Anti-Corruption'];
+                           $standar = ['Antecedents Standard','Transaction Standard','Outcomes Standard'];
+                          ?>
+                         <table id="" width="100%" class="table table-striped table-bordered table-hover">
+                           <thead>
+                             <tr>
+                               <th>ANEKA Aspect</th>
+                               <th>Antecedents Standard </th>
+                               <th>Transaction Standard</th>
+                               <th>Outcomes Standard</th>
+                             </tr>
+                           </thead>
+                           <tbody>
+                             <?php for ($i=0; $i < 5; $i++) {
+                              ?>
+                               <tr>
+                                 <td>{{$aneka[$i]}}</td>
+                                 <?php for ($j=0; $j < 3; $j++) {
+                                 ?>
+                                   <td>{{ $normB[$i][$j] }}</td>
+                                 <?php }  ?>
+
+
+                               </tr>
+                             <?php } ?>
+
+                           </tbody>
+                         </table>
+                       </div>
+
+
+                       <div class="panel-body" style="overflow-x:auto;">
+                       <h4>Normalization Process of Palemahan</h4>
+                       <?php
+                         $aneka = ['Accountability','Nationalism','Public Ethics','Quality Commitment', 'Anti-Corruption'];
+                         $standar = ['Antecedents Standard','Transaction Standard','Outcomes Standard'];
+                        ?>
+                       <table id="" width="100%" class="table table-striped table-bordered table-hover">
+                         <thead>
+                           <tr>
+                             <th>ANEKA Aspect</th>
+                             <th>Antecedents Standard </th>
+                             <th>Transaction Standard</th>
+                             <th>Outcomes Standard</th>
+                           </tr>
+                         </thead>
+                         <tbody>
+                           <?php for ($i=0; $i < 5; $i++) {
+                            ?>
+                             <tr>
+                               <td>{{$aneka[$i]}}</td>
+                               <?php for ($j=0; $j < 3; $j++) {
+                               ?>
+                                 <td>{{ $normC[$i][$j] }}</td>
+                               <?php }  ?>
+
+
+                             </tr>
+                           <?php } ?>
+
+                         </tbody>
+                       </table>
+                     </div>
+
+
+
+
+                         <!-- END tampilkan normalisasi -->
+
+
+
+                           <h3 style="margin-left: 20px">Recommendation</h3>
 
                           <!-- menampilkan data -->
                           <div class="panel-body" style="overflow-x:auto;">
@@ -309,6 +425,7 @@
                             $finalC[1] = $dataMinC;
                           ?>
 
+                          <h3 style="margin-left: 20px">Decision</h3>
 
                         <form method="post" data-toggle="validator" action="/form/{{$form -> id}}/decision" id="theForm">
                           {{ csrf_field() }} {{ method_field('POST') }}

@@ -99,10 +99,15 @@ Route::group(['middleware' => 'admin'], function(){
     Route::get('/form/{id}', 'FormController@showData');
 
 
+
+
 });
 
 
 Route::group(['middleware' => 'adminStaf'], function(){
+
+  //menampilkan transaction
+  Route::get('/transaction/{idForm}', 'DataAverageController@showTransaction');
 
   //kelola bobot
 Route::get('/weight', 'BobotController@show');

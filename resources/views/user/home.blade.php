@@ -74,7 +74,7 @@
                        <center>
                          <br>
                          <br>
-                         <h2>Application Of Countenance Evaluation Based On Tri Hita Karana - ANEKA</h2>
+                         <h2>Application of Countenance Evaluation Based on Tri Hita Karana - ANEKA</h2>
                          <h4>Wellcome {{ Auth::user()->name }}</h4>
                          <p>you are login as: {{ $role }}</p>
                          <br>

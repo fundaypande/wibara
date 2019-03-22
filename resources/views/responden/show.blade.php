@@ -62,6 +62,8 @@
             <table id="staf-table" width="100%" class="table table-striped table-bordered table-hover">
               <thead>
                 <tr>
+                  <th>ANEKA Component</th>
+                  <th>ANEKA Aspect</th>
                   <th>Item</th>
                   <th>Value</th>
                 </tr>
@@ -72,15 +74,23 @@
 
                   <tr>
                     <td>
+                      {{ $data -> aneka }}
+                    </td>
+
+                    <td>
+                      {{ $data -> aspek }}
+                    </td>
+
+                    <td>
                       {{ $data -> butir }}
                     </td>
                     <td>
                       <select style="display: block;" id="nilai" name="{{$data -> id}}">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
+                        <option value="1">Poor</option>
+                        <option value="2">Less</option>
+                        <option value="3">Moderate</option>
+                        <option value="4">Good</option>
+                        <option value="5">Excellent</option>
                       </select>
                     </td>
                   </tr>

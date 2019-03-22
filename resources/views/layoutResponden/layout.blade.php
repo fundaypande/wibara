@@ -47,7 +47,7 @@
 			</button>
 
 			<div class="contact100-form-title" style="background-image: url(/images/bg2.jpg);">
-				<span>Application Of Countenance Evaluation Based On Tri Hita Karana - ANEKA</span>
+				<span>Application of Countenance Evaluation Based on Tri Hita Karana - ANEKA</span>
 				<br>
 				<br>
 				<span>Input Scores From Respondents</span>

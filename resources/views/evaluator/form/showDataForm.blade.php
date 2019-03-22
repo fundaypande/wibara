@@ -38,7 +38,8 @@
 
             <div style="padding-left: 20px; padding-right: 20px" class="card">
               <div class="card-header">
-                <h3>Antecedents</h3>
+                <h2>Description Matrix</h2>
+                <h3>A. Antecedents</h3>
 
               </div>
 
@@ -124,7 +125,7 @@
             <?php }  ?>
 
 
-            <button style="width:200px; margin-left: 20px" type="submit" class="btn btn-info btn-fill" id="simpan">Update Averages</button>
+            <button style="width:200px; margin-left: 20px" type="submit" class="btn btn-info btn-fill" id="simpan">Next To Transaction</button>
 
           </form>
 

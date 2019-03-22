@@ -44,7 +44,8 @@
 
             <div style="padding-left: 20px; padding-right: 20px" class="card">
                 <div class="card-header">
-                  <h3>Transaction</h3>
+                  <h2>Description Matrix</h2>
+                  <h3>C. Outcomes</h3>
                   <input type="hidden" name="" value="{{$form -> id}}" id="idForm">
 
                 </div>
@@ -107,7 +108,7 @@
 
                         </div>
 
-                        <h3 style="margin-left: 20px">Out Comes</h3>
+                        <!-- <h3 style="margin-left: 20px">Out Comes</h3> -->
 
                         <?php
                           $thk = ['Parahyangan','Pawongan','Palemahan'];
@@ -298,7 +299,7 @@
 
                           <?php }  ?>
 
-                          <button type="submit" class="btn btn-info btn-fill" id="simpan">Save Outcomes</button>
+                          <button type="submit" class="btn btn-info btn-fill" id="simpan">Next To Judgement Matrix</button>
                         </form>
 
 
