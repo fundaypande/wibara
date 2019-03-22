@@ -105,10 +105,7 @@ class RegisterStafController extends Controller
         }
 
 
-
-
-
-        Mail::to($user->email)->send(new UserRegistered($user ));
+        Mail::to($user->email)->send(new UserRegistered($user));
     }
 
 
